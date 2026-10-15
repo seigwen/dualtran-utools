@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>DualTran</title>
+  <link rel="stylesheet" href="dist/style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="bar">
+      <span class="brand">DualTran</span>
+      <select id="engine" title="Engine">
+        <option value="google">Google</option>
+        <option value="ai">AI (BYOK)</option>
+      </select>
+      <input id="source" class="lang" title="Source language" size="4" />
+      <span class="arrow">→</span>
+      <input id="target" class="lang" title="Target language" size="4" />
+    </header>
+
+    <textarea id="input" placeholder="Type text or enter with selected text…" spellcheck="false"></textarea>
+
+    <div class="actions">
+      <button id="translate">Translate</button>
+      <button id="copy" disabled>Copy</button>
+      <span id="status" class="status"></span>
+    </div>
+
+    <pre id="result" class="result"></pre>
+  </main>
+  <script src="dist/renderer.js"></script>
+</body>
+</html>

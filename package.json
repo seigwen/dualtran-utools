@@ -1,0 +1,35 @@
+{
+  "name": "dualtran-utools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DualTran for uTools \u2014 translate selected text with Google or your own AI model (BYOK).",
+  "scripts": {
+    "sync-core": "node scripts/sync-core.mjs",
+    "build": "node scripts/build-renderer.mjs",
+    "test": "vitest run",
+    "test:dist": "node tests/dist/guards.mjs",
+    "verify": "npm run test && npm run build && npm run test:dist",
+    "package": "node scripts/package.mjs"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.82",
+    "@ai-sdk/azure": "^3.0.71",
+    "@ai-sdk/cohere": "^3.0.38",
+    "@ai-sdk/deepinfra": "^2.0.54",
+    "@ai-sdk/deepseek": "^2.0.35",
+    "@ai-sdk/google": "^3.0.80",
+    "@ai-sdk/groq": "^3.0.41",
+    "@ai-sdk/mistral": "^3.0.39",
+    "@ai-sdk/openai": "^3.0.69",
+    "@ai-sdk/perplexity": "^3.0.35",
+    "@ai-sdk/togetherai": "^2.0.55",
+    "@ai-sdk/xai": "^3.0.93",
+    "ai": "^6.0.199",
+    "common-tags": "^1.8.2",
+    "eventsource-parser": "^1.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "vitest": "^0.34.6"
+  }
+}
