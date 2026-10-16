@@ -1,0 +1,10 @@
+{
+  "name": "dualtran",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.mjs",
+  "exports": {
+    ".": "./index.mjs"
+  },
+  "license": "MPL-2.0"
+}

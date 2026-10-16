@@ -24,7 +24,7 @@ const corePkg = JSON.parse(
 );
 fs.rmSync(STAGE, { recursive: true, force: true });
 fs.mkdirSync(STAGE, { recursive: true });
-for (const f of ["index.mjs", "index.mjs.map"]) {
+for (const f of ["index.mjs"]) {
   fs.copyFileSync(path.join(CORE_REPO, "dist-core", f), path.join(STAGE, f));
 }
 for (const f of ["LICENSE", "PROVENANCE.md"]) {
