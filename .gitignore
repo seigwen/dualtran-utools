@@ -1,6 +1,5 @@
-node_modules/
-dist/
+/node_modules/
+/dist/
 *.zip
-# dualtran-core/ is committed on purpose: CI (npm install + npm run verify)
-# must run without the core repository, and the uTools package ships it.
+# dualtran-core/ is committed on purpose (CI + the uTools package ship it).
 dualtran-core/*.map
