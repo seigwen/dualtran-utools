@@ -1,9 +1,10 @@
 {
+  "$schema": "https://www.u-tools.cn/schema/plugin.json",
   "pluginName": "DualTran",
   "description": "翻译选中文本 / Translate selected text — Google 或自有 AI 模型（BYOK，20+ providers）",
   "author": "seigwen",
   "homepage": "https://github.com/seigwen/dualtran-utools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "logo": "assets/logo.png",
   "main": "index.html",
   "preload": "preload.js",

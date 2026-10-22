@@ -1,8 +1,8 @@
 {
   "name": "dualtran-utools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
-  "description": "DualTran for uTools \u2014 translate selected text with Google or your own AI model (BYOK).",
+  "description": "DualTran for uTools — translate selected text with Google or your own AI model (BYOK).",
   "scripts": {
     "sync-core": "node scripts/sync-core.mjs",
     "build": "node scripts/build-renderer.mjs",

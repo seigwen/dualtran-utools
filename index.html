@@ -29,5 +29,11 @@
     <pre id="result" class="result"></pre>
   </main>
   <script src="dist/renderer.js"></script>
+  <script>
+    // uTools creates plugin windows at 0x0; ask for a real height on load.
+    window.addEventListener("load", function () {
+      try { utools.setExpendHeight(620); } catch (e) { /* not in uTools */ }
+    });
+  </script>
 </body>
 </html>

@@ -16,11 +16,23 @@ installNodeFetch();
 
 const storage = createStorageAdapter(utools.dbStorage);
 
+/**
+ * uTools 6.x destroys the renderer when utools.dbStorage is touched from a call
+ * that originates in the page (window.__dualtran.getSettings() -> dbStorage.getItem).
+ * Keep a plain in-memory copy and only touch dbStorage from this context, off the
+ * page's call stack (a timer), so the renderer never dies on a settings read.
+ */
+const DEFAULT_SETTINGS = { engine: "google", sourceLanguage: "auto", targetLanguage: "en" };
+let settingsCache = { ...DEFAULT_SETTINGS };
+setTimeout(() => {
+  try { settingsCache = storage.load(); } catch (e) { /* keep defaults */ }
+}, 0);
+
 let bridgePromise = null;
 function getBridge() {
   if (!bridgePromise) {
     bridgePromise = import("./dualtran-core/index.mjs").then((core) =>
-      createBridge({ core, fetchImpl: null, getSettings: () => storage.load() })
+      createBridge({ core, fetchImpl: null, getSettings: () => ({ ...settingsCache }) })
     );
   }
   return bridgePromise;
@@ -35,8 +47,12 @@ window.__dualtran = {
     const [translated] = await bridge.translateBlocks([text]);
     return translated || "";
   },
-  getSettings: () => storage.load(),
-  saveSettings: (settings) => storage.save(settings),
+  getSettings: () => ({ ...settingsCache }),
+  saveSettings: (settings) => {
+    settingsCache = { ...settingsCache, ...(settings || {}) };
+    const snapshot = { ...settingsCache };
+    setTimeout(() => { try { storage.save(snapshot); } catch (e) { /* ignore */ } }, 0);
+  },
   copyText: (text) => utools.copyText(text),
   /** Hand the last selected-text payload to the renderer exactly once. */
   consumePendingInput() {
@@ -46,7 +62,9 @@ window.__dualtran = {
   },
 };
 
+// The plugin window is created at 0x0; ask uTools for a usable height on entry.
 utools.onPluginEnter(({ type, payload }) => {
+  try { utools.setExpendHeight(620); } catch (e) { /* older uTools */ }
   if ((type === "text" || type === "over") && typeof payload === "string" && payload.trim()) {
     if (typeof window.__dualtranOnEnter === "function") {
       window.__dualtranOnEnter(payload.trim());
