@@ -37,3 +37,48 @@ npm run package              # assembles DualTran-uTools-<version>.zip for submi
 ## License
 
 MIT — the bundled `@dualtran/core` portion is MPL-2.0.
+
+
+## 使用
+
+### 1. 打开插件
+
+按 `Alt+Space` 呼出 uTools 搜索框（或点右下角悬浮球），输入任意一个关键字：
+
+| 输入 | 说明 |
+|---|---|
+| `tr` | 最快 |
+| `翻译` | 中文关键字 |
+| `dt` | 缩写 |
+
+然后回车，或点结果里的 **DualTran** 图标。
+
+### 2. 翻译
+
+窗口里三个东西：
+
+- **上排**：引擎（Google / AI）、源语言（`auto` = 自动识别）、目标语言（`zh-CN` / `en` / …）
+- **中间大框**：要翻译的文本，粘贴或直接输入
+- **下面两个按钮**：`Translate` 翻译，`Copy` 复制译文（译文出现在按钮下方的只读区）
+
+快捷键：文本框里按 `Ctrl+Enter` 直接翻译。
+
+### 3. 划词翻译（最常用）
+
+1. 在网页、邮件、编辑器里**选中**要翻译的文字
+2. 按 `Alt+Space` —— uTools 会把选中的文字带进搜索框
+3. 选 **DualTran**（或输入 `tr` 回车）
+4. 插件打开时自动把这段文字填进去并翻译，不用再粘贴
+
+### 4. 语言
+
+- 源语言填 `auto` 让引擎自己判断；也可以填 `en`、`ja`、`ko` 等
+- 目标语言默认 `zh-CN`，要英译就改成 `en`
+
+### 5. 引擎
+
+- **Google**：默认，免费、不用 key，直接可用
+- **AI (BYOK)**：给有自己模型的人用（OpenAI 兼容端点）。当前 uTools 版还没有设置面板，
+  选它会在翻译时报错 —— 需要先在配置里填 endpoint / model / key 才可用。
+
+> 设置会记住（存在 uTools 本地数据库），下次打开不用重填语言。
