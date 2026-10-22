@@ -19,6 +19,25 @@ function setStatus(text, isError = false) {
   els.status.classList.toggle("error", Boolean(isError));
 }
 
+const SETTINGS_KEY = "dualtran.settings";
+
+/** Settings live in localStorage — utools.dbStorage kills this uTools build's renderer. */
+function loadStoredSettings() {
+  try {
+    return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "null");
+  } catch (e) {
+    return null;
+  }
+}
+
+function persistSettings(settings) {
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  } catch (e) {
+    /* private mode — keep the in-memory copy only */
+  }
+}
+
 function applySettings(settings) {
   els.engine.value = settings.engine;
   els.source.value = settings.sourceLanguage;
@@ -44,8 +63,10 @@ async function translate() {
   els.result.textContent = "";
   els.copy.disabled = true;
   try {
-    await window.__dualtran.saveSettings(collectSettings());
-    const out = await window.__dualtran.translate(text);
+    const settings = collectSettings();
+    window.__dualtran.saveSettings(settings);
+    persistSettings(settings);
+    const out = await window.__dualtran.translate(text, settings);
     els.result.textContent = out;
     els.copy.disabled = !out;
     setStatus(out ? "Done." : "Empty translation.");
@@ -62,7 +83,7 @@ function wire() {
     setStatus("DualTran preload not available.", true);
     return;
   }
-  applySettings(api.getSettings());
+  applySettings({ ...api.getSettings(), ...(loadStoredSettings() || {}) });
   els.translate.addEventListener("click", translate);
   els.copy.addEventListener("click", () => api.copyText(els.result.textContent));
   els.input.addEventListener("keydown", (event) => {

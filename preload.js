@@ -1,32 +1,25 @@
 "use strict";
 /**
- * DualTran for uTools — preload entry (plan 63 B2).
+ * DualTran for uTools — preload entry.
  *
  * Runs in the Node-enabled preload context and shares one window with the
  * renderer: the renderer calls window.__dualtran directly. ALL network work
  * lives on this side — the renderer's own fetch() would enforce CORS and the
  * translation providers send no CORS headers (see preload/nodeFetch.js).
+ *
+ * Settings deliberately never touch utools.dbStorage: in this uTools build a
+ * dbStorage call destroys the renderer, which the store review saw as "the
+ * plugin exits immediately". The renderer persists them in localStorage and
+ * hands the current values to translate() on every call.
  */
 const { createBridge } = require("./preload/bridge.js");
-const { createStorageAdapter } = require("./preload/settings.js");
 const { installNodeFetch } = require("./preload/nodeFetch.js");
 
 // Node http/https based fetch — core and the AI SDK pick it up via globalThis.
 installNodeFetch();
 
-const storage = createStorageAdapter(utools.dbStorage);
-
-/**
- * uTools 6.x destroys the renderer when utools.dbStorage is touched from a call
- * that originates in the page (window.__dualtran.getSettings() -> dbStorage.getItem).
- * Keep a plain in-memory copy and only touch dbStorage from this context, off the
- * page's call stack (a timer), so the renderer never dies on a settings read.
- */
 const DEFAULT_SETTINGS = { engine: "google", sourceLanguage: "auto", targetLanguage: "en" };
 let settingsCache = { ...DEFAULT_SETTINGS };
-setTimeout(() => {
-  try { settingsCache = storage.load(); } catch (e) { /* keep defaults */ }
-}, 0);
 
 let bridgePromise = null;
 function getBridge() {
@@ -41,8 +34,11 @@ function getBridge() {
 let pendingInput = null;
 
 window.__dualtran = {
-  /** Translate a single piece of text with the configured engine. */
-  async translate(text) {
+  /** Translate one piece of text; `settings` comes from the page (localStorage). */
+  async translate(text, settings) {
+    if (settings && typeof settings === "object") {
+      settingsCache = { ...settingsCache, ...settings };
+    }
     const bridge = await getBridge();
     const [translated] = await bridge.translateBlocks([text]);
     return translated || "";
@@ -50,8 +46,7 @@ window.__dualtran = {
   getSettings: () => ({ ...settingsCache }),
   saveSettings: (settings) => {
     settingsCache = { ...settingsCache, ...(settings || {}) };
-    const snapshot = { ...settingsCache };
-    setTimeout(() => { try { storage.save(snapshot); } catch (e) { /* ignore */ } }, 0);
+    return { ...settingsCache };
   },
   copyText: (text) => utools.copyText(text),
   /** Hand the last selected-text payload to the renderer exactly once. */
@@ -64,7 +59,6 @@ window.__dualtran = {
 
 // The plugin window is created at 0x0; ask uTools for a usable height on entry.
 utools.onPluginEnter(({ type, payload }) => {
-  try { utools.setExpendHeight(620); } catch (e) { /* older uTools */ }
   if ((type === "text" || type === "over") && typeof payload === "string" && payload.trim()) {
     if (typeof window.__dualtranOnEnter === "function") {
       window.__dualtranOnEnter(payload.trim());
