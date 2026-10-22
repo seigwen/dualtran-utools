@@ -78,12 +78,15 @@ async function translate() {
 }
 
 function wire() {
+  if (window.__dtlog) window.__dtlog("wire start bridge=" + (typeof window.__dualtran));
   const api = window.__dualtran;
   if (!api) {
     setStatus("DualTran preload not available.", true);
     return;
   }
+  if (window.__dtlog) window.__dtlog("calling getSettings");
   applySettings({ ...api.getSettings(), ...(loadStoredSettings() || {}) });
+  if (window.__dtlog) window.__dtlog("settings applied");
   els.translate.addEventListener("click", translate);
   els.copy.addEventListener("click", () => api.copyText(els.result.textContent));
   els.input.addEventListener("keydown", (event) => {

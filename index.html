@@ -9,31 +9,179 @@
   <main class="wrap">
     <header class="bar">
       <span class="brand">DualTran</span>
-      <select id="engine" title="Engine">
-        <option value="google">Google</option>
-        <option value="ai">AI (BYOK)</option>
-      </select>
-      <input id="source" class="lang" title="Source language" size="4" />
-      <span class="arrow">→</span>
-      <input id="target" class="lang" title="Target language" size="4" />
+      <select id="engine"><option value="google">Google</option><option value="ai">AI (BYOK)</option></select>
+      <input id="source" class="lang" size="4" value="auto" title="Source language" />
+      <span class="arrow">&#8594;</span>
+      <input id="target" class="lang" size="4" value="zh-CN" title="Target language" />
     </header>
-
-    <textarea id="input" placeholder="Type text or enter with selected text…" spellcheck="false"></textarea>
-
+    <textarea id="input" placeholder="Type text, or select text anywhere and open the plugin with tr..." spellcheck="false"></textarea>
     <div class="actions">
       <button id="translate">Translate</button>
       <button id="copy" disabled>Copy</button>
       <span id="status" class="status"></span>
     </div>
-
     <pre id="result" class="result"></pre>
+    <details id="settings">
+      <summary>AI settings (BYOK)</summary>
+      <label>Endpoint <input id="aiEndpoint" placeholder="https://api.openai.com/v1" /></label>
+      <label>Model <input id="aiModel" placeholder="gpt-4o-mini" /></label>
+      <label>API key <input id="aiKey" type="password" placeholder="sk-..." /></label>
+    </details>
   </main>
-  <script src="dist/renderer.js"></script>
   <script>
-    // uTools creates plugin windows at 0x0; ask for a real height on load.
-    window.addEventListener("load", function () {
-      try { utools.setExpendHeight(620); } catch (e) { /* not in uTools */ }
+  /* Everything lives in this page: uTools injects `utools` into plugin pages, and the
+     Google endpoint sends CORS headers, so no preload bridge is needed. Calling into a
+     preload-defined function is what made this plugin's window die on first use. */
+  (function () {
+    var KEY = "dualtran.settings";
+    var el = {
+      engine: document.getElementById("engine"),
+      source: document.getElementById("source"),
+      target: document.getElementById("target"),
+      input: document.getElementById("input"),
+      translate: document.getElementById("translate"),
+      copy: document.getElementById("copy"),
+      status: document.getElementById("status"),
+      result: document.getElementById("result"),
+      aiEndpoint: document.getElementById("aiEndpoint"),
+      aiModel: document.getElementById("aiModel"),
+      aiKey: document.getElementById("aiKey")
+    };
+
+    function say(text, bad) {
+      el.status.textContent = text || "";
+      el.status.className = bad ? "status error" : "status";
+    }
+
+    function settings() {
+      return {
+        engine: el.engine.value,
+        sourceLanguage: el.source.value.trim() || "auto",
+        targetLanguage: el.target.value.trim() || "zh-CN",
+        aiEndpoint: el.aiEndpoint.value.trim(),
+        aiModel: el.aiModel.value.trim(),
+        aiKey: el.aiKey.value.trim()
+      };
+    }
+
+    function restore() {
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
+      if (!saved) return;
+      if (saved.engine) el.engine.value = saved.engine;
+      if (saved.sourceLanguage) el.source.value = saved.sourceLanguage;
+      if (saved.targetLanguage) el.target.value = saved.targetLanguage;
+      if (saved.aiEndpoint) el.aiEndpoint.value = saved.aiEndpoint;
+      if (saved.aiModel) el.aiModel.value = saved.aiModel;
+      if (saved.aiKey) el.aiKey.value = saved.aiKey;
+    }
+
+    function remember() {
+      try { localStorage.setItem(KEY, JSON.stringify(settings())); } catch (e) {}
+    }
+
+    function chunk(text, size) {
+      var out = [], buf = "";
+      var parts = text.split(/(?<=[.!?。！？\n])/);
+      for (var i = 0; i < parts.length; i++) {
+        if ((buf + parts[i]).length > size && buf) { out.push(buf); buf = parts[i]; }
+        else buf += parts[i];
+      }
+      if (buf) out.push(buf);
+      return out.length ? out : [text];
+    }
+
+    function google(text, sl, tl) {
+      var pieces = chunk(text, 1800);
+      var done = [];
+      return pieces.reduce(function (chain, piece) {
+        return chain.then(function () {
+          var url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" +
+            encodeURIComponent(sl) + "&tl=" + encodeURIComponent(tl) + "&dt=t&q=" + encodeURIComponent(piece);
+          return fetch(url).then(function (r) {
+            if (!r.ok) throw new Error("Google HTTP " + r.status);
+            return r.json();
+          }).then(function (data) {
+            done.push((data[0] || []).map(function (seg) { return seg[0]; }).join(""));
+          });
+        });
+      }, Promise.resolve()).then(function () { return done.join("\n"); });
+    }
+
+    function ai(text, sl, tl, s) {
+      if (!s.aiEndpoint || !s.aiModel || !s.aiKey) {
+        return Promise.reject(new Error("AI mode needs endpoint, model and key (open AI settings)."));
+      }
+      var base = s.aiEndpoint.replace(/\/+$/, "");
+      return fetch(base + "/chat/completions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + s.aiKey },
+        body: JSON.stringify({
+          model: s.aiModel,
+          temperature: 0.2,
+          messages: [
+            { role: "system", content: "Translate into " + tl + ". Output only the translation, keep line breaks." },
+            { role: "user", content: text }
+          ]
+        })
+      }).then(function (r) {
+        if (!r.ok) throw new Error("AI HTTP " + r.status);
+        return r.json();
+      }).then(function (data) {
+        return (((data.choices || [])[0] || {}).message || {}).content || "";
+      });
+    }
+
+    function run() {
+      var text = el.input.value.trim();
+      if (!text) { say("Nothing to translate."); return; }
+      var s = settings();
+      remember();
+      el.translate.disabled = true;
+      el.copy.disabled = true;
+      el.result.textContent = "";
+      say("Translating...");
+      var job = s.engine === "ai" ? ai(text, s.sourceLanguage, s.targetLanguage, s)
+                                  : google(text, s.sourceLanguage, s.targetLanguage);
+      job.then(function (out) {
+        el.result.textContent = out;
+        el.copy.disabled = !out;
+        say(out ? "Done." : "Empty translation.");
+      }).catch(function (e) {
+        say(String((e && e.message) || e), true);
+      }).then(function () {
+        el.translate.disabled = false;
+      });
+    }
+
+    el.translate.addEventListener("click", run);
+    el.copy.addEventListener("click", function () {
+      try { utools.copyText(el.result.textContent); }
+      catch (e) { if (navigator.clipboard) navigator.clipboard.writeText(el.result.textContent); }
     });
+    el.input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) run();
+    });
+    ["change", "input"].forEach(function (evt) {
+      [el.engine, el.source, el.target, el.aiEndpoint, el.aiModel, el.aiKey].forEach(function (node) {
+        node.addEventListener(evt, remember);
+      });
+    });
+
+    restore();
+
+    // Selected text arrives through uTools; the page owns this hook directly.
+    try {
+      utools.onPluginEnter(function (ctx) {
+        if (ctx && (ctx.type === "text" || ctx.type === "over") && typeof ctx.payload === "string" && ctx.payload.trim()) {
+          el.input.value = ctx.payload.trim();
+          run();
+        }
+        try { utools.setExpendHeight(620); } catch (e) {}
+      });
+      utools.setExpendHeight(620);
+    } catch (e) {}
+  })();
   </script>
 </body>
 </html>

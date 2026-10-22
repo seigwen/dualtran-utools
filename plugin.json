@@ -7,7 +7,6 @@
   "version": "0.1.1",
   "logo": "assets/logo.png",
   "main": "index.html",
-  "preload": "preload.js",
   "features": [
     {
       "code": "dt-translate",
@@ -18,5 +17,6 @@
         "dt"
       ]
     }
-  ]
+  ],
+  "preload": "preload.js"
 }
