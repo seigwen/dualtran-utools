@@ -4,15 +4,24 @@
   <meta charset="utf-8" />
   <title>DualTran</title>
   <link rel="stylesheet" href="dist/style.css" />
+  <style>
+    select.lang { width: 136px; }
+    #settings label {
+      display: grid; grid-template-columns: 76px 1fr; align-items: center;
+      gap: 8px; margin: 5px 0; color: #8a8a94; font-size: 12px;
+    }
+    #settings input, #settings select { width: 100%; }
+    #settings .hint { margin: 2px 0 6px; color: #8a8a94; font-size: 11px; }
+  </style>
 </head>
 <body>
   <main class="wrap">
     <header class="bar">
       <span class="brand">DualTran</span>
-      <select id="engine"><option value="google">Google</option><option value="ai">AI (BYOK)</option></select>
-      <input id="source" class="lang" size="4" value="auto" title="Source language" />
+      <select id="engine" title="Engine"><option value="google">Google</option><option value="ai">AI (BYOK)</option></select>
+      <select id="source" class="lang" title="Source language"></select>
       <span class="arrow">&#8594;</span>
-      <input id="target" class="lang" size="4" value="zh-CN" title="Target language" />
+      <select id="target" class="lang" title="Target language"></select>
     </header>
     <textarea id="input" placeholder="Type text, or select text anywhere and open the plugin with tr..." spellcheck="false"></textarea>
     <div class="actions">
@@ -23,6 +32,8 @@
     <pre id="result" class="result"></pre>
     <details id="settings">
       <summary>AI settings (BYOK)</summary>
+      <label>服务商 <select id="aiProvider"></select></label>
+      <p class="hint">选择服务商会自动填入 endpoint 和默认模型，下面的输入框可以随时覆盖。</p>
       <label>Endpoint <input id="aiBaseUrl" placeholder="https://api.openai.com/v1" /></label>
       <label>Model <input id="aiModel" placeholder="gpt-4o-mini" /></label>
       <label>API key <input id="aiApiKey" type="password" placeholder="sk-..." /></label>
@@ -34,6 +45,32 @@
      selected text uTools passes on entry. */
   (function () {
     var KEY = "dualtran.settings";
+
+    var LANGUAGES = [
+      ["zh-CN", "简体中文"], ["zh-TW", "繁體中文"], ["en", "English"], ["ja", "日本語"],
+      ["ko", "한국어"], ["fr", "Français"], ["de", "Deutsch"], ["es", "Español"],
+      ["ru", "Русский"], ["pt", "Português"], ["it", "Italiano"], ["ar", "العربية"],
+      ["hi", "हिन्दी"], ["th", "ไทย"], ["vi", "Tiếng Việt"], ["id", "Bahasa Indonesia"],
+      ["tr", "Türkçe"], ["nl", "Nederlands"], ["pl", "Polski"], ["uk", "Українська"]
+    ];
+
+    // OpenAI-compatible providers only — the uTools build posts to /chat/completions.
+    var PROVIDERS = [
+      ["openai", "OpenAI", "https://api.openai.com/v1", "gpt-4o-mini"],
+      ["deepseek", "DeepSeek", "https://api.deepseek.com/v1", "deepseek-chat"],
+      ["moonshot", "Moonshot / Kimi", "https://api.moonshot.cn/v1", "moonshot-v1-8k"],
+      ["zhipu", "智谱 GLM", "https://open.bigmodel.cn/api/paas/v4", "glm-4-flash"],
+      ["qwen", "通义千问", "https://dashscope.aliyuncs.com/compatible-mode/v1", "qwen-plus"],
+      ["siliconflow", "硅基流动", "https://api.siliconflow.cn/v1", "Qwen/Qwen2.5-7B-Instruct"],
+      ["groq", "Groq", "https://api.groq.com/openai/v1", "llama-3.3-70b-versatile"],
+      ["openrouter", "OpenRouter", "https://openrouter.ai/api/v1", "openai/gpt-4o-mini"],
+      ["together", "Together AI", "https://api.together.xyz/v1", "meta-llama/Llama-3.3-70B-Instruct-Turbo"],
+      ["mistral", "Mistral AI", "https://api.mistral.ai/v1", "mistral-small-latest"],
+      ["ollama", "Ollama（本机）", "http://127.0.0.1:11434/v1", "qwen2.5:7b"],
+      ["lmstudio", "LM Studio（本机）", "http://127.0.0.1:1234/v1", "local-model"],
+      ["custom", "自定义", "", ""]
+    ];
+
     var el = {
       engine: document.getElementById("engine"),
       source: document.getElementById("source"),
@@ -43,10 +80,49 @@
       copy: document.getElementById("copy"),
       status: document.getElementById("status"),
       result: document.getElementById("result"),
+      aiProvider: document.getElementById("aiProvider"),
       aiBaseUrl: document.getElementById("aiBaseUrl"),
       aiModel: document.getElementById("aiModel"),
       aiApiKey: document.getElementById("aiApiKey")
     };
+
+    var lastProviderDefaults = { base: "", model: "" };
+
+    function fillLanguages() {
+      el.source.innerHTML = '<option value="auto">自动检测</option>' +
+        LANGUAGES.map(function (l) {
+          return '<option value="' + l[0] + '">' + l[1] + " " + l[0] + "</option>";
+        }).join("");
+      el.target.innerHTML = LANGUAGES.map(function (l) {
+        return '<option value="' + l[0] + '">' + l[1] + " " + l[0] + "</option>";
+      }).join("");
+    }
+
+    function fillProviders() {
+      el.aiProvider.innerHTML = PROVIDERS.map(function (p) {
+        return '<option value="' + p[0] + '">' + p[1] + "</option>";
+      }).join("");
+    }
+
+    function providerById(id) {
+      for (var i = 0; i < PROVIDERS.length; i++) {
+        if (PROVIDERS[i][0] === id) return PROVIDERS[i];
+      }
+      return PROVIDERS[0];
+    }
+
+    function applyProviderDefaults(id) {
+      var p = providerById(id);
+      var base = p[2];
+      var model = p[3];
+      // Overwrite the endpoint with the provider default; keep the model unless it
+      // is empty or still the previous provider's default (a typed value survives).
+      el.aiBaseUrl.value = base;
+      if (!el.aiModel.value.trim() || el.aiModel.value.trim() === lastProviderDefaults.model) {
+        el.aiModel.value = model;
+      }
+      lastProviderDefaults = { base: base, model: model };
+    }
 
     function say(text, bad) {
       el.status.textContent = text || "";
@@ -56,8 +132,9 @@
     function settings() {
       return {
         engine: el.engine.value,
-        sourceLanguage: el.source.value.trim() || "auto",
-        targetLanguage: el.target.value.trim() || "zh-CN",
+        sourceLanguage: el.source.value || "auto",
+        targetLanguage: el.target.value || "zh-CN",
+        aiProvider: el.aiProvider.value,
         aiBaseUrl: el.aiBaseUrl.value.trim(),
         aiModel: el.aiModel.value.trim(),
         aiApiKey: el.aiApiKey.value.trim()
@@ -71,9 +148,12 @@
       if (saved.engine) el.engine.value = saved.engine;
       if (saved.sourceLanguage) el.source.value = saved.sourceLanguage;
       if (saved.targetLanguage) el.target.value = saved.targetLanguage;
+      if (saved.aiProvider) el.aiProvider.value = saved.aiProvider;
       if (saved.aiBaseUrl) el.aiBaseUrl.value = saved.aiBaseUrl;
       if (saved.aiModel) el.aiModel.value = saved.aiModel;
       if (saved.aiApiKey) el.aiApiKey.value = saved.aiApiKey;
+      var preset = providerById(el.aiProvider.value);
+      lastProviderDefaults = { base: preset[2], model: preset[3] };
     }
 
     function remember() {
@@ -114,7 +194,8 @@
         return Promise.reject(new Error("AI mode needs endpoint, model and key (open AI settings)."));
       }
       var base = cfg.aiBaseUrl.replace(/\/+$/, "");
-      return fetch(base + "/chat/completions", {
+      var targetUrl = /\/chat\/completions$/.test(base) ? base : base + "/chat/completions";
+      return fetch(targetUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: "Bearer " + cfg.aiApiKey },
         body: JSON.stringify({
@@ -156,6 +237,23 @@
       });
     }
 
+    fillLanguages();
+    fillProviders();
+    el.target.value = "zh-CN";
+    restore();
+    if (!el.aiBaseUrl.value.trim()) applyProviderDefaults(el.aiProvider.value);
+
+    el.engine.addEventListener("change", function () {
+      // Picking the AI engine with nothing configured should show the settings.
+      if (el.engine.value === "ai" && !el.aiApiKey.value.trim()) {
+        document.getElementById("settings").open = true;
+      }
+      remember();
+    });
+    el.aiProvider.addEventListener("change", function () {
+      applyProviderDefaults(el.aiProvider.value);
+      remember();
+    });
     el.translate.addEventListener("click", run);
     el.copy.addEventListener("click", function () {
       try { utools.copyText(el.result.textContent); }
@@ -177,7 +275,6 @@
       }
     });
 
-    restore();
     try { utools.setExpendHeight(620); } catch (e) {}
   })();
   </script>
