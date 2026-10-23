@@ -4,9 +4,9 @@
   "description": "翻译选中文本 / Translate selected text — Google 或自有 AI 模型（BYOK，20+ providers）",
   "author": "seigwen",
   "homepage": "https://github.com/seigwen/dualtran-utools",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "logo": "assets/logo.png",
-  "main": "index.html",
+  "main": "index.app.html",
   "features": [
     {
       "code": "dt-translate",

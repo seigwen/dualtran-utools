@@ -23,15 +23,14 @@
     <pre id="result" class="result"></pre>
     <details id="settings">
       <summary>AI settings (BYOK)</summary>
-      <label>Endpoint <input id="aiEndpoint" placeholder="https://api.openai.com/v1" /></label>
+      <label>Endpoint <input id="aiBaseUrl" placeholder="https://api.openai.com/v1" /></label>
       <label>Model <input id="aiModel" placeholder="gpt-4o-mini" /></label>
-      <label>API key <input id="aiKey" type="password" placeholder="sk-..." /></label>
+      <label>API key <input id="aiApiKey" type="password" placeholder="sk-..." /></label>
     </details>
   </main>
   <script>
-  /* Everything lives in this page: uTools injects `utools` into plugin pages, and the
-     Google endpoint sends CORS headers, so no preload bridge is needed. Calling into a
-     preload-defined function is what made this plugin's window die on first use. */
+  /* The page never calls a preload function — that killed this plugin's window.
+     It posts a message; the preload does the network call in Node and posts back. */
   (function () {
     var KEY = "dualtran.settings";
     var el = {
@@ -43,10 +42,13 @@
       copy: document.getElementById("copy"),
       status: document.getElementById("status"),
       result: document.getElementById("result"),
-      aiEndpoint: document.getElementById("aiEndpoint"),
+      aiBaseUrl: document.getElementById("aiBaseUrl"),
       aiModel: document.getElementById("aiModel"),
-      aiKey: document.getElementById("aiKey")
+      aiApiKey: document.getElementById("aiApiKey")
     };
+
+    var waiting = {};
+    var seq = 0;
 
     function say(text, bad) {
       el.status.textContent = text || "";
@@ -58,9 +60,9 @@
         engine: el.engine.value,
         sourceLanguage: el.source.value.trim() || "auto",
         targetLanguage: el.target.value.trim() || "zh-CN",
-        aiEndpoint: el.aiEndpoint.value.trim(),
+        aiBaseUrl: el.aiBaseUrl.value.trim(),
         aiModel: el.aiModel.value.trim(),
-        aiKey: el.aiKey.value.trim()
+        aiApiKey: el.aiApiKey.value.trim()
       };
     }
 
@@ -71,79 +73,48 @@
       if (saved.engine) el.engine.value = saved.engine;
       if (saved.sourceLanguage) el.source.value = saved.sourceLanguage;
       if (saved.targetLanguage) el.target.value = saved.targetLanguage;
-      if (saved.aiEndpoint) el.aiEndpoint.value = saved.aiEndpoint;
+      if (saved.aiBaseUrl) el.aiBaseUrl.value = saved.aiBaseUrl;
       if (saved.aiModel) el.aiModel.value = saved.aiModel;
-      if (saved.aiKey) el.aiKey.value = saved.aiKey;
+      if (saved.aiApiKey) el.aiApiKey.value = saved.aiApiKey;
     }
 
     function remember() {
       try { localStorage.setItem(KEY, JSON.stringify(settings())); } catch (e) {}
     }
 
-    function chunk(text, size) {
-      var out = [], buf = "";
-      var parts = text.split(/(?<=[.!?。！？\n])/);
-      for (var i = 0; i < parts.length; i++) {
-        if ((buf + parts[i]).length > size && buf) { out.push(buf); buf = parts[i]; }
-        else buf += parts[i];
-      }
-      if (buf) out.push(buf);
-      return out.length ? out : [text];
-    }
-
-    function google(text, sl, tl) {
-      var pieces = chunk(text, 1800);
-      var done = [];
-      return pieces.reduce(function (chain, piece) {
-        return chain.then(function () {
-          var url = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" +
-            encodeURIComponent(sl) + "&tl=" + encodeURIComponent(tl) + "&dt=t&q=" + encodeURIComponent(piece);
-          return fetch(url).then(function (r) {
-            if (!r.ok) throw new Error("Google HTTP " + r.status);
-            return r.json();
-          }).then(function (data) {
-            done.push((data[0] || []).map(function (seg) { return seg[0]; }).join(""));
-          });
-        });
-      }, Promise.resolve()).then(function () { return done.join("\n"); });
-    }
-
-    function ai(text, sl, tl, s) {
-      if (!s.aiEndpoint || !s.aiModel || !s.aiKey) {
-        return Promise.reject(new Error("AI mode needs endpoint, model and key (open AI settings)."));
-      }
-      var base = s.aiEndpoint.replace(/\/+$/, "");
-      return fetch(base + "/chat/completions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: "Bearer " + s.aiKey },
-        body: JSON.stringify({
-          model: s.aiModel,
-          temperature: 0.2,
-          messages: [
-            { role: "system", content: "Translate into " + tl + ". Output only the translation, keep line breaks." },
-            { role: "user", content: text }
-          ]
-        })
-      }).then(function (r) {
-        if (!r.ok) throw new Error("AI HTTP " + r.status);
-        return r.json();
-      }).then(function (data) {
-        return (((data.choices || [])[0] || {}).message || {}).content || "";
+    function requestTranslate(text) {
+      return new Promise(function (resolve, reject) {
+        var id = ++seq;
+        waiting[id] = { resolve: resolve, reject: reject };
+        window.postMessage({ __dualtran: true, type: "translate", id: id, text: text, settings: settings() }, "*");
+        setTimeout(function () {
+          if (waiting[id]) { delete waiting[id]; reject(new Error("Translation timed out.")); }
+        }, 45000);
       });
     }
+
+    window.addEventListener("message", function (event) {
+      var msg = event && event.data;
+      if (!msg || msg.__dualtran !== true) return;
+      if (msg.type === "result" && waiting[msg.id]) {
+        var slot = waiting[msg.id];
+        delete waiting[msg.id];
+        if (msg.ok) slot.resolve(msg.text); else slot.reject(new Error(msg.error));
+      } else if (msg.type === "input" && msg.text) {
+        el.input.value = msg.text;
+        run();
+      }
+    });
 
     function run() {
       var text = el.input.value.trim();
       if (!text) { say("Nothing to translate."); return; }
-      var s = settings();
       remember();
       el.translate.disabled = true;
       el.copy.disabled = true;
       el.result.textContent = "";
       say("Translating...");
-      var job = s.engine === "ai" ? ai(text, s.sourceLanguage, s.targetLanguage, s)
-                                  : google(text, s.sourceLanguage, s.targetLanguage);
-      job.then(function (out) {
+      requestTranslate(text).then(function (out) {
         el.result.textContent = out;
         el.copy.disabled = !out;
         say(out ? "Done." : "Empty translation.");
@@ -162,25 +133,12 @@
     el.input.addEventListener("keydown", function (e) {
       if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) run();
     });
-    ["change", "input"].forEach(function (evt) {
-      [el.engine, el.source, el.target, el.aiEndpoint, el.aiModel, el.aiKey].forEach(function (node) {
-        node.addEventListener(evt, remember);
-      });
+    [el.engine, el.source, el.target, el.aiBaseUrl, el.aiModel, el.aiApiKey].forEach(function (node) {
+      node.addEventListener("change", remember);
     });
 
     restore();
-
-    // Selected text arrives through uTools; the page owns this hook directly.
-    try {
-      utools.onPluginEnter(function (ctx) {
-        if (ctx && (ctx.type === "text" || ctx.type === "over") && typeof ctx.payload === "string" && ctx.payload.trim()) {
-          el.input.value = ctx.payload.trim();
-          run();
-        }
-        try { utools.setExpendHeight(620); } catch (e) {}
-      });
-      utools.setExpendHeight(620);
-    } catch (e) {}
+    try { utools.setExpendHeight(620); } catch (e) {}
   })();
   </script>
 </body>
