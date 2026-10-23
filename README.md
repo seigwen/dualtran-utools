@@ -43,7 +43,7 @@ MIT — the bundled `@dualtran/core` portion is MPL-2.0.
 
 ### 1. 打开插件
 
-按 `Alt+Space` 呼出 uTools 搜索框（或点右下角悬浮球），输入任意一个关键字：
+按 uTools 的呼出快捷键（**默认 `Alt+Space`**，可在 uTools 设置 → 快捷键 里改）或点悬浮球，输入任意一个关键字：
 
 | 输入 | 说明 |
 |---|---|
@@ -66,7 +66,7 @@ MIT — the bundled `@dualtran/core` portion is MPL-2.0.
 ### 3. 划词翻译（最常用）
 
 1. 在网页、邮件、编辑器里**选中**要翻译的文字
-2. 按 `Alt+Space` —— uTools 会把选中的文字带进搜索框
+2. 按 uTools 呼出快捷键（默认 `Alt+Space`）—— 选中的文字会被带进搜索框
 3. 选 **DualTran**（或输入 `tr` 回车）
 4. 插件打开时自动把这段文字填进去并翻译，不用再粘贴
 

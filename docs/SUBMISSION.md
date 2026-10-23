@@ -34,7 +34,7 @@ uTools-account action via the uTools developer tool.
 ```
 DualTran 把 DualTran 浏览器扩展的翻译引擎带进 uTools。
 
-· 选中任意软件的文本 → 呼出 uTools → 一键翻译
+· 选中任意软件的文本 → 按 uTools 呼出快捷键（默认 Alt+Space，可在设置里改）→ 一键翻译
 · 或输入关键词 tr / 翻译 / dt 后跟文本
 · Google 引擎免费即用；AI 引擎（BYOK）支持 OpenAI / Anthropic / Gemini /
   DeepSeek / OpenRouter 等 20+ 供应商，用自己的 API Key
