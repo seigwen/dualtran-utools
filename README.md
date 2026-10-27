@@ -82,3 +82,7 @@ MIT — the bundled `@dualtran/core` portion is MPL-2.0.
   选它会在翻译时报错 —— 需要先在配置里填 endpoint / model / key 才可用。
 
 > 设置会记住（存在 uTools 本地数据库），下次打开不用重填语言。
+
+## E2E
+
+`npm run e2e` loads `index.app.html` in headless Chromium with a `window.utools` stub and a local mock endpoint: provider divider + catalogue, translation, AI request body (incl. `reasoning_effort`), spinner, error path, persistence. Artifacts land in `e2e-artifacts/`.

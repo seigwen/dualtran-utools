@@ -3,3 +3,6 @@
 *.zip
 # dualtran-core/ is committed on purpose (CI + the uTools package ship it).
 dualtran-core/*.map
+e2e-artifacts/
+.cache/
+.vscode-test/

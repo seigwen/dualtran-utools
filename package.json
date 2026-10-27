@@ -9,7 +9,8 @@
     "test": "vitest run",
     "test:dist": "node tests/dist/guards.mjs",
     "verify": "npm run test && npm run build && npm run test:dist",
-    "package": "node scripts/package.mjs"
+    "package": "node scripts/package.mjs",
+    "e2e": "node e2e/run.mjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.82",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "esbuild": "^0.28.0",
+    "playwright": "^1.64.1",
     "vitest": "^0.34.6"
   }
 }
