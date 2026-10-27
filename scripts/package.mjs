@@ -43,7 +43,28 @@ const copyDir = (rel, { skipMaps = false } = {}) => {
     }
   }
 };
-for (const rel of ["plugin.json", "index.html", "preload.js", "README.md", "LICENSE", "PRIVACY.md"]) {
+// plugin.json's own pointers (main/preload/logo) must ship, otherwise the
+// published plugin opens nothing. They are added explicitly rather than relying
+// on a hand-maintained list — an entry missing here is invisible until a reviewer
+// installs the zip.
+const pluginFiles = new Set([
+  "plugin.json",
+  "index.html",
+  "index.app.html",
+  "preload.js",
+  "README.md",
+  "LICENSE",
+  "PRIVACY.md",
+  plugin.main,
+  plugin.preload,
+  plugin.logo,
+].filter(Boolean));
+for (const rel of pluginFiles) {
+  if (!fs.existsSync(path.join(ROOT, rel))) {
+    console.error(`[package] plugin.json references a missing file: ${rel}`);
+    process.exit(1);
+  }
+  fs.mkdirSync(path.dirname(path.join(STAGE, rel)), { recursive: true });
   fs.copyFileSync(path.join(ROOT, rel), path.join(STAGE, rel));
 }
 fs.mkdirSync(path.join(STAGE, "docs"), { recursive: true });
@@ -61,6 +82,15 @@ fs.writeFileSync(
 );
 console.log("[package] installing runtime dependencies into the stage …");
 execFileSync("npm", ["install", "--omit=dev", "--no-audit", "--no-fund", "--prefix", STAGE], { stdio: "inherit" });
+
+// 2.5 the staged tree must satisfy plugin.json before it is zipped
+for (const key of ["main", "preload", "logo"]) {
+  const rel = plugin[key];
+  if (rel && !fs.existsSync(path.join(STAGE, rel))) {
+    console.error(`[package] staged tree is missing plugin.json ${key}: ${rel}`);
+    process.exit(1);
+  }
+}
 
 // 3. zip it
 fs.rmSync(OUT, { force: true });
