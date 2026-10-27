@@ -9,8 +9,16 @@ uTools-account action via the uTools developer tool.
 - [ ] `npm run verify` green and `npm run package` produced
       `dualtran-utools-<version>.zip`.
 - [ ] Version in `plugin.json` bumped; release notes drafted.
-- [ ] Screenshots (3-4): selection→result; `tr` keyword flow; settings; an AI
-      translation example.
+- [x] Screenshots (3): `docs/screenshots/01-translate.png`, `02-settings.png`,
+      `03-models-dev.png` (1280x800, real page; regenerate with
+      `node scripts/capture-store-shots.mjs`).
+
+## Current package
+
+- `dualtran-utools-0.1.3.zip` (build with `npm run package`)
+- sha256 `dd513be3b900dc27fcccbdcea407553be76cc3b24d3def28094b7684b4df8cb5`
+- Contains `index.app.html` (the `plugin.json` `main`) — a packaging bug that
+  omitted it was fixed in 0.1.3; `npm run verify` now pins the contract.
 
 ## Steps (uTools 开发者工具 → 插件应用市场)
 

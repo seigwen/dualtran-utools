@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-const ROOT = path.resolve(__dirname, "..", "..");
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const plugin = JSON.parse(fs.readFileSync(path.join(ROOT, "plugin.json"), "utf8"));
 
 /**
@@ -19,10 +20,8 @@ describe("uTools package manifest", () => {
     }
   });
 
-  it("keeps the packaged entry point inside the zip staging list", () => {
+  it("derives the packaged file list from plugin.json", () => {
     const script = fs.readFileSync(path.join(ROOT, "scripts", "package.mjs"), "utf8");
-    // The list is built from plugin.json (pluginFiles) — assert the wiring exists
-    // so a future hand-written list cannot silently drop the entry point again.
     expect(script).toContain("plugin.main");
     expect(script).toContain("plugin.preload");
   });
