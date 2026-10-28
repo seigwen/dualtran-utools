@@ -159,11 +159,15 @@
     };
     var savedUiLang = null;
     try { savedUiLang = localStorage.getItem(UI_LANG_KEY); } catch (err) { /* private mode */ }
-    var i18n = window.DtI18n.create(window.DT_LOCALES || {}, savedUiLang || navigator.language);
+    // If dist/i18n.js ever fails to load, keep the page usable: the markup's own
+    // English text stays, dynamic strings degrade to empty rather than throwing.
+    var i18n = window.DtI18n && window.DT_LOCALES
+      ? window.DtI18n.create(window.DT_LOCALES, savedUiLang || navigator.language)
+      : { code: "en", t: function () { return ""; } };
     var t = i18n.t;
     // Right-to-left scripts get a flipped layout (flex/grid follow the direction).
     if (["ar", "fa", "he", "ug"].indexOf(i18n.code) >= 0) document.documentElement.setAttribute("dir", "rtl");
-    window.DtI18n.apply(document, t);
+    if (window.DtI18n) window.DtI18n.apply(document, t);
 
     function uiLangName(code) {
       return UI_LANG_NAMES[code] || code;
