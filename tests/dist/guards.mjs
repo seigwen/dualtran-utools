@@ -26,6 +26,26 @@ assert.ok(
   'the primary feature must keep the "tr" keyword'
 );
 
+// Selected text only reaches a plugin through a 匹配指令 (over/regex). Without one
+// uTools can never hand the selection over — the plugin then silently ignores it
+// (the 0.1.3 regression this guard pins).
+const overCommand = (plugin.features[0].cmds || []).find(
+  (cmd) => cmd && typeof cmd === "object" && cmd.type === "over"
+);
+assert.ok(
+  overCommand,
+  'the primary feature must declare an "over" 匹配指令 — uTools carries selected text to nothing else'
+);
+assert.ok(String(overCommand.label || "").trim().length > 0, "the over command needs a label");
+assert.ok(
+  Number.isInteger(overCommand.minLength) && overCommand.minLength >= 1,
+  "the over command needs minLength >= 1"
+);
+assert.ok(
+  Number.isInteger(overCommand.maxLength) && overCommand.maxLength > overCommand.minLength,
+  "the over command needs a maxLength above minLength"
+);
+
 // referenced files exist
 for (const rel of [plugin.logo, plugin.main, plugin.preload, "dist/renderer.js", "dist/style.css", "dualtran-core/index.mjs"]) {
   assert.ok(fs.existsSync(path.join(ROOT, rel)), `missing ${rel} — run build / sync-core first`);

@@ -7,11 +7,22 @@ with **Google** or your own AI model (BYOK, 20+ providers). Powered by
 
 ## Usage
 
-- Select text anywhere → open uTools → the plugin appears with the text ready
-  → press **Translate**.
-- Or type `tr` (or `翻译` / `dt`) in uTools, enter text after it, press Enter.
+- **Selected text**: select it anywhere, then bring up uTools and pick
+  **翻译** — the selection is translated the moment the plugin opens. uTools
+  delivers a selection only through a matching command, so this works from the
+  panel (middle mouse button by default) or from the search box after a copy
+  (see below).
+- **Copied / pasted text**: copy the text, open uTools (`Alt+Space`) — with
+  uTools' *自动粘贴到搜索框* enabled the box is already filled — and pick
+  **DualTran · 翻译**; Enter translates it.
+- **Typed**: `dt` (or `tr` / `翻译`) opens the plugin with an empty box — type
+  or paste there. uTools passes the keyword itself on that path, not any text
+  that followed it, so the box is always yours to fill.
 - **Copy** puts the translation back on the clipboard (paste into the app you
   came from with Ctrl+V).
+- A **bare keyword** never carries the selection: verified — the clipboard is
+  untouched when the panel opens, so nothing about the selection reaches the
+  search box.
 
 ## Development
 
@@ -65,10 +76,13 @@ MIT — the bundled `@dualtran/core` portion is MPL-2.0.
 
 ### 3. 划词翻译（最常用）
 
-1. 在网页、邮件、编辑器里**选中**要翻译的文字
-2. 按 uTools 呼出快捷键（默认 `Alt+Space`）—— 选中的文字会被带进搜索框
-3. 选 **DualTran**（或输入 `tr` 回车）
-4. 插件打开时自动把这段文字填进去并翻译，不用再粘贴
+uTools 只在「匹配指令」里把选区交给插件（关键字入口的 payload 是关键字本身），所以有两条路：
+
+1. **鼠标中键（超级面板）**：选中文字 → 中键 → 点「翻译」→ 插件打开后自动填入并翻译。
+2. **复制后进搜索框**：`Ctrl+C` 复制 → `Alt+Space`（uTools 设置 → 使用偏好里可开「自动粘贴到搜索框」）→ 结果里出现 **DualTran · 翻译** → 回车。
+
+> 选中文字后直接 `Alt+Space` 再输 `tr` 回车时，搜索框里只有 `tr`，选区不会跟过来——
+> 这是 uTools 的入口限制（实测：呼出前后剪贴板都没变），不是插件丢了内容。
 
 ### 4. 语言
 
@@ -78,8 +92,8 @@ MIT — the bundled `@dualtran/core` portion is MPL-2.0.
 ### 5. 引擎
 
 - **Google**：默认，免费、不用 key，直接可用
-- **AI (BYOK)**：给有自己模型的人用（OpenAI 兼容端点）。当前 uTools 版还没有设置面板，
-  选它会在翻译时报错 —— 需要先在配置里填 endpoint / model / key 才可用。
+- **AI (BYOK)**：给有自己模型的人用。在窗口里展开 **AI settings** 填服务商 / endpoint / model / key
+  （服务商与模型列表来自 models.dev，可手动覆盖）；没填全就选 AI 会在翻译时报错
 
 > 设置会记住（存在 uTools 本地数据库），下次打开不用重填语言。
 

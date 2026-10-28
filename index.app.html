@@ -32,7 +32,7 @@
       <span class="arrow">&#8594;</span>
       <select id="target" class="lang" title="Target language"></select>
     </header>
-    <textarea id="input" placeholder="Type text, or select text anywhere and open the plugin with tr..." spellcheck="false"></textarea>
+    <textarea id="input" placeholder="Type or paste text — or select text anywhere and pick 翻译 in the uTools panel." spellcheck="false"></textarea>
     <div class="actions">
       <button id="translate">Translate</button>
       <button id="copy" disabled>Copy</button>
@@ -536,13 +536,31 @@
       node.addEventListener("change", remember);
     });
 
+    // uTools hands the entry text over from the preload (preload/enterText.js):
+    //   - a text-bearing entry (划词 / 粘贴的文本 / `dt 文本`) arrives as "input";
+    //   - a bare keyword entry arrives as "focus" — uTools carries no text there.
+    // The preload re-posts until we ack, so ack after handling and drop an
+    // identical retry instead of translating the same text twice.
+    var lastEntry = { text: "", at: 0 };
+    function ackEntry() {
+      window.postMessage({ __dualtran: true, type: "ack" }, "*");
+    }
     window.addEventListener("message", function (event) {
       var msg = event && event.data;
-      if (msg && msg.__dualtran === true && msg.type === "input" && msg.text) {
+      if (!msg || msg.__dualtran !== true) return;
+      if (msg.type === "input" && typeof msg.text === "string" && msg.text) {
+        var at = Date.now();
+        if (msg.text === lastEntry.text && at - lastEntry.at < 2000) { ackEntry(); return; }
+        lastEntry = { text: msg.text, at: at };
         el.input.value = msg.text;
+        ackEntry();
         run();
+      } else if (msg.type === "focus") {
+        el.input.focus();
+        say("没有带入文本：选中文字后按鼠标中键选「翻译」，或复制/粘贴后再翻译。");
       }
     });
+    window.postMessage({ __dualtran: true, type: "ready" }, "*");
 
     loadCatalog(false);
     try { utools.setExpendHeight(620); } catch (e) {}

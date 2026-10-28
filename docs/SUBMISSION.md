@@ -24,8 +24,12 @@ uTools-account action via the uTools developer tool.
 
 1. Open the uTools developer tool (开发者工具) → 项目 → select this repository
    directory (dev mode loads `plugin.json` directly).
-2. Test the full flow in dev mode: select text in another app → invoke uTools
-   → plugin shows the text → Translate; and the `tr` keyword flow.
+2. Test the full flow in dev mode: (a) copy text → `Alt+Space` (with uTools'
+   自动粘贴到搜索框) → pick **DualTran · 翻译** → the box holds the text and the
+   translation arrives; (b) select text → middle mouse button (超级面板) → **翻译**;
+   (c) `dt` alone → the box stays empty, a hint appears, nothing is translated
+   (uTools passes the keyword, never the selection, on that path — verify with a
+   clipboard sentinel, it must not change).
 3. 发布 (publish) → fill in: version, update notes, screenshots, category
    (工具 / 翻译), description; attach the packaged zip if the flow asks for an
    upload rather than a repo.
@@ -42,8 +46,9 @@ uTools-account action via the uTools developer tool.
 ```
 DualTran 把 DualTran 浏览器扩展的翻译引擎带进 uTools。
 
-· 选中任意软件的文本 → 按 uTools 呼出快捷键（默认 Alt+Space，可在设置里改）→ 一键翻译
-· 或输入关键词 tr / 翻译 / dt 后跟文本
+· 选中任意软件里的文本 → 鼠标中键（超级面板）→ 点「翻译」，插件打开即自动翻译
+· 或复制文本后 Alt+Space，在结果里选 DualTran · 翻译（uTools 可开「自动粘贴到搜索框」）
+· 也可以输入关键词 tr / 翻译 / dt 打开插件，再输入或粘贴文本
 · Google 引擎免费即用；AI 引擎（BYOK）支持 OpenAI / Anthropic / Gemini /
   DeepSeek / OpenRouter 等 20+ 供应商，用自己的 API Key
 · 结果一键复制回剪贴板

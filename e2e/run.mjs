@@ -22,6 +22,13 @@ const FIXTURE = JSON.parse(fs.readFileSync(path.join(HERE, "fixtures", "modelsde
 
 const UTools_STUB = `
   window.__copied = [];
+  window.__dtOutbox = [];
+  window.__dtFetches = [];
+  window.addEventListener("message", (event) => {
+    if (event && event.data && event.data.__dualtran === true) window.__dtOutbox.push(event.data);
+  });
+  const __dtFetch = window.fetch.bind(window);
+  window.fetch = (...args) => { window.__dtFetches.push(String(args[0])); return __dtFetch(...args); };
   window.utools = {
     copyText(text) { window.__copied.push(text); },
     setExpendHeight() {},
@@ -283,6 +290,65 @@ scenario("persistence", async ({ browser, server }) => {
   assert(restored.reasoning === "high", `reasoning not persisted: ${restored.reasoning}`);
   assert(restored.target === "ja", `target not persisted: ${restored.target}`);
   await page.screenshot({ path: path.join(ARTIFACTS, "persistence", "screenshot.png") });
+  await context.close();
+});
+
+scenario("enter-text", async ({ browser, server }) => {
+  const { page, context } = await openPage(browser, server.origin);
+
+  // The preload registers onPluginEnter before the page exists, so the page must
+  // announce readiness — otherwise a first-entry delivery has nowhere to land.
+  const boot = await page.evaluate(() => window.__dtOutbox.slice());
+  assert(
+    boot.some((message) => message.type === "ready"),
+    `page must announce readiness for the preload, got ${JSON.stringify(boot)}`
+  );
+
+  const deliver = (message) => page.evaluate((payload) => window.postMessage(payload, "*"), message);
+  const translateCalls = () =>
+    page.evaluate(() => window.__dtFetches.filter((url) => url.includes("translate_a/single")).length);
+
+  // A text-bearing entry (划词 / pasted / `dt <text>`) fills the box and runs once.
+  await deliver({ __dualtran: true, type: "input", text: "Hello world" });
+  await page.waitForFunction(() => document.getElementById("result").textContent.trim().length > 0, null, {
+    timeout: 5000,
+  });
+  const state = await page.evaluate(() => ({
+    input: document.getElementById("input").value,
+    result: document.getElementById("result").textContent,
+    acks: window.__dtOutbox.filter((message) => message.type === "ack").length,
+  }));
+  assert(state.input === "Hello world", `entry text must land in the input, got "${state.input}"`);
+  assert(state.result.includes("译文"), `entry text must be translated, got "${state.result}"`);
+  assert(state.acks >= 1, "the page must ack the delivery so the preload stops re-posting");
+
+  // The preload retries until acked; a repeated delivery of the same text must
+  // not translate twice.
+  const callsAfterFirst = await translateCalls();
+  await deliver({ __dualtran: true, type: "input", text: "Hello world" });
+  await page.waitForTimeout(300);
+  const callsAfterRetry = await translateCalls();
+  assert(
+    callsAfterRetry === callsAfterFirst,
+    `an identical retry must be deduped, got ${callsAfterRetry - callsAfterFirst} extra request(s)`
+  );
+
+  // A bare keyword entry carries no text: focus the box, hint, and never translate
+  // the keyword itself.
+  await page.evaluate(() => {
+    document.getElementById("input").value = "";
+  });
+  await deliver({ __dualtran: true, type: "focus" });
+  await page.waitForTimeout(200);
+  const bare = await page.evaluate(() => ({
+    status: document.getElementById("status").textContent,
+    focused: document.activeElement === document.getElementById("input"),
+  }));
+  assert((await translateCalls()) === callsAfterFirst, "a bare keyword entry must not translate anything");
+  assert(bare.focused, "a bare keyword entry must focus the input");
+  assert(/中键|dt \+/.test(bare.status), `expected the entry hint, got "${bare.status}"`);
+
+  await page.screenshot({ path: path.join(ARTIFACTS, "enter-text", "screenshot.png") });
   await context.close();
 });
 
