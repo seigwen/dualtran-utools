@@ -375,13 +375,58 @@ scenario("i18n-locale", async ({ browser, server }) => {
   assert(state.uiLang === "auto", `language picker must default to auto, got "${state.uiLang}"`);
   assert(state.uiLangOptions >= 30, `language picker must list the catalogues, got ${state.uiLangOptions}`);
 
+  // No label may render its raw key or stay empty.
+  const leaks = await page.evaluate(() =>
+    Array.from(document.querySelectorAll("[data-i18n]"))
+      .filter((node) => {
+        const key = node.getAttribute("data-i18n");
+        const text = (node.textContent || "").trim();
+        return !text || text === key;
+      })
+      .map((node) => node.getAttribute("data-i18n"))
+  );
+  assert(leaks.length === 0, `untranslated labels: ${leaks.join(", ")}`);
+
   // Dynamic text goes through t() too.
   await page.click("#translate");
   const status = await page.evaluate(() => document.getElementById("status").textContent);
   assert(status === de.utStatusNothing.message, `status must be German, got "${status}"`);
 
+  // Manual override beats the system locale and survives a reload.
+  const ja = read("ja");
+  await Promise.all([page.waitForNavigation(), page.selectOption("#uiLang", "ja")]);
+  await page.waitForFunction(() => document.querySelectorAll("#aiProvider option").length > 0);
+  const overridden = await page.evaluate(() => ({
+    translate: document.getElementById("translate").textContent,
+    lang: document.getElementById("uiLang").value,
+    stored: localStorage.getItem("dualtran.uiLang"),
+  }));
+  assert(overridden.translate === ja.btnTranslate.message, `override must be Japanese, got "${overridden.translate}"`);
+  assert(overridden.lang === "ja" && overridden.stored === "ja", `override not persisted: ${JSON.stringify(overridden)}`);
+
   await page.screenshot({ path: path.join(ARTIFACTS, "i18n-locale", "screenshot.png") });
   await context.close();
+
+  // RTL: an Arabic system locale flips the document and mirrors the arrow.
+  const rtl = await openPage(browser, server.origin, { locale: "ar-SA" });
+  const mirrored = await rtl.page.evaluate(() => ({
+    dir: document.documentElement.getAttribute("dir"),
+    arrow: getComputedStyle(document.querySelector(".arrow")).transform,
+    button: document.getElementById("translate").textContent,
+  }));
+  const ar = read("ar");
+  assert(mirrored.dir === "rtl", `Arabic must set dir=rtl, got "${mirrored.dir}"`);
+  assert(mirrored.arrow.includes("-1"), `arrow must be mirrored in RTL, got "${mirrored.arrow}"`);
+  assert(mirrored.button === ar.btnTranslate.message, `Arabic button expected, got "${mirrored.button}"`);
+  await rtl.page.screenshot({ path: path.join(ARTIFACTS, "i18n-locale", "rtl.png") });
+  await rtl.context.close();
+
+  // Unknown languages fall back to English rather than showing keys.
+  const fallback = await openPage(browser, server.origin, { locale: "xx-YY" });
+  const en = read("en");
+  const fallbackText = await fallback.page.evaluate(() => document.getElementById("translate").textContent);
+  assert(fallbackText === en.btnTranslate.message, `unknown locale must fall back to English, got "${fallbackText}"`);
+  await fallback.context.close();
 });
 
 async function main() {

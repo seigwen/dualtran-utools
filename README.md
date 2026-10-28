@@ -108,3 +108,8 @@ uTools 只在这两种情况下把文本交给「匹配指令」：**键盘输�
 ## E2E
 
 `npm run e2e` loads `index.app.html` in headless Chromium with a `window.utools` stub and a local mock endpoint: provider divider + catalogue, translation, AI request body (incl. `reasoning_effort`), spinner, error path, persistence. Artifacts land in `e2e-artifacts/`.
+
+The `i18n-locale` scenario boots with a German system locale, asserts the German
+labels and dynamic status text, switches the picker to Japanese (persisted across
+the reload), and finally boots in Arabic to check `dir=rtl` and the mirrored
+arrow — plus an unknown locale falling back to English.
