@@ -7,17 +7,17 @@ with **Google** or your own AI model (BYOK, 20+ providers). Powered by
 
 ## Usage
 
-- **Selected text**: select it anywhere, then bring up uTools and pick
-  **翻译** — the selection is translated the moment the plugin opens. uTools
-  delivers a selection only through a matching command, so this works from the
-  panel (middle mouse button by default) or from the search box after a copy
-  (see below).
-- **Copied / pasted text**: copy the text, open uTools (`Alt+Space`) — with
-  uTools' *自动粘贴到搜索框* enabled the box is already filled — and pick
+- **Selected text (the main path)**: select it anywhere, press the uTools panel
+  key (**middle mouse button** by default — 设置 → 超级面板) and pick **翻译**;
+  the selection is translated the moment the plugin opens.
+- **Typed text**: type the text into the uTools search box and pick
   **DualTran · 翻译**; Enter translates it.
-- **Typed**: `dt` (or `tr` / `翻译`) opens the plugin with an empty box — type
-  or paste there. uTools passes the keyword itself on that path, not any text
-  that followed it, so the box is always yours to fill.
+- **Copied / pasted text does not trigger the matcher** — uTools evaluates
+  matching commands only for typed text (and for pasted images/files), so
+  `Ctrl+C` + `Alt+Space` shows no 翻译 row. Paste the text into the plugin's own
+  box instead, or use the panel.
+- **Keyword**: `dt` (or `tr` / `翻译`) opens the plugin with an empty box —
+  uTools passes the keyword itself on that path, never the text that followed.
 - **Copy** puts the translation back on the clipboard (paste into the app you
   came from with Ctrl+V).
 - A **bare keyword** never carries the selection: verified — the clipboard is
@@ -76,12 +76,14 @@ MIT — the bundled `@dualtran/core` portion is MPL-2.0.
 
 ### 3. 划词翻译（最常用）
 
-uTools 只在「匹配指令」里把选区交给插件（关键字入口的 payload 是关键字本身），所以有两条路：
+uTools 只在这两种情况下把文本交给「匹配指令」：**键盘输入的文本**，以及**选中后经超级面板**。
+复制/自动粘贴进搜索框的文字**不参与匹配**（实测：`Ctrl+C` + `Alt+Space` 不会出现「翻译」行）。
 
-1. **鼠标中键（超级面板）**：选中文字 → 中键 → 点「翻译」→ 插件打开后自动填入并翻译。
-2. **复制后进搜索框**：`Ctrl+C` 复制 → `Alt+Space`（uTools 设置 → 使用偏好里可开「自动粘贴到搜索框」）→ 结果里出现 **DualTran · 翻译** → 回车。
+1. **超级面板（推荐）**：选中文字 → 鼠标中键（设置 → 超级面板，可改成「长按鼠标右键」）→ 点「翻译」→ 插件打开即自动翻译。
+2. **手打**：`Alt+Space` → 用键盘把要翻的文字打进去 → 结果里出现 **DualTran · 翻译** → 回车。
+3. **关键字**：`dt` / `tr` / `翻译` 回车打开插件，再把文字粘进插件的输入框点 Translate。
 
-> 选中文字后直接 `Alt+Space` 再输 `tr` 回车时，搜索框里只有 `tr`，选区不会跟过来——
+> 选中文字后直接 `Alt+Space` 再输 `dt` 回车时，搜索框里只有 `dt`，选区不会跟过来——
 > 这是 uTools 的入口限制（实测：呼出前后剪贴板都没变），不是插件丢了内容。
 
 ### 4. 语言
