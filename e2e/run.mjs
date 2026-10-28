@@ -91,8 +91,8 @@ async function startServer() {
   };
 }
 
-async function openPage(browser, origin) {
-  const context = await browser.newContext({ viewport: { width: 960, height: 900 } });
+async function openPage(browser, origin, options = {}) {
+  const context = await browser.newContext({ viewport: { width: 960, height: 900 }, ...options });
   const page = await context.newPage();
   const logs = [];
   page.on("console", (message) => logs.push(`${message.type()}: ${message.text()}`));
@@ -346,9 +346,41 @@ scenario("enter-text", async ({ browser, server }) => {
   }));
   assert((await translateCalls()) === callsAfterFirst, "a bare keyword entry must not translate anything");
   assert(bare.focused, "a bare keyword entry must focus the input");
-  assert(/中键|dt \+/.test(bare.status), `expected the entry hint, got "${bare.status}"`);
+  const enCatalogue = JSON.parse(fs.readFileSync(path.join(ROOT, "locales", "en", "messages.json"), "utf8"));
+  assert(
+    bare.status === enCatalogue.utNoTextHint.message,
+    `expected the entry hint, got "${bare.status}"`
+  );
 
   await page.screenshot({ path: path.join(ARTIFACTS, "enter-text", "screenshot.png") });
+  await context.close();
+});
+
+scenario("i18n-locale", async ({ browser, server }) => {
+  const read = (code) => JSON.parse(fs.readFileSync(path.join(ROOT, "locales", code, "messages.json"), "utf8"));
+  const de = read("de");
+  const { page, context } = await openPage(browser, server.origin, { locale: "de-DE" });
+  const state = await page.evaluate(() => ({
+    translate: document.getElementById("translate").textContent,
+    copy: document.getElementById("copy").textContent,
+    placeholder: document.getElementById("input").getAttribute("placeholder"),
+    engineTitle: document.getElementById("engine").title,
+    uiLang: document.getElementById("uiLang").value,
+    uiLangOptions: document.getElementById("uiLang").options.length,
+  }));
+  assert(state.translate === de.btnTranslate.message, `translate button must be German, got "${state.translate}"`);
+  assert(state.copy === de.btncopy.message, `copy button must be German, got "${state.copy}"`);
+  assert(state.placeholder === de.utPlaceholder.message, `placeholder must be German, got "${state.placeholder}"`);
+  assert(state.engineTitle === de.utEngine.message, `engine title must be German, got "${state.engineTitle}"`);
+  assert(state.uiLang === "auto", `language picker must default to auto, got "${state.uiLang}"`);
+  assert(state.uiLangOptions >= 30, `language picker must list the catalogues, got ${state.uiLangOptions}`);
+
+  // Dynamic text goes through t() too.
+  await page.click("#translate");
+  const status = await page.evaluate(() => document.getElementById("status").textContent);
+  assert(status === de.utStatusNothing.message, `status must be German, got "${status}"`);
+
+  await page.screenshot({ path: path.join(ARTIFACTS, "i18n-locale", "screenshot.png") });
   await context.close();
 });
 

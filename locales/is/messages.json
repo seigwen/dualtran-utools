@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Þýða"
+  },
+  "btncopy": {
+    "message": "Afrita"
+  },
+  "lblAiProvider": {
+    "message": "AI-veitandi"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Dýpt rökhugsunar"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Markmál"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Lægst (sjálfgefið)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Sjálfgefið (veitandi)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Ekkert"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Lágmark"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Lág"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Miðlungs"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Há"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Mjög hátt"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Hámark"
+  },
+  "utSourceLanguage": {
+    "message": "Upprunamál"
+  },
+  "utAutoDetect": {
+    "message": "Sjálfvirk greining"
+  },
+  "utEngine": {
+    "message": "Vél"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI stillingar (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Viðmótsmál"
+  },
+  "utLanguageAuto": {
+    "message": "Fylgja kerfinu"
+  },
+  "utPlaceholder": {
+    "message": "Sláðu inn eða límdu texta — eða veldu texta hvar sem er og veldu 「翻译」 í uTools spjaldinu."
+  },
+  "utApiKey": {
+    "message": "API lykill"
+  },
+  "utEndpoint": {
+    "message": "Endapunktur"
+  },
+  "utModel": {
+    "message": "Líkan"
+  },
+  "utModelName": {
+    "message": "Heiti líkans"
+  },
+  "utModelPlaceholder": {
+    "message": "t.d. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Endurhlaða"
+  },
+  "utCatalogIdle": {
+    "message": "Líkanskrá: ekki hlaðin"
+  },
+  "utCatalogLoading": {
+    "message": "Líkanskrá: hleð…"
+  },
+  "utCatalogLoaded": {
+    "message": "Líkanskrá: $COUNT$ veitur"
+  },
+  "utCatalogOffline": {
+    "message": "Líkanskrá: ótengd ($COUNT$ í skyndiminni)"
+  },
+  "utCatalogError": {
+    "message": "Líkanskrá: hleðsla mistókst — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Sérsniðið…"
+  },
+  "utProviderDivider": {
+    "message": "── meira ──"
+  },
+  "utEndpointHint": {
+    "message": "Hægt er að hnekkja bæði endapunkti og líkani."
+  },
+  "utStatusTranslating": {
+    "message": "Þýði…"
+  },
+  "utStatusDone": {
+    "message": "Lokið."
+  },
+  "utStatusEmpty": {
+    "message": "Tóm þýðing."
+  },
+  "utStatusNothing": {
+    "message": "Ekkert til að þýða."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI ham þarf endapunkt, líkan og lykil (opna AI stillingar)."
+  },
+  "utNoTextHint": {
+    "message": "Ekkert texti barst — veldu texta og veldu 「翻译」 í uTools spjaldinu, eða límdu textann hér."
+  }
+}

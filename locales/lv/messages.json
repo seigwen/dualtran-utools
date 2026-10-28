@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Tulkot"
+  },
+  "btncopy": {
+    "message": "Kopēt"
+  },
+  "lblAiProvider": {
+    "message": "AI pakalpojumu sniedzējs"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Spriešanas dziļums"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Mērķvaloda"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Zemākais (noklusējums)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Noklusējums (nodrošinātājs)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Nav"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimāla"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Zema"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Vidēja"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Augsta"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Ļoti augsta"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maksimāla"
+  },
+  "utSourceLanguage": {
+    "message": "Avota valoda"
+  },
+  "utAutoDetect": {
+    "message": "Automātiska noteikšana"
+  },
+  "utEngine": {
+    "message": "Dzinējs"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI iestatījumi (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Saskarnes valoda"
+  },
+  "utLanguageAuto": {
+    "message": "Sekot sistēmai"
+  },
+  "utPlaceholder": {
+    "message": "Ierakstiet vai ielīmējiet tekstu — vai atlasiet tekstu jebkur un uTools panelī izvēlieties 「翻译」."
+  },
+  "utApiKey": {
+    "message": "API atslēga"
+  },
+  "utEndpoint": {
+    "message": "Galapunkts"
+  },
+  "utModel": {
+    "message": "Modelis"
+  },
+  "utModelName": {
+    "message": "Modeļa nosaukums"
+  },
+  "utModelPlaceholder": {
+    "message": "piem., gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Atsvaidzināt"
+  },
+  "utCatalogIdle": {
+    "message": "Modeļu katalogs: nav ielādēts"
+  },
+  "utCatalogLoading": {
+    "message": "Modeļu katalogs: ielādē…"
+  },
+  "utCatalogLoaded": {
+    "message": "Modeļu katalogs: $COUNT$ nodrošinātāji"
+  },
+  "utCatalogOffline": {
+    "message": "Modeļu katalogs: bezsaistē ($COUNT$ kešatmiņā)"
+  },
+  "utCatalogError": {
+    "message": "Modeļu katalogs: ielāde neizdevās — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Pielāgots…"
+  },
+  "utProviderDivider": {
+    "message": "── vairāk ──"
+  },
+  "utEndpointHint": {
+    "message": "Gan galapunktu, gan modeli var pārrakstīt."
+  },
+  "utStatusTranslating": {
+    "message": "Tulko…"
+  },
+  "utStatusDone": {
+    "message": "Gatavs."
+  },
+  "utStatusEmpty": {
+    "message": "Tukšs tulkojums."
+  },
+  "utStatusNothing": {
+    "message": "Nav ko tulkot."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI režīmam nepieciešams galapunkts, modelis un atslēga (atveriet AI iestatījumus)."
+  },
+  "utNoTextHint": {
+    "message": "Teksts netika saņemts — atlasiet tekstu un uTools panelī izvēlieties 「翻译」, vai ielīmējiet tekstu šeit."
+  }
+}

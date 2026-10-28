@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "翻譯"
+  },
+  "btncopy": {
+    "message": "複製"
+  },
+  "lblAiProvider": {
+    "message": "服務商"
+  },
+  "lblAiReasoningDepth": {
+    "message": "推理強度"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "目標語言"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "最低（預設）"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "服務商預設"
+  },
+  "msgReasoningDepthNone": {
+    "message": "無"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "極低"
+  },
+  "msgReasoningDepthLow": {
+    "message": "低"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "中"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "高"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "極高"
+  },
+  "msgReasoningDepthMax": {
+    "message": "最高"
+  },
+  "utSourceLanguage": {
+    "message": "來源語言"
+  },
+  "utAutoDetect": {
+    "message": "自動偵測"
+  },
+  "utEngine": {
+    "message": "引擎"
+  },
+  "utEngineAi": {
+    "message": "AI（BYOK）"
+  },
+  "utAiSettings": {
+    "message": "AI 設定（BYOK）"
+  },
+  "utLanguage": {
+    "message": "介面語言"
+  },
+  "utLanguageAuto": {
+    "message": "跟隨系統"
+  },
+  "utPlaceholder": {
+    "message": "輸入或貼上文字 —— 也可以在任意位置選取文字，用 uTools 面板點「翻譯」。"
+  },
+  "utApiKey": {
+    "message": "API Key"
+  },
+  "utEndpoint": {
+    "message": "Endpoint"
+  },
+  "utModel": {
+    "message": "模型"
+  },
+  "utModelName": {
+    "message": "模型名稱"
+  },
+  "utModelPlaceholder": {
+    "message": "例如 gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "重新整理"
+  },
+  "utCatalogIdle": {
+    "message": "模型目錄：未載入"
+  },
+  "utCatalogLoading": {
+    "message": "模型目錄：載入中…"
+  },
+  "utCatalogLoaded": {
+    "message": "模型目錄：已載入 $COUNT$ 個服務商"
+  },
+  "utCatalogOffline": {
+    "message": "模型目錄：離線（快取 $COUNT$ 項）"
+  },
+  "utCatalogError": {
+    "message": "模型目錄：載入失敗 —— $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "自訂…"
+  },
+  "utProviderDivider": {
+    "message": "── 更多 ──"
+  },
+  "utEndpointHint": {
+    "message": "endpoint 與 model 都可手動覆寫。"
+  },
+  "utStatusTranslating": {
+    "message": "翻譯中…"
+  },
+  "utStatusDone": {
+    "message": "完成。"
+  },
+  "utStatusEmpty": {
+    "message": "譯文為空。"
+  },
+  "utStatusNothing": {
+    "message": "沒有可翻譯的內容。"
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI 模式需要 endpoint、model 和 key（展開 AI 設定填寫）。"
+  },
+  "utNoTextHint": {
+    "message": "沒有帶入文字 —— 選取文字後用 uTools 面板點「翻譯」，或把文字貼到這裡。"
+  }
+}

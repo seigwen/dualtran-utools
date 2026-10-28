@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Tradueix"
+  },
+  "btncopy": {
+    "message": "Copia"
+  },
+  "lblAiProvider": {
+    "message": "Proveïdor d'IA"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Profunditat de raonament"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Llengua de destinació"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "El més baix (per defecte)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Predeterminat (proveïdor)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Cap"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Mínim"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Baix"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Mitjà"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Alt"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Molt alt"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Màxim"
+  },
+  "utSourceLanguage": {
+    "message": "Llengua d'origen"
+  },
+  "utAutoDetect": {
+    "message": "Detecció automàtica"
+  },
+  "utEngine": {
+    "message": "Motor"
+  },
+  "utEngineAi": {
+    "message": "IA (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "Configuració d'IA (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Llengua de la interfície"
+  },
+  "utLanguageAuto": {
+    "message": "Segueix el sistema"
+  },
+  "utPlaceholder": {
+    "message": "Escriu o enganxa text — o selecciona text a qualsevol lloc i tria 「翻译」 al tauler d'uTools."
+  },
+  "utApiKey": {
+    "message": "Clau d'API"
+  },
+  "utEndpoint": {
+    "message": "Punt de connexió"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Nom del model"
+  },
+  "utModelPlaceholder": {
+    "message": "p. ex. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Actualitza"
+  },
+  "utCatalogIdle": {
+    "message": "Catàleg de models: no carregat"
+  },
+  "utCatalogLoading": {
+    "message": "Catàleg de models: carregant…"
+  },
+  "utCatalogLoaded": {
+    "message": "Catàleg de models: $COUNT$ proveïdors"
+  },
+  "utCatalogOffline": {
+    "message": "Catàleg de models: fora de línia ($COUNT$ en memòria cau)"
+  },
+  "utCatalogError": {
+    "message": "Catàleg de models: error de càrrega — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Personalitzat…"
+  },
+  "utProviderDivider": {
+    "message": "── més ──"
+  },
+  "utEndpointHint": {
+    "message": "Tant l'endpoint com el model es poden sobreescriure."
+  },
+  "utStatusTranslating": {
+    "message": "S'està traduint…"
+  },
+  "utStatusDone": {
+    "message": "Fet."
+  },
+  "utStatusEmpty": {
+    "message": "Traducció buida."
+  },
+  "utStatusNothing": {
+    "message": "No hi ha res per traduir."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "IA HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "El mode IA necessita endpoint, model i clau (obre la configuració d'IA)."
+  },
+  "utNoTextHint": {
+    "message": "No ha arribat cap text: selecciona text i tria 「翻译」 al tauler d'uTools, o enganxa el text aquí."
+  }
+}

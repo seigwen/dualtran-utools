@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Tradu"
+  },
+  "btncopy": {
+    "message": "Copiază"
+  },
+  "lblAiProvider": {
+    "message": "Furnizor de IA"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Profunzimea raționamentului"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Limba țintă"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Cea mai mică (implicit)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Implicit (furnizor)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Fără"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minim"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Scăzută"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Medie"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Ridicată"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Foarte ridicat"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maximă"
+  },
+  "utSourceLanguage": {
+    "message": "Limba sursă"
+  },
+  "utAutoDetect": {
+    "message": "Detectare automată"
+  },
+  "utEngine": {
+    "message": "Motor"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "Setări AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Limba interfeței"
+  },
+  "utLanguageAuto": {
+    "message": "Urmează sistemul"
+  },
+  "utPlaceholder": {
+    "message": "Tastați sau lipiți text — sau selectați text oriunde și alegeți 「翻译」 în panoul uTools."
+  },
+  "utApiKey": {
+    "message": "Cheie API"
+  },
+  "utEndpoint": {
+    "message": "Punct final"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Nume model"
+  },
+  "utModelPlaceholder": {
+    "message": "de ex. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Reîmprospătează"
+  },
+  "utCatalogIdle": {
+    "message": "Catalog de modele: neîncărcat"
+  },
+  "utCatalogLoading": {
+    "message": "Catalog de modele: se încarcă…"
+  },
+  "utCatalogLoaded": {
+    "message": "Catalog de modele: $COUNT$ furnizori"
+  },
+  "utCatalogOffline": {
+    "message": "Catalog de modele: offline ($COUNT$ în cache)"
+  },
+  "utCatalogError": {
+    "message": "Catalog de modele: încărcarea a eșuat — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Personalizat…"
+  },
+  "utProviderDivider": {
+    "message": "── mai multe ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpointul și modelul pot fi ambele suprascrise."
+  },
+  "utStatusTranslating": {
+    "message": "Se traduce…"
+  },
+  "utStatusDone": {
+    "message": "Gata."
+  },
+  "utStatusEmpty": {
+    "message": "Traducere goală."
+  },
+  "utStatusNothing": {
+    "message": "Nimic de tradus."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "Modul AI necesită endpoint, model și cheie (deschide setările AI)."
+  },
+  "utNoTextHint": {
+    "message": "Nu a venit niciun text — selectează text și alege 「翻译」 în panoul uTools sau lipește textul aici."
+  }
+}

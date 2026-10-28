@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Μετάφραση"
+  },
+  "btncopy": {
+    "message": "Αντιγραφή"
+  },
+  "lblAiProvider": {
+    "message": "Πάροχος τεχνητής νοημοσύνης"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Βάθος συλλογισμού"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Γλώσσα-στόχος"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Χαμηλότερο (προεπιλογή)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Προεπιλογή (πάροχος)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Κανένα"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Ελάχιστο"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Χαμηλή"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Μεσαία"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Υψηλή"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Πολύ υψηλό"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Μέγιστη"
+  },
+  "utSourceLanguage": {
+    "message": "Γλώσσα προέλευσης"
+  },
+  "utAutoDetect": {
+    "message": "Αυτόματη ανίχνευση"
+  },
+  "utEngine": {
+    "message": "Μηχανισμός"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "Ρυθμίσεις AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Γλώσσα διεπαφής"
+  },
+  "utLanguageAuto": {
+    "message": "Ακολούθηση συστήματος"
+  },
+  "utPlaceholder": {
+    "message": "Πληκτρολογήστε ή επικολλήστε κείμενο — ή επιλέξτε κείμενο οπουδήποτε και επιλέξτε 「翻译」 στον πίνακα uTools."
+  },
+  "utApiKey": {
+    "message": "Κλειδί API"
+  },
+  "utEndpoint": {
+    "message": "Τελικό σημείο"
+  },
+  "utModel": {
+    "message": "Μοντέλο"
+  },
+  "utModelName": {
+    "message": "Όνομα μοντέλου"
+  },
+  "utModelPlaceholder": {
+    "message": "π.χ. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Ανανέωση"
+  },
+  "utCatalogIdle": {
+    "message": "Κατάλογος μοντέλων: δεν έχει φορτωθεί"
+  },
+  "utCatalogLoading": {
+    "message": "Κατάλογος μοντέλων: φόρτωση…"
+  },
+  "utCatalogLoaded": {
+    "message": "Κατάλογος μοντέλων: $COUNT$ πάροχοι"
+  },
+  "utCatalogOffline": {
+    "message": "Κατάλογος μοντέλων: εκτός σύνδεσης ($COUNT$ σε προσωρινή μνήμη)"
+  },
+  "utCatalogError": {
+    "message": "Κατάλογος μοντέλων: αποτυχία φόρτωσης — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Προσαρμοσμένο…"
+  },
+  "utProviderDivider": {
+    "message": "── περισσότερα ──"
+  },
+  "utEndpointHint": {
+    "message": "Το endpoint και το μοντέλο μπορούν να παρακαμφθούν."
+  },
+  "utStatusTranslating": {
+    "message": "Μετάφραση…"
+  },
+  "utStatusDone": {
+    "message": "Έγινε."
+  },
+  "utStatusEmpty": {
+    "message": "Κενή μετάφραση."
+  },
+  "utStatusNothing": {
+    "message": "Δεν υπάρχει κείμενο για μετάφραση."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "Η λειτουργία AI απαιτεί endpoint, μοντέλο και κλειδί (ανοίξτε τις ρυθμίσεις AI)."
+  },
+  "utNoTextHint": {
+    "message": "Δεν ήρθε κείμενο — επιλέξτε κείμενο και πατήστε 「翻译」 στον πίνακα uTools ή επικολλήστε το κείμενο εδώ."
+  }
+}

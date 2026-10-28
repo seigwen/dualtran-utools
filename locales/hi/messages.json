@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "अनुवाद करना"
+  },
+  "btncopy": {
+    "message": "प्रतिलिपि"
+  },
+  "lblAiProvider": {
+    "message": "एआई प्रदाता"
+  },
+  "lblAiReasoningDepth": {
+    "message": "तर्क की गहराई"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "लक्षित भाषा"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "न्यूनतम (डिफ़ॉल्ट)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "डिफ़ॉल्ट (प्रदाता)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "कोई नहीं"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "न्यूनतम"
+  },
+  "msgReasoningDepthLow": {
+    "message": "निम्न"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "मध्यम"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "उच्च"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "अति उच्च"
+  },
+  "msgReasoningDepthMax": {
+    "message": "अधिकतम"
+  },
+  "utSourceLanguage": {
+    "message": "स्रोत भाषा"
+  },
+  "utAutoDetect": {
+    "message": "स्वतः पहचानें"
+  },
+  "utEngine": {
+    "message": "इंजन"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI सेटिंग्स (BYOK)"
+  },
+  "utLanguage": {
+    "message": "इंटरफ़ेस भाषा"
+  },
+  "utLanguageAuto": {
+    "message": "सिस्टम के अनुसार"
+  },
+  "utPlaceholder": {
+    "message": "टेक्स्ट टाइप या पेस्ट करें — या कहीं भी टेक्स्ट चुनें और uTools पैनल में 「翻译」 चुनें।"
+  },
+  "utApiKey": {
+    "message": "API कुंजी"
+  },
+  "utEndpoint": {
+    "message": "एंडपॉइंट"
+  },
+  "utModel": {
+    "message": "मॉडल"
+  },
+  "utModelName": {
+    "message": "मॉडल नाम"
+  },
+  "utModelPlaceholder": {
+    "message": "उदा. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "रीफ़्रेश करें"
+  },
+  "utCatalogIdle": {
+    "message": "मॉडल कैटलॉग: लोड नहीं हुआ"
+  },
+  "utCatalogLoading": {
+    "message": "मॉडल कैटलॉग: लोड हो रहा है…"
+  },
+  "utCatalogLoaded": {
+    "message": "मॉडल कैटलॉग: $COUNT$ प्रदाता"
+  },
+  "utCatalogOffline": {
+    "message": "मॉडल कैटलॉग: ऑफ़लाइन ($COUNT$ कैश्ड)"
+  },
+  "utCatalogError": {
+    "message": "मॉडल कैटलॉग: लोड विफल — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "कस्टम…"
+  },
+  "utProviderDivider": {
+    "message": "── अधिक ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint और मॉडल दोनों को ओवरराइड किया जा सकता है।"
+  },
+  "utStatusTranslating": {
+    "message": "अनुवाद हो रहा है…"
+  },
+  "utStatusDone": {
+    "message": "पूर्ण।"
+  },
+  "utStatusEmpty": {
+    "message": "खाली अनुवाद।"
+  },
+  "utStatusNothing": {
+    "message": "अनुवाद करने के लिए कुछ नहीं।"
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI मोड के लिए endpoint, मॉडल और कुंजी आवश्यक है (AI सेटिंग्स खोलें)।"
+  },
+  "utNoTextHint": {
+    "message": "कोई टेक्स्ट नहीं आया — टेक्स्ट चुनें और uTools पैनल में 「翻译」 चुनें, या यहाँ टेक्स्ट पेस्ट करें।"
+  }
+}

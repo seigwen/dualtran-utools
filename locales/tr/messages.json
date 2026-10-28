@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Çevir"
+  },
+  "btncopy": {
+    "message": "Kopyala"
+  },
+  "lblAiProvider": {
+    "message": "Yapay zekâ sağlayıcısı"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Akıl yürütme derinliği"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Hedef dil"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "En düşük (varsayılan)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Varsayılan (sağlayıcı)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Yok"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Asgari"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Düşük"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Orta"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Yüksek"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Çok Yüksek"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maksimum"
+  },
+  "utSourceLanguage": {
+    "message": "Kaynak dil"
+  },
+  "utAutoDetect": {
+    "message": "Otomatik algıla"
+  },
+  "utEngine": {
+    "message": "Motor"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI ayarları (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Arayüz dili"
+  },
+  "utLanguageAuto": {
+    "message": "Sistemi takip et"
+  },
+  "utPlaceholder": {
+    "message": "Metin yazın veya yapıştırın — ya da herhangi bir yerde metin seçip uTools panelinde 「翻译」 öğesini seçin."
+  },
+  "utApiKey": {
+    "message": "API anahtarı"
+  },
+  "utEndpoint": {
+    "message": "Uç nokta"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Model adı"
+  },
+  "utModelPlaceholder": {
+    "message": "örn. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Yenile"
+  },
+  "utCatalogIdle": {
+    "message": "Model kataloğu: yüklenmedi"
+  },
+  "utCatalogLoading": {
+    "message": "Model kataloğu: yükleniyor…"
+  },
+  "utCatalogLoaded": {
+    "message": "Model kataloğu: $COUNT$ sağlayıcı"
+  },
+  "utCatalogOffline": {
+    "message": "Model kataloğu: çevrimdışı ($COUNT$ önbellekte)"
+  },
+  "utCatalogError": {
+    "message": "Model kataloğu: yükleme başarısız — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Özel…"
+  },
+  "utProviderDivider": {
+    "message": "── daha fazla ──"
+  },
+  "utEndpointHint": {
+    "message": "Uç nokta ve modelin ikisi de geçersiz kılınabilir."
+  },
+  "utStatusTranslating": {
+    "message": "Çevriliyor…"
+  },
+  "utStatusDone": {
+    "message": "Tamamlandı."
+  },
+  "utStatusEmpty": {
+    "message": "Boş çeviri."
+  },
+  "utStatusNothing": {
+    "message": "Çevrilecek bir şey yok."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI modu için uç nokta, model ve anahtar gerekli (AI ayarlarını açın)."
+  },
+  "utNoTextHint": {
+    "message": "Metin gelmedi — metni seçip uTools panelinde 「翻译」 öğesini seçin veya metni buraya yapıştırın."
+  }
+}

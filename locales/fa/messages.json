@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "ترجمه"
+  },
+  "btncopy": {
+    "message": "کپی (رونوشت)"
+  },
+  "lblAiProvider": {
+    "message": "ارائه‌دهنده هوش مصنوعی"
+  },
+  "lblAiReasoningDepth": {
+    "message": "عمق استدلال"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "زبان مقصد"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "پایین‌ترین (پیش‌فرض)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "پیش‌فرض (ارائه‌دهنده)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "هیچ"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "حداقلی"
+  },
+  "msgReasoningDepthLow": {
+    "message": "کم"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "متوسط"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "زیاد"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "خیلی زیاد"
+  },
+  "msgReasoningDepthMax": {
+    "message": "حداکثر"
+  },
+  "utSourceLanguage": {
+    "message": "زبان مبدأ"
+  },
+  "utAutoDetect": {
+    "message": "تشخیص خودکار"
+  },
+  "utEngine": {
+    "message": "موتور"
+  },
+  "utEngineAi": {
+    "message": "هوش مصنوعی (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "تنظیمات هوش مصنوعی (BYOK)"
+  },
+  "utLanguage": {
+    "message": "زبان رابط کاربری"
+  },
+  "utLanguageAuto": {
+    "message": "پیروی از سیستم"
+  },
+  "utPlaceholder": {
+    "message": "متن را تایپ یا جای‌گذاری کنید — یا متنی را در هر جا انتخاب کنید و در پنل uTools گزینهٔ 「翻译」 را برگزینید."
+  },
+  "utApiKey": {
+    "message": "کلید API"
+  },
+  "utEndpoint": {
+    "message": "نقطهٔ پایانی"
+  },
+  "utModel": {
+    "message": "مدل"
+  },
+  "utModelName": {
+    "message": "نام مدل"
+  },
+  "utModelPlaceholder": {
+    "message": "مثلاً gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "بازخوانی"
+  },
+  "utCatalogIdle": {
+    "message": "کاتالوگ مدل: بارگذاری نشده"
+  },
+  "utCatalogLoading": {
+    "message": "کاتالوگ مدل: در حال بارگذاری…"
+  },
+  "utCatalogLoaded": {
+    "message": "کاتالوگ مدل: $COUNT$ ارائه‌دهنده"
+  },
+  "utCatalogOffline": {
+    "message": "کاتالوگ مدل: آفلاین ($COUNT$ ذخیره‌شده)"
+  },
+  "utCatalogError": {
+    "message": "کاتالوگ مدل: بارگذاری ناموفق — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "سفارشی…"
+  },
+  "utProviderDivider": {
+    "message": "── بیشتر ──"
+  },
+  "utEndpointHint": {
+    "message": "نقطه پایانی و مدل هر دو قابل بازنویسی هستند."
+  },
+  "utStatusTranslating": {
+    "message": "در حال ترجمه…"
+  },
+  "utStatusDone": {
+    "message": "انجام شد."
+  },
+  "utStatusEmpty": {
+    "message": "ترجمه خالی."
+  },
+  "utStatusNothing": {
+    "message": "چیزی برای ترجمه نیست."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "حالت AI به نقطه پایانی، مدل و کلید نیاز دارد (تنظیمات AI را باز کنید)."
+  },
+  "utNoTextHint": {
+    "message": "متنی دریافت نشد — متن را انتخاب کنید و در پنل uTools گزینه 「翻译」 را بزنید، یا متن را اینجا بچسبانید."
+  }
+}

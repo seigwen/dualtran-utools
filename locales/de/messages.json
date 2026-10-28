@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Übersetzen"
+  },
+  "btncopy": {
+    "message": "Kopieren"
+  },
+  "lblAiProvider": {
+    "message": "KI-Anbieter"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Schlussfolgerungstiefe"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Zielsprache"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Niedrigste (Standard)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Standard (Anbieter)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Keine"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimal"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Niedrig"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Mittel"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Hoch"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Sehr hoch"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maximal"
+  },
+  "utSourceLanguage": {
+    "message": "Ausgangssprache"
+  },
+  "utAutoDetect": {
+    "message": "Automatisch erkennen"
+  },
+  "utEngine": {
+    "message": "Engine"
+  },
+  "utEngineAi": {
+    "message": "KI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "KI-Einstellungen (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Oberflächensprache"
+  },
+  "utLanguageAuto": {
+    "message": "Systemeinstellung folgen"
+  },
+  "utPlaceholder": {
+    "message": "Text eingeben oder einfügen — oder Text markieren und im uTools-Panel 「翻译」 wählen."
+  },
+  "utApiKey": {
+    "message": "API-Schlüssel"
+  },
+  "utEndpoint": {
+    "message": "Endpunkt"
+  },
+  "utModel": {
+    "message": "Modell"
+  },
+  "utModelName": {
+    "message": "Modellname"
+  },
+  "utModelPlaceholder": {
+    "message": "z. B. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Aktualisieren"
+  },
+  "utCatalogIdle": {
+    "message": "Modellkatalog: nicht geladen"
+  },
+  "utCatalogLoading": {
+    "message": "Modellkatalog: wird geladen…"
+  },
+  "utCatalogLoaded": {
+    "message": "Modellkatalog: $COUNT$ Anbieter"
+  },
+  "utCatalogOffline": {
+    "message": "Modellkatalog: offline ($COUNT$ im Cache)"
+  },
+  "utCatalogError": {
+    "message": "Modellkatalog: Laden fehlgeschlagen — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Benutzerdefiniert…"
+  },
+  "utProviderDivider": {
+    "message": "── mehr ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint und Modell können beide überschrieben werden."
+  },
+  "utStatusTranslating": {
+    "message": "Übersetze…"
+  },
+  "utStatusDone": {
+    "message": "Fertig."
+  },
+  "utStatusEmpty": {
+    "message": "Leere Übersetzung."
+  },
+  "utStatusNothing": {
+    "message": "Nichts zu übersetzen."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI-Modus benötigt Endpoint, Modell und Schlüssel (AI-Einstellungen öffnen)."
+  },
+  "utNoTextHint": {
+    "message": "Kein Text empfangen — Text auswählen und 「翻译」 im uTools-Panel wählen oder den Text hier einfügen."
+  }
+}

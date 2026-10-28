@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "翻訳"
+  },
+  "btncopy": {
+    "message": "コピー"
+  },
+  "lblAiProvider": {
+    "message": "AI プロバイダー"
+  },
+  "lblAiReasoningDepth": {
+    "message": "推論の深さ"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "対象言語"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "最低 (デフォルト)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "デフォルト (プロバイダー)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "なし"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "最小"
+  },
+  "msgReasoningDepthLow": {
+    "message": "低"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "中"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "高"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "最高"
+  },
+  "msgReasoningDepthMax": {
+    "message": "最大"
+  },
+  "utSourceLanguage": {
+    "message": "ソース言語"
+  },
+  "utAutoDetect": {
+    "message": "自動検出"
+  },
+  "utEngine": {
+    "message": "エンジン"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI設定 (BYOK)"
+  },
+  "utLanguage": {
+    "message": "表示言語"
+  },
+  "utLanguageAuto": {
+    "message": "システムに従う"
+  },
+  "utPlaceholder": {
+    "message": "テキストを入力または貼り付け、または任意の場所でテキストを選択してuToolsパネルの「翻译」を選択してください。"
+  },
+  "utApiKey": {
+    "message": "APIキー"
+  },
+  "utEndpoint": {
+    "message": "エンドポイント"
+  },
+  "utModel": {
+    "message": "モデル"
+  },
+  "utModelName": {
+    "message": "モデル名"
+  },
+  "utModelPlaceholder": {
+    "message": "例: gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "更新"
+  },
+  "utCatalogIdle": {
+    "message": "モデルカタログ: 未読み込み"
+  },
+  "utCatalogLoading": {
+    "message": "モデルカタログ: 読み込み中…"
+  },
+  "utCatalogLoaded": {
+    "message": "モデルカタログ: $COUNT$ プロバイダー"
+  },
+  "utCatalogOffline": {
+    "message": "モデルカタログ: オフライン ($COUNT$ キャッシュ)"
+  },
+  "utCatalogError": {
+    "message": "モデルカタログ: 読み込み失敗 — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "カスタム…"
+  },
+  "utProviderDivider": {
+    "message": "── その他 ──"
+  },
+  "utEndpointHint": {
+    "message": "エンドポイントとモデルはどちらも上書きできます。"
+  },
+  "utStatusTranslating": {
+    "message": "翻訳中…"
+  },
+  "utStatusDone": {
+    "message": "完了。"
+  },
+  "utStatusEmpty": {
+    "message": "翻訳結果が空です。"
+  },
+  "utStatusNothing": {
+    "message": "翻訳するテキストがありません。"
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AIモードにはエンドポイント、モデル、キーが必要です（AI設定を開く）。"
+  },
+  "utNoTextHint": {
+    "message": "テキストが入力されていません — テキストを選択してuToolsパネルで「翻译」を選ぶか、ここにテキストを貼り付けてください。"
+  }
+}

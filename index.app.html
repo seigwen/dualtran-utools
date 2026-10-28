@@ -5,9 +5,10 @@
   <title>DualTran</title>
   <link rel="stylesheet" href="dist/style.css" />
   <style>
-    select.lang { width: 136px; }
+    select.lang { min-width: 136px; width: auto; max-width: 220px; }
+    [dir="rtl"] .arrow { display: inline-block; transform: scaleX(-1); }
     #settings label {
-      display: grid; grid-template-columns: 76px 1fr; align-items: center;
+      display: grid; grid-template-columns: minmax(76px, auto) 1fr; align-items: center;
       gap: 8px; margin: 5px 0; color: #8a8a94; font-size: 12px;
     }
     #settings input, #settings select { width: 100%; }
@@ -27,33 +28,35 @@
   <main class="wrap">
     <header class="bar">
       <span class="brand">DualTran</span>
-      <select id="engine" title="Engine"><option value="google">Google</option><option value="ai">AI (BYOK)</option></select>
-      <select id="source" class="lang" title="Source language"></select>
+      <select id="engine" data-i18n-title="utEngine"><option value="google">Google</option><option value="ai" data-i18n="utEngineAi">AI (BYOK)</option></select>
+      <select id="source" class="lang" data-i18n-title="utSourceLanguage"></select>
       <span class="arrow">&#8594;</span>
-      <select id="target" class="lang" title="Target language"></select>
+      <select id="target" class="lang" data-i18n-title="lblTargetLanguageGroup"></select>
     </header>
-    <textarea id="input" placeholder="Type or paste text — or select text anywhere and pick 翻译 in the uTools panel." spellcheck="false"></textarea>
+    <textarea id="input" data-i18n-placeholder="utPlaceholder" spellcheck="false"></textarea>
     <div class="actions">
-      <button id="translate">Translate</button>
-      <button id="copy" disabled>Copy</button>
+      <button id="translate" data-i18n="btnTranslate">Translate</button>
+      <button id="copy" data-i18n="btncopy" disabled>Copy</button>
       <span id="status" class="status"></span>
     </div>
     <pre id="result" class="result"></pre>
     <details id="settings">
-      <summary>AI settings (BYOK)</summary>
-      <label>服务商 <select id="aiProvider"></select></label>
+      <summary data-i18n="utAiSettings">AI settings (BYOK)</summary>
+      <label><span data-i18n="lblAiProvider">AI provider</span> <select id="aiProvider"></select></label>
       <div class="catalog">
-        <span id="catalogState" class="hint">模型目录：未加载</span>
-        <button id="refreshCatalog" type="button">刷新</button>
+        <span id="catalogState" class="hint" data-i18n="utCatalogIdle">Model catalogue: not loaded</span>
+        <button id="refreshCatalog" type="button" data-i18n="utRefresh">Refresh</button>
       </div>
-      <label>Endpoint <input id="aiBaseUrl" placeholder="https://api.openai.com/v1" /></label>
-      <label>Model <select id="aiModelSelect"></select></label>
-      <label>推理强度 <select id="aiReasoning"></select></label>
-      <label id="customModelRow" hidden>模型名 <input id="aiModel" placeholder="例如 gpt-4o-mini" /></label>
-      <label>API key <input id="aiApiKey" type="password" placeholder="sk-..." /></label>
-      <p class="hint">服务商与模型列表来自 models.dev（缓存 24 小时）。endpoint 与 model 都可手动覆盖。</p>
+      <label><span data-i18n="utEndpoint">Endpoint</span> <input id="aiBaseUrl" placeholder="https://api.openai.com/v1" /></label>
+      <label><span data-i18n="utModel">Model</span> <select id="aiModelSelect"></select></label>
+      <label><span data-i18n="lblAiReasoningDepth">Reasoning depth</span> <select id="aiReasoning"></select></label>
+      <label id="customModelRow" hidden><span data-i18n="utModelName">Model name</span> <input id="aiModel" data-i18n-placeholder="utModelPlaceholder" /></label>
+      <label><span data-i18n="utApiKey">API key</span> <input id="aiApiKey" type="password" placeholder="sk-..." /></label>
+      <p class="hint" data-i18n="utEndpointHint">Endpoint and model can both be overridden.</p>
+      <label><span data-i18n="utLanguage">Interface language</span> <select id="uiLang"></select></label>
     </details>
   </main>
+  <script src="dist/i18n.js"></script>
   <script>
   /* The page does the network work: the browser's stack reaches Google from this
      machine while Node's raw sockets time out. The preload only forwards the
@@ -105,10 +108,66 @@
       customModelRow: document.getElementById("customModelRow"),
       aiApiKey: document.getElementById("aiApiKey"),
       catalogState: document.getElementById("catalogState"),
-      refreshCatalog: document.getElementById("refreshCatalog")
+      refreshCatalog: document.getElementById("refreshCatalog"),
+      uiLang: document.getElementById("uiLang")
     };
 
     el.aiReasoning = document.getElementById("aiReasoning");
+
+    // ── i18n ──────────────────────────────────────────────────
+    // Catalogue codes follow the Chrome extension (locales/<code>/messages.json).
+    var UI_LANG_KEY = "dualtran.uiLang";
+    var UI_LANG_NAMES = {
+      "af": "Afrikaans",
+      "ar": "العربية",
+      "ca": "Català",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "el": "Ελληνικά",
+      "en": "English",
+      "es": "Español",
+      "fa": "فارسی",
+      "fi": "Suomi",
+      "fr": "Français",
+      "he": "עברית",
+      "hi": "हिन्दी",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "is": "Íslenska",
+      "it": "Italiano",
+      "ja": "日本語",
+      "ko": "한국어",
+      "lv": "Latviešu",
+      "nl": "Nederlands",
+      "no": "Norsk",
+      "pl": "Polski",
+      "pt_BR": "Português (Brasil)",
+      "pt_PT": "Português (Portugal)",
+      "ro": "Română",
+      "ru": "Русский",
+      "sl": "Slovenščina",
+      "sr": "Српски",
+      "sv": "Svenska",
+      "th": "ไทย",
+      "tr": "Türkçe",
+      "ug": "ئۇيغۇرچە",
+      "uk": "Українська",
+      "vi": "Tiếng Việt",
+      "zh_CN": "简体中文",
+      "zh_TW": "繁體中文"
+    };
+    var savedUiLang = null;
+    try { savedUiLang = localStorage.getItem(UI_LANG_KEY); } catch (err) { /* private mode */ }
+    var i18n = window.DtI18n.create(window.DT_LOCALES || {}, savedUiLang || navigator.language);
+    var t = i18n.t;
+    // Right-to-left scripts get a flipped layout (flex/grid follow the direction).
+    if (["ar", "fa", "he", "ug"].indexOf(i18n.code) >= 0) document.documentElement.setAttribute("dir", "rtl");
+    window.DtI18n.apply(document, t);
+
+    function uiLangName(code) {
+      return UI_LANG_NAMES[code] || code;
+    }
 
     var REASONING_LOWEST = "__lowest__";
     var REASONING_ORDER = ["none", "minimal", "low", "medium", "high", "xhigh", "max"];
@@ -135,10 +194,13 @@
       var declared = reasoningValuesFor();
       var values = REASONING_ORDER.filter(function (level) { return declared.indexOf(level) >= 0; });
       var html = [
-        '<option value="' + REASONING_LOWEST + '">最低（默认）</option>',
-        '<option value="">服务商默认</option>'
+        '<option value="' + REASONING_LOWEST + '">' + t("msgReasoningDepthLowest") + "</option>",
+        '<option value="">' + t("msgReasoningDepthProviderDefault") + "</option>"
       ];
-      values.forEach(function (level) { html.push('<option value="' + level + '">' + level + "</option>"); });
+      values.forEach(function (level) {
+        var key = "msgReasoningDepth" + level.charAt(0).toUpperCase() + level.slice(1);
+        html.push('<option value="' + level + '">' + t(key) + "</option>");
+      });
       el.aiReasoning.innerHTML = html.join("");
       var still = Array.prototype.some.call(el.aiReasoning.options, function (o) { return o.value === current; });
       el.aiReasoning.value = still ? current : REASONING_LOWEST;
@@ -161,8 +223,27 @@
     var lastDefaults = { base: "", model: "" };
 
     // ── languages ──────────────────────────────────────────────
+    function fillUiLanguages() {
+      if (!el.uiLang) return;
+      var codes = Object.keys(window.DT_LOCALES || {}).sort(function (a, b) {
+        return uiLangName(a).localeCompare(uiLangName(b));
+      });
+      el.uiLang.innerHTML = '<option value="auto">' + t("utLanguageAuto") + "</option>" +
+        codes.map(function (code) {
+          return '<option value="' + code + '">' + uiLangName(code) + "</option>";
+        }).join("");
+      el.uiLang.value = savedUiLang && window.DT_LOCALES && window.DT_LOCALES[savedUiLang] ? savedUiLang : "auto";
+      el.uiLang.addEventListener("change", function () {
+        try {
+          if (el.uiLang.value === "auto") localStorage.removeItem(UI_LANG_KEY);
+          else localStorage.setItem(UI_LANG_KEY, el.uiLang.value);
+        } catch (err) { /* ignore */ }
+        location.reload();
+      });
+    }
+
     function fillLanguages() {
-      el.source.innerHTML = '<option value="auto">自动检测</option>' +
+      el.source.innerHTML = '<option value="auto">' + t("utAutoDetect") + "</option>" +
         LANGUAGES.map(function (l) {
           return '<option value="' + l[0] + '">' + l[1] + " " + l[0] + "</option>";
         }).join("");
@@ -221,7 +302,7 @@
       catalog = providers;
       catalogTs = ts;
       var n = Object.keys(providers).length;
-      setCatalogState("模型目录：已载入 " + n + " 个服务商");
+      setCatalogState(t("utCatalogLoaded", { COUNT: n }));
       renderProviders();
       renderModels();
       renderReasoning();
@@ -238,7 +319,7 @@
           if (Date.now() - (cached.ts || 0) < CATALOG_TTL) return;
         }
       }
-      setCatalogState("模型目录：加载中…");
+      setCatalogState(t("utCatalogLoading"));
       fetch(CATALOG_URL)
         .then(function (res) {
           if (!res.ok) throw new Error("HTTP " + res.status);
@@ -254,8 +335,8 @@
           applyCatalog(providers, ts);
         })
         .catch(function (e) {
-          if (catalog) setCatalogState("模型目录：离线（缓存 " + Object.keys(catalog).length + " 项）");
-          else setCatalogState("模型目录：加载失败 " + ((e && e.message) || ""));
+          if (catalog) setCatalogState(t("utCatalogOffline", { COUNT: Object.keys(catalog).length }));
+          else setCatalogState(t("utCatalogError", { ERROR: (e && e.message) || "" }));
         });
     }
 
@@ -279,7 +360,7 @@
           return (catalog[a].name || a).localeCompare(catalog[b].name || b);
         });
         if (ids.length) {
-          opts.push('<option disabled>── more ──</option>');
+          opts.push('<option disabled>' + t("utProviderDivider") + "</option>");
           ids.forEach(function (id) {
             if (!catalog[id].api) return; // no endpoint to call; only useful as a built-in alias
             if (BUILTIN.some(function (b) { return b.dev === id; })) return; // already listed above
@@ -317,7 +398,7 @@
       var opts = models.map(function (m) {
         return '<option value="' + m[0] + '">' + m[1] + "</option>";
       });
-      opts.push('<option value="__custom__">自定义…</option>');
+      opts.push('<option value="__custom__">' + t("utCustomOption") + "</option>");
       el.aiModelSelect.innerHTML = opts.join("");
       if (value && known) {
         el.aiModelSelect.value = value;
@@ -428,7 +509,7 @@
             "&sl=" + encodeURIComponent(source) + "&tl=" + encodeURIComponent(target) +
             "&dt=t&q=" + encodeURIComponent(piece);
           return fetch(url).then(function (res) {
-            if (!res.ok) throw new Error("Google HTTP " + res.status);
+            if (!res.ok) throw new Error(t("utErrorGoogleHttp", { STATUS: res.status }));
             return res.json();
           }).then(function (data) {
             done.push((data[0] || []).map(function (seg) { return seg[0]; }).join(""));
@@ -439,7 +520,7 @@
 
     function ai(text, target, cfg) {
       if (!cfg.aiBaseUrl || !cfg.aiModel || !cfg.aiApiKey) {
-        return Promise.reject(new Error("AI mode needs endpoint, model and key (open AI settings)."));
+        return Promise.reject(new Error(t("utErrorAiConfig")));
       }
       var reasoning = resolveReasoning();
       var base = cfg.aiBaseUrl.replace(/\/+$/, "");
@@ -456,7 +537,7 @@
           ]
         }, reasoning ? { reasoning_effort: reasoning } : {}))
       }).then(function (res) {
-        if (!res.ok) throw new Error("AI HTTP " + res.status);
+        if (!res.ok) throw new Error(t("utErrorAiHttp", { STATUS: res.status }));
         return res.json();
       }).then(function (data) {
         return (((data.choices || [])[0] || {}).message || {}).content || "";
@@ -465,20 +546,20 @@
 
     function run() {
       var text = el.input.value.trim();
-      if (!text) { say("Nothing to translate."); return; }
+      if (!text) { say(t("utStatusNothing")); return; }
       var cfg = settings();
       remember();
       el.translate.disabled = true;
       el.copy.disabled = true;
       el.result.textContent = "";
-      say("Translating…", false, true);
+      say(t("utStatusTranslating"), false, true);
       var job = cfg.engine === "ai"
         ? ai(text, cfg.targetLanguage, cfg)
         : google(text, cfg.sourceLanguage, cfg.targetLanguage);
       job.then(function (out) {
         el.result.textContent = out;
         el.copy.disabled = !out;
-        say(out ? "Done." : "Empty translation.");
+        say(out ? t("utStatusDone") : t("utStatusEmpty"));
       }).catch(function (e) {
         say(String((e && e.message) || e), true);
       }).then(function () {
@@ -494,6 +575,7 @@
     if (!el.aiBaseUrl.value.trim()) applyProviderDefaults(el.aiProvider.value);
     else renderModels();
     renderReasoning();
+    fillUiLanguages();
 
     el.aiProvider.addEventListener("change", function () {
       applyProviderDefaults(el.aiProvider.value);
@@ -557,7 +639,7 @@
         run();
       } else if (msg.type === "focus") {
         el.input.focus();
-        say("没有带入文本：选中文字后按鼠标中键选「翻译」，或复制/粘贴后再翻译。");
+        say(t("utNoTextHint"));
       }
     });
     window.postMessage({ __dualtran: true, type: "ready" }, "*");

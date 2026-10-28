@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "ترجم"
+  },
+  "btncopy": {
+    "message": "نسخ"
+  },
+  "lblAiProvider": {
+    "message": "مزود الذكاء الاصطناعي"
+  },
+  "lblAiReasoningDepth": {
+    "message": "عمق الاستدلال"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "اللغة المستهدفة"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "الأدنى (افتراضي)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "الافتراضي (المزوّد)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "بلا"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "أدنى حد"
+  },
+  "msgReasoningDepthLow": {
+    "message": "منخفض"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "متوسط"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "عالٍ"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "مرتفع جدًا"
+  },
+  "msgReasoningDepthMax": {
+    "message": "الأقصى"
+  },
+  "utSourceLanguage": {
+    "message": "لغة المصدر"
+  },
+  "utAutoDetect": {
+    "message": "اكتشاف تلقائي"
+  },
+  "utEngine": {
+    "message": "المحرك"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "إعدادات AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "لغة الواجهة"
+  },
+  "utLanguageAuto": {
+    "message": "اتباع النظام"
+  },
+  "utPlaceholder": {
+    "message": "اكتب أو الصق النص — أو حدد نصًا في أي مكان واختر 「翻译」 في لوحة uTools."
+  },
+  "utApiKey": {
+    "message": "مفتاح API"
+  },
+  "utEndpoint": {
+    "message": "نقطة النهاية"
+  },
+  "utModel": {
+    "message": "الطراز"
+  },
+  "utModelName": {
+    "message": "اسم الطراز"
+  },
+  "utModelPlaceholder": {
+    "message": "مثال: gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "تحديث"
+  },
+  "utCatalogIdle": {
+    "message": "كتالوج الطرازات: لم يتم التحميل"
+  },
+  "utCatalogLoading": {
+    "message": "كتالوج الطرازات: جارٍ التحميل…"
+  },
+  "utCatalogLoaded": {
+    "message": "كتالوج الطرازات: $COUNT$ مزوّد"
+  },
+  "utCatalogOffline": {
+    "message": "كتالوج الطرازات: دون اتصال ($COUNT$ مخزّن مؤقتًا)"
+  },
+  "utCatalogError": {
+    "message": "كتالوج الطرازات: فشل التحميل — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "مخصّص…"
+  },
+  "utProviderDivider": {
+    "message": "── المزيد ──"
+  },
+  "utEndpointHint": {
+    "message": "يمكن تجاوز كل من نقطة النهاية والطراز."
+  },
+  "utStatusTranslating": {
+    "message": "جارٍ الترجمة…"
+  },
+  "utStatusDone": {
+    "message": "تم."
+  },
+  "utStatusEmpty": {
+    "message": "ترجمة فارغة."
+  },
+  "utStatusNothing": {
+    "message": "لا يوجد ما يُترجم."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "يتطلب وضع AI نقطة نهاية وطرازًا ومفتاحًا (افتح إعدادات AI)."
+  },
+  "utNoTextHint": {
+    "message": "لم يصل أي نص — حدد النص واختر 「翻译」 في لوحة uTools، أو الصق النص هنا."
+  }
+}

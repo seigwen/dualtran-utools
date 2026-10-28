@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Traduzir"
+  },
+  "btncopy": {
+    "message": "Copiar"
+  },
+  "lblAiProvider": {
+    "message": "Fornecedor de IA"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Profundidade de raciocínio"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Língua de destino"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "O mais baixo (predefinição)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Predefinido (fornecedor)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Nenhum"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Mínimo"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Baixo"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Médio"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Alto"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Muito alto"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Máximo"
+  },
+  "utSourceLanguage": {
+    "message": "Idioma de origem"
+  },
+  "utAutoDetect": {
+    "message": "Detetar automaticamente"
+  },
+  "utEngine": {
+    "message": "Motor"
+  },
+  "utEngineAi": {
+    "message": "IA (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "Definições de IA (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Idioma da interface"
+  },
+  "utLanguageAuto": {
+    "message": "Seguir o sistema"
+  },
+  "utPlaceholder": {
+    "message": "Escreva ou cole texto — ou selecione texto em qualquer lugar e escolha 「翻译」 no painel do uTools."
+  },
+  "utApiKey": {
+    "message": "Chave API"
+  },
+  "utEndpoint": {
+    "message": "Endpoint"
+  },
+  "utModel": {
+    "message": "Modelo"
+  },
+  "utModelName": {
+    "message": "Nome do modelo"
+  },
+  "utModelPlaceholder": {
+    "message": "ex.: gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Atualizar"
+  },
+  "utCatalogIdle": {
+    "message": "Catálogo de modelos: não carregado"
+  },
+  "utCatalogLoading": {
+    "message": "Catálogo de modelos: a carregar…"
+  },
+  "utCatalogLoaded": {
+    "message": "Catálogo de modelos: $COUNT$ fornecedores"
+  },
+  "utCatalogOffline": {
+    "message": "Catálogo de modelos: offline ($COUNT$ em cache)"
+  },
+  "utCatalogError": {
+    "message": "Catálogo de modelos: falha ao carregar — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Personalizado…"
+  },
+  "utProviderDivider": {
+    "message": "── mais ──"
+  },
+  "utEndpointHint": {
+    "message": "O endpoint e o modelo podem ambos ser substituídos."
+  },
+  "utStatusTranslating": {
+    "message": "A traduzir…"
+  },
+  "utStatusDone": {
+    "message": "Concluído."
+  },
+  "utStatusEmpty": {
+    "message": "Tradução vazia."
+  },
+  "utStatusNothing": {
+    "message": "Nada para traduzir."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "O modo AI precisa de endpoint, modelo e chave (abrir definições de AI)."
+  },
+  "utNoTextHint": {
+    "message": "Não entrou texto — selecione texto e escolha 「翻译」 no painel do uTools, ou cole o texto aqui."
+  }
+}

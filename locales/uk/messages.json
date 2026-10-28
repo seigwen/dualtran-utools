@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Перекласти"
+  },
+  "btncopy": {
+    "message": "Копіювати"
+  },
+  "lblAiProvider": {
+    "message": "Постачальник ШІ"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Глибина міркувань"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Цільова мова"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Найнижчий (за замовчуванням)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "За замовчуванням (постачальник)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Немає"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Мінімальна"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Низький"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Середній"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Високий"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Дуже висока"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Максимальний"
+  },
+  "utSourceLanguage": {
+    "message": "Мова джерела"
+  },
+  "utAutoDetect": {
+    "message": "Автовизначення"
+  },
+  "utEngine": {
+    "message": "Рушій"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "Налаштування AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Мова інтерфейсу"
+  },
+  "utLanguageAuto": {
+    "message": "Як у системі"
+  },
+  "utPlaceholder": {
+    "message": "Введіть або вставте текст — або виділіть текст будь-де та виберіть 「翻译」 на панелі uTools."
+  },
+  "utApiKey": {
+    "message": "Ключ API"
+  },
+  "utEndpoint": {
+    "message": "Кінцева точка"
+  },
+  "utModel": {
+    "message": "Модель"
+  },
+  "utModelName": {
+    "message": "Назва моделі"
+  },
+  "utModelPlaceholder": {
+    "message": "напр. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Оновити"
+  },
+  "utCatalogIdle": {
+    "message": "Каталог моделей: не завантажено"
+  },
+  "utCatalogLoading": {
+    "message": "Каталог моделей: завантаження…"
+  },
+  "utCatalogLoaded": {
+    "message": "Каталог моделей: постачальників — $COUNT$"
+  },
+  "utCatalogOffline": {
+    "message": "Каталог моделей: офлайн (кешовано — $COUNT$)"
+  },
+  "utCatalogError": {
+    "message": "Каталог моделей: помилка завантаження — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Власна…"
+  },
+  "utProviderDivider": {
+    "message": "── більше ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint і модель можна перевизначити."
+  },
+  "utStatusTranslating": {
+    "message": "Перекладаю…"
+  },
+  "utStatusDone": {
+    "message": "Готово."
+  },
+  "utStatusEmpty": {
+    "message": "Порожній переклад."
+  },
+  "utStatusNothing": {
+    "message": "Немає що перекладати."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "Режиму AI потрібні endpoint, модель і ключ (відкрийте налаштування AI)."
+  },
+  "utNoTextHint": {
+    "message": "Текст не надійшов — виділіть текст і виберіть 「翻译」 на панелі uTools або вставте текст сюди."
+  }
+}

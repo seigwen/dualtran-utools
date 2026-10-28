@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Oversette"
+  },
+  "btncopy": {
+    "message": "Kopiere"
+  },
+  "lblAiProvider": {
+    "message": "AI-leverandør"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Resonneringsdybde"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Målspråk"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Laveste (standard)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Standard (leverandør)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Ingen"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimal"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Lav"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Middels"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Høy"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "XHøy"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maks"
+  },
+  "utSourceLanguage": {
+    "message": "Kildespråk"
+  },
+  "utAutoDetect": {
+    "message": "Automatisk gjenkjenning"
+  },
+  "utEngine": {
+    "message": "Motor"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI-innstillinger (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Grensesnittspråk"
+  },
+  "utLanguageAuto": {
+    "message": "Følg systemet"
+  },
+  "utPlaceholder": {
+    "message": "Skriv eller lim inn tekst – eller merk tekst hvor som helst og velg 「翻译」 i uTools-panelet."
+  },
+  "utApiKey": {
+    "message": "API-nøkkel"
+  },
+  "utEndpoint": {
+    "message": "Endepunkt"
+  },
+  "utModel": {
+    "message": "Modell"
+  },
+  "utModelName": {
+    "message": "Modellnavn"
+  },
+  "utModelPlaceholder": {
+    "message": "f.eks. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Oppdater"
+  },
+  "utCatalogIdle": {
+    "message": "Modellkatalog: ikke lastet"
+  },
+  "utCatalogLoading": {
+    "message": "Modellkatalog: laster…"
+  },
+  "utCatalogLoaded": {
+    "message": "Modellkatalog: $COUNT$ leverandører"
+  },
+  "utCatalogOffline": {
+    "message": "Modellkatalog: frakoblet ($COUNT$ bufret)"
+  },
+  "utCatalogError": {
+    "message": "Modellkatalog: lasting mislyktes — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Egendefinert…"
+  },
+  "utProviderDivider": {
+    "message": "── mer ──"
+  },
+  "utEndpointHint": {
+    "message": "Endepunkt og modell kan begge overstyres."
+  },
+  "utStatusTranslating": {
+    "message": "Oversetter…"
+  },
+  "utStatusDone": {
+    "message": "Ferdig."
+  },
+  "utStatusEmpty": {
+    "message": "Tom oversettelse."
+  },
+  "utStatusNothing": {
+    "message": "Ingenting å oversette."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI-modus krever endepunkt, modell og nøkkel (åpne AI-innstillinger)."
+  },
+  "utNoTextHint": {
+    "message": "Ingen tekst kom inn – velg tekst og velg 「翻译」 i uTools-panelet, eller lim inn teksten her."
+  }
+}

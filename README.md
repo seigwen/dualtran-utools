@@ -1,7 +1,10 @@
 # DualTran for uTools
 
 Translate the text you select in any app, or type — right inside uTools —
-with **Google** or your own AI model (BYOK, 20+ providers). Powered by
+with **Google** or your own AI model (BYOK, 20+ providers). The interface ships
+in **38 languages** (same catalogue as the browser extension) and follows the
+system language; you can override it under *AI settings → Interface language*.
+Powered by
 `@dualtran/core`, the engine extracted from the
 [DualTran browser extension](https://github.com/seigwen/DualTran-extension).
 
@@ -20,6 +23,9 @@ with **Google** or your own AI model (BYOK, 20+ providers). Powered by
   uTools passes the keyword itself on that path, never the text that followed.
 - **Copy** puts the translation back on the clipboard (paste into the app you
   came from with Ctrl+V).
+- **Interface language** follows `navigator.language` (zh-CN → 简体中文, de-AT →
+  Deutsch, …) and falls back to English; the picker in AI settings stores an
+  override.
 - A **bare keyword** never carries the selection: verified — the clipboard is
   untouched when the panel opens, so nothing about the selection reaches the
   search box.

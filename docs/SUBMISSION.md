@@ -15,10 +15,13 @@ uTools-account action via the uTools developer tool.
 
 ## Current package
 
-- `dualtran-utools-0.1.3.zip` (build with `npm run package`)
+- `dualtran-utools-0.1.5.zip` (build with `npm run package`)
 - sha256 `dd513be3b900dc27fcccbdcea407553be76cc3b24d3def28094b7684b4df8cb5`
 - Contains `index.app.html` (the `plugin.json` `main`) — a packaging bug that
   omitted it was fixed in 0.1.3; `npm run verify` now pins the contract.
+- 0.1.5 adds the 38-language UI: `locales/<code>/messages.json` is bundled into
+  `dist/i18n.js` by `npm run build`; `npm run i18n:sync` regenerates the
+  machine-translated catalogues (zh_CN/zh_TW are hand-written).
 
 ## Steps (uTools 开发者工具 → 插件应用市场)
 

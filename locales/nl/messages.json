@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Vertalen"
+  },
+  "btncopy": {
+    "message": "Kopiëren"
+  },
+  "lblAiProvider": {
+    "message": "AI-provider"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Redeneerdiepte"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Doeltaal"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Laagste (standaard)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Standaard (provider)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Geen"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimaal"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Laag"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Gemiddeld"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Hoog"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Extra hoog"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Max"
+  },
+  "utSourceLanguage": {
+    "message": "Brontaal"
+  },
+  "utAutoDetect": {
+    "message": "Automatisch detecteren"
+  },
+  "utEngine": {
+    "message": "Engine"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI-instellingen (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Interfacetaal"
+  },
+  "utLanguageAuto": {
+    "message": "Systeem volgen"
+  },
+  "utPlaceholder": {
+    "message": "Typ of plak tekst — of selecteer ergens tekst en kies 「翻译」 in het uTools-paneel."
+  },
+  "utApiKey": {
+    "message": "API-sleutel"
+  },
+  "utEndpoint": {
+    "message": "Endpoint"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Modelnaam"
+  },
+  "utModelPlaceholder": {
+    "message": "bijv. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Vernieuwen"
+  },
+  "utCatalogIdle": {
+    "message": "Modelcatalogus: niet geladen"
+  },
+  "utCatalogLoading": {
+    "message": "Modelcatalogus: laden…"
+  },
+  "utCatalogLoaded": {
+    "message": "Modelcatalogus: $COUNT$ providers"
+  },
+  "utCatalogOffline": {
+    "message": "Modelcatalogus: offline ($COUNT$ in cache)"
+  },
+  "utCatalogError": {
+    "message": "Modelcatalogus: laden mislukt — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Aangepast…"
+  },
+  "utProviderDivider": {
+    "message": "── meer ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint en model kunnen beide worden overschreven."
+  },
+  "utStatusTranslating": {
+    "message": "Vertalen…"
+  },
+  "utStatusDone": {
+    "message": "Klaar."
+  },
+  "utStatusEmpty": {
+    "message": "Lege vertaling."
+  },
+  "utStatusNothing": {
+    "message": "Niets om te vertalen."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI-modus vereist endpoint, model en sleutel (open AI-instellingen)."
+  },
+  "utNoTextHint": {
+    "message": "Geen tekst ontvangen — selecteer tekst en kies 「翻译」 in het uTools-paneel, of plak de tekst hier."
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Prevedi"
+  },
+  "btncopy": {
+    "message": "Kopirati"
+  },
+  "lblAiProvider": {
+    "message": "Dobavljač AI-a"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Dubina zaključivanja"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Ciljni jezik"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Najniža (zadano)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Zadano (pružatelj)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Ništa"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimalno"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Niska"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Srednja"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Visoka"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Vrlo visoko"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maksimalna"
+  },
+  "utSourceLanguage": {
+    "message": "Izvorni jezik"
+  },
+  "utAutoDetect": {
+    "message": "Automatsko prepoznavanje"
+  },
+  "utEngine": {
+    "message": "Mehanizam"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI postavke (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Jezik sučelja"
+  },
+  "utLanguageAuto": {
+    "message": "Slijedi sustav"
+  },
+  "utPlaceholder": {
+    "message": "Upišite ili zalijepite tekst — ili odaberite tekst bilo gdje i odaberite 「翻译」 u uTools panelu."
+  },
+  "utApiKey": {
+    "message": "API ključ"
+  },
+  "utEndpoint": {
+    "message": "Endpoint"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Naziv modela"
+  },
+  "utModelPlaceholder": {
+    "message": "npr. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Osvježi"
+  },
+  "utCatalogIdle": {
+    "message": "Katalog modela: nije učitan"
+  },
+  "utCatalogLoading": {
+    "message": "Katalog modela: učitavanje…"
+  },
+  "utCatalogLoaded": {
+    "message": "Katalog modela: $COUNT$ pružatelja"
+  },
+  "utCatalogOffline": {
+    "message": "Katalog modela: izvan mreže ($COUNT$ predmemorirano)"
+  },
+  "utCatalogError": {
+    "message": "Katalog modela: učitavanje nije uspjelo — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Prilagođeno…"
+  },
+  "utProviderDivider": {
+    "message": "── više ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint i model mogu se oba nadjačati."
+  },
+  "utStatusTranslating": {
+    "message": "Prevođenje…"
+  },
+  "utStatusDone": {
+    "message": "Gotovo."
+  },
+  "utStatusEmpty": {
+    "message": "Prazan prijevod."
+  },
+  "utStatusNothing": {
+    "message": "Nema teksta za prijevod."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI način rada zahtijeva endpoint, model i ključ (otvorite AI postavke)."
+  },
+  "utNoTextHint": {
+    "message": "Nema unesenog teksta — odaberite tekst i odaberite 「翻译」 u uTools panelu ili zalijepite tekst ovdje."
+  }
+}

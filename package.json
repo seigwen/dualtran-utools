@@ -1,16 +1,18 @@
 {
   "name": "dualtran-utools",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "description": "DualTran for uTools — translate selected text with Google or your own AI model (BYOK).",
   "scripts": {
     "sync-core": "node scripts/sync-core.mjs",
-    "build": "node scripts/build-renderer.mjs",
+    "build": "node scripts/build-renderer.mjs && node scripts/build-i18n.mjs",
     "test": "vitest run",
     "test:dist": "node tests/dist/guards.mjs",
     "verify": "npm run test && npm run build && npm run test:dist",
     "package": "node scripts/package.mjs",
-    "e2e": "node e2e/run.mjs"
+    "e2e": "node e2e/run.mjs",
+    "i18n:build": "node scripts/build-i18n.mjs",
+    "i18n:sync": "node scripts/translate-locales.mjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.82",

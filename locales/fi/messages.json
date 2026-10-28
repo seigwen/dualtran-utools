@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Käännä"
+  },
+  "btncopy": {
+    "message": "Kopio"
+  },
+  "lblAiProvider": {
+    "message": "AI-palveluntarjoaja"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Päättelyn syvyys"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Kohdekieli"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Matalin (oletus)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Oletus (palveluntarjoaja)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Ei mitään"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimaalinen"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Matala"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Keskitaso"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Korkea"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Erittäin korkea"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Enimmäis"
+  },
+  "utSourceLanguage": {
+    "message": "Lähdekieli"
+  },
+  "utAutoDetect": {
+    "message": "Tunnista automaattisesti"
+  },
+  "utEngine": {
+    "message": "Moottori"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI-asetukset (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Käyttöliittymän kieli"
+  },
+  "utLanguageAuto": {
+    "message": "Seuraa järjestelmää"
+  },
+  "utPlaceholder": {
+    "message": "Kirjoita tai liitä tekstiä — tai valitse tekstiä missä tahansa ja valitse 「翻译」 uTools-paneelista."
+  },
+  "utApiKey": {
+    "message": "API-avain"
+  },
+  "utEndpoint": {
+    "message": "Päätepiste"
+  },
+  "utModel": {
+    "message": "Malli"
+  },
+  "utModelName": {
+    "message": "Mallin nimi"
+  },
+  "utModelPlaceholder": {
+    "message": "esim. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Päivitä"
+  },
+  "utCatalogIdle": {
+    "message": "Malliluettelo: ei ladattu"
+  },
+  "utCatalogLoading": {
+    "message": "Malliluettelo: ladataan…"
+  },
+  "utCatalogLoaded": {
+    "message": "Malliluettelo: $COUNT$ tarjoajaa"
+  },
+  "utCatalogOffline": {
+    "message": "Malliluettelo: offline-tilassa ($COUNT$ välimuistissa)"
+  },
+  "utCatalogError": {
+    "message": "Malliluettelo: lataus epäonnistui — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Mukautettu…"
+  },
+  "utProviderDivider": {
+    "message": "── lisää ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpointin ja mallin voi molemmat ohittaa."
+  },
+  "utStatusTranslating": {
+    "message": "Käännetään…"
+  },
+  "utStatusDone": {
+    "message": "Valmis."
+  },
+  "utStatusEmpty": {
+    "message": "Tyhjä käännös."
+  },
+  "utStatusNothing": {
+    "message": "Ei käännettävää."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI-tila vaatii endpointin, mallin ja avaimen (avaa AI-asetukset)."
+  },
+  "utNoTextHint": {
+    "message": "Tekstiä ei tullut — valitse teksti ja valitse 「翻译」 uTools-paneelista tai liitä teksti tähän."
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Dịch"
+  },
+  "btncopy": {
+    "message": "Sao Chép"
+  },
+  "lblAiProvider": {
+    "message": "Nhà cung cấp AI"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Độ sâu suy luận"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Ngôn ngữ đích"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Thấp nhất (mặc định)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Mặc định (nhà cung cấp)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Không"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Tối thiểu"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Thấp"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Trung bình"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Cao"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Rất cao"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Tối đa"
+  },
+  "utSourceLanguage": {
+    "message": "Ngôn ngữ nguồn"
+  },
+  "utAutoDetect": {
+    "message": "Tự động phát hiện"
+  },
+  "utEngine": {
+    "message": "Công cụ dịch"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "Cài đặt AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Ngôn ngữ giao diện"
+  },
+  "utLanguageAuto": {
+    "message": "Theo hệ thống"
+  },
+  "utPlaceholder": {
+    "message": "Nhập hoặc dán văn bản — hoặc chọn văn bản ở bất kỳ đâu và chọn 「翻译」 trong bảng uTools."
+  },
+  "utApiKey": {
+    "message": "Khóa API"
+  },
+  "utEndpoint": {
+    "message": "Điểm cuối"
+  },
+  "utModel": {
+    "message": "Mô hình"
+  },
+  "utModelName": {
+    "message": "Tên mô hình"
+  },
+  "utModelPlaceholder": {
+    "message": "ví dụ: gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Làm mới"
+  },
+  "utCatalogIdle": {
+    "message": "Danh mục mô hình: chưa tải"
+  },
+  "utCatalogLoading": {
+    "message": "Danh mục mô hình: đang tải…"
+  },
+  "utCatalogLoaded": {
+    "message": "Danh mục mô hình: $COUNT$ nhà cung cấp"
+  },
+  "utCatalogOffline": {
+    "message": "Danh mục mô hình: ngoại tuyến ($COUNT$ đã lưu)"
+  },
+  "utCatalogError": {
+    "message": "Danh mục mô hình: tải thất bại — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Tùy chỉnh…"
+  },
+  "utProviderDivider": {
+    "message": "── thêm ──"
+  },
+  "utEndpointHint": {
+    "message": "Có thể ghi đè cả endpoint và model."
+  },
+  "utStatusTranslating": {
+    "message": "Đang dịch…"
+  },
+  "utStatusDone": {
+    "message": "Xong."
+  },
+  "utStatusEmpty": {
+    "message": "Bản dịch trống."
+  },
+  "utStatusNothing": {
+    "message": "Không có gì để dịch."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "Chế độ AI cần endpoint, model và key (mở cài đặt AI)."
+  },
+  "utNoTextHint": {
+    "message": "Không có văn bản nào — hãy chọn văn bản và chọn 「翻译」 trong bảng uTools, hoặc dán văn bản vào đây."
+  }
+}

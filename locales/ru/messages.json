@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Перевести"
+  },
+  "btncopy": {
+    "message": "Копировать"
+  },
+  "lblAiProvider": {
+    "message": "Поставщик ИИ"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Глубина рассуждений"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Целевой язык"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Минимальный (по умолчанию)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "По умолчанию (провайдер)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Нет"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Минимальная"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Низкая"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Средняя"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Высокая"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Очень высокий"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Максимальная"
+  },
+  "utSourceLanguage": {
+    "message": "Исходный язык"
+  },
+  "utAutoDetect": {
+    "message": "Автоопределение"
+  },
+  "utEngine": {
+    "message": "Движок"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "Настройки AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Язык интерфейса"
+  },
+  "utLanguageAuto": {
+    "message": "Как в системе"
+  },
+  "utPlaceholder": {
+    "message": "Введите или вставьте текст — или выделите текст в любом месте и выберите 「翻译」 на панели uTools."
+  },
+  "utApiKey": {
+    "message": "Ключ API"
+  },
+  "utEndpoint": {
+    "message": "Конечная точка"
+  },
+  "utModel": {
+    "message": "Модель"
+  },
+  "utModelName": {
+    "message": "Название модели"
+  },
+  "utModelPlaceholder": {
+    "message": "например, gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Обновить"
+  },
+  "utCatalogIdle": {
+    "message": "Каталог моделей: не загружен"
+  },
+  "utCatalogLoading": {
+    "message": "Каталог моделей: загрузка…"
+  },
+  "utCatalogLoaded": {
+    "message": "Каталог моделей: провайдеров — $COUNT$"
+  },
+  "utCatalogOffline": {
+    "message": "Каталог моделей: офлайн (в кэше — $COUNT$)"
+  },
+  "utCatalogError": {
+    "message": "Каталог моделей: ошибка загрузки — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Другая…"
+  },
+  "utProviderDivider": {
+    "message": "── ещё ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint и модель можно переопределить."
+  },
+  "utStatusTranslating": {
+    "message": "Перевод…"
+  },
+  "utStatusDone": {
+    "message": "Готово."
+  },
+  "utStatusEmpty": {
+    "message": "Пустой перевод."
+  },
+  "utStatusNothing": {
+    "message": "Нечего переводить."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "Для режима AI нужны endpoint, модель и ключ (откройте настройки AI)."
+  },
+  "utNoTextHint": {
+    "message": "Текст не поступил — выделите текст и выберите 「翻译」 на панели uTools или вставьте текст сюда."
+  }
+}

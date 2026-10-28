@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Oversæt"
+  },
+  "btncopy": {
+    "message": "Kopier"
+  },
+  "lblAiProvider": {
+    "message": "AI-udbyder"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Ræsonneringsdybde"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Målsprog"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Laveste (standard)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Standard (udbyder)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Ingen"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimal"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Lav"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Mellem"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Høj"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "XHøj"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maks."
+  },
+  "utSourceLanguage": {
+    "message": "Kildesprog"
+  },
+  "utAutoDetect": {
+    "message": "Registrer automatisk"
+  },
+  "utEngine": {
+    "message": "Motor"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI-indstillinger (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Grænsefladesprog"
+  },
+  "utLanguageAuto": {
+    "message": "Følg systemet"
+  },
+  "utPlaceholder": {
+    "message": "Skriv eller indsæt tekst — eller markér tekst hvor som helst, og vælg 「翻译」 i uTools-panelet."
+  },
+  "utApiKey": {
+    "message": "API-nøgle"
+  },
+  "utEndpoint": {
+    "message": "Endpoint"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Modelnavn"
+  },
+  "utModelPlaceholder": {
+    "message": "f.eks. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Opdater"
+  },
+  "utCatalogIdle": {
+    "message": "Modelkatalog: ikke indlæst"
+  },
+  "utCatalogLoading": {
+    "message": "Modelkatalog: indlæser…"
+  },
+  "utCatalogLoaded": {
+    "message": "Modelkatalog: $COUNT$ udbydere"
+  },
+  "utCatalogOffline": {
+    "message": "Modelkatalog: offline ($COUNT$ cachelagret)"
+  },
+  "utCatalogError": {
+    "message": "Modelkatalog: indlæsning mislykkedes — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Tilpasset…"
+  },
+  "utProviderDivider": {
+    "message": "── mere ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint og model kan begge tilsidesættes."
+  },
+  "utStatusTranslating": {
+    "message": "Oversætter…"
+  },
+  "utStatusDone": {
+    "message": "Færdig."
+  },
+  "utStatusEmpty": {
+    "message": "Tom oversættelse."
+  },
+  "utStatusNothing": {
+    "message": "Intet at oversætte."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI-tilstand kræver endpoint, model og nøgle (åbn AI-indstillinger)."
+  },
+  "utNoTextHint": {
+    "message": "Ingen tekst modtaget — vælg tekst og vælg 「翻译」 i uTools-panelet, eller indsæt teksten her."
+  }
+}

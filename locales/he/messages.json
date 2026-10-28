@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "תרגם"
+  },
+  "btncopy": {
+    "message": "עותק"
+  },
+  "lblAiProvider": {
+    "message": "ספק בינה מלאכותית"
+  },
+  "lblAiReasoningDepth": {
+    "message": "עומק החשיבה"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "שפת יעד"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "הנמוך ביותר (ברירת מחדל)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "ברירת מחדל (ספק)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "ללא"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "מינימלי"
+  },
+  "msgReasoningDepthLow": {
+    "message": "נמוכה"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "בינונית"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "גבוהה"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "גבוה במיוחד"
+  },
+  "msgReasoningDepthMax": {
+    "message": "מקסימלית"
+  },
+  "utSourceLanguage": {
+    "message": "שפת מקור"
+  },
+  "utAutoDetect": {
+    "message": "זיהוי אוטומטי"
+  },
+  "utEngine": {
+    "message": "מנוע"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "הגדרות AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "שפת ממשק"
+  },
+  "utLanguageAuto": {
+    "message": "לפי המערכת"
+  },
+  "utPlaceholder": {
+    "message": "הקלד או הדבק טקסט — או בחר טקסט בכל מקום ובחר 「翻译」 בפאנל של uTools."
+  },
+  "utApiKey": {
+    "message": "מפתח API"
+  },
+  "utEndpoint": {
+    "message": "נקודת קצה"
+  },
+  "utModel": {
+    "message": "מודל"
+  },
+  "utModelName": {
+    "message": "שם המודל"
+  },
+  "utModelPlaceholder": {
+    "message": "לדוגמה gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "רענון"
+  },
+  "utCatalogIdle": {
+    "message": "קטלוג מודלים: לא נטען"
+  },
+  "utCatalogLoading": {
+    "message": "קטלוג מודלים: טוען…"
+  },
+  "utCatalogLoaded": {
+    "message": "קטלוג מודלים: $COUNT$ ספקים"
+  },
+  "utCatalogOffline": {
+    "message": "קטלוג מודלים: לא מקוון ($COUNT$ שמורים במטמון)"
+  },
+  "utCatalogError": {
+    "message": "קטלוג מודלים: הטעינה נכשלה — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "מותאם אישית…"
+  },
+  "utProviderDivider": {
+    "message": "── עוד ──"
+  },
+  "utEndpointHint": {
+    "message": "ניתן לעקוף גם את נקודת הקצה וגם את המודל."
+  },
+  "utStatusTranslating": {
+    "message": "מתרגם…"
+  },
+  "utStatusDone": {
+    "message": "בוצע."
+  },
+  "utStatusEmpty": {
+    "message": "תרגום ריק."
+  },
+  "utStatusNothing": {
+    "message": "אין מה לתרגם."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "מצב AI דורש נקודת קצה, מודל ומפתח (פתח את הגדרות AI)."
+  },
+  "utNoTextHint": {
+    "message": "לא התקבל טקסט — בחר טקסט ובחר 「翻译」 בפאנל uTools, או הדבק את הטקסט כאן."
+  }
+}

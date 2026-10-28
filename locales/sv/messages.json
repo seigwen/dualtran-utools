@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Översätt"
+  },
+  "btncopy": {
+    "message": "Kopiera"
+  },
+  "lblAiProvider": {
+    "message": "AI-leverantör"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Resonemangsdjup"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Målspråk"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Lägsta (standard)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Standard (leverantör)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Ingen"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimal"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Låg"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Medel"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Hög"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "XHög"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Max"
+  },
+  "utSourceLanguage": {
+    "message": "Källspråk"
+  },
+  "utAutoDetect": {
+    "message": "Identifiera automatiskt"
+  },
+  "utEngine": {
+    "message": "Motor"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI-inställningar (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Gränssnittsspråk"
+  },
+  "utLanguageAuto": {
+    "message": "Följ systemet"
+  },
+  "utPlaceholder": {
+    "message": "Skriv eller klistra in text — eller markera text var som helst och välj 「翻译」 i uTools-panelen."
+  },
+  "utApiKey": {
+    "message": "API-nyckel"
+  },
+  "utEndpoint": {
+    "message": "Slutpunkt"
+  },
+  "utModel": {
+    "message": "Modell"
+  },
+  "utModelName": {
+    "message": "Modellnamn"
+  },
+  "utModelPlaceholder": {
+    "message": "t.ex. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Uppdatera"
+  },
+  "utCatalogIdle": {
+    "message": "Modellkatalog: inte inläst"
+  },
+  "utCatalogLoading": {
+    "message": "Modellkatalog: läser in…"
+  },
+  "utCatalogLoaded": {
+    "message": "Modellkatalog: $COUNT$ leverantörer"
+  },
+  "utCatalogOffline": {
+    "message": "Modellkatalog: offline ($COUNT$ cachade)"
+  },
+  "utCatalogError": {
+    "message": "Modellkatalog: inläsning misslyckades — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Anpassad…"
+  },
+  "utProviderDivider": {
+    "message": "── fler ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint och modell kan båda åsidosättas."
+  },
+  "utStatusTranslating": {
+    "message": "Översätter…"
+  },
+  "utStatusDone": {
+    "message": "Klart."
+  },
+  "utStatusEmpty": {
+    "message": "Tom översättning."
+  },
+  "utStatusNothing": {
+    "message": "Inget att översätta."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI-läget kräver endpoint, modell och nyckel (öppna AI-inställningarna)."
+  },
+  "utNoTextHint": {
+    "message": "Ingen text kom in — markera text och välj 「翻译」 i uTools-panelen, eller klistra in texten här."
+  }
+}

@@ -46,6 +46,36 @@ assert.ok(
   "the over command needs a maxLength above minLength"
 );
 
+// i18n: every shipped locale carries every key of the English catalogue, and only
+// Chinese may contain CJK — the uTools panel label 「翻译」 is a UI literal that is
+// deliberately identical everywhere.
+const LOCALES = path.join(ROOT, "locales");
+const enCatalogue = JSON.parse(fs.readFileSync(path.join(LOCALES, "en", "messages.json"), "utf8"));
+const enKeys = Object.keys(enCatalogue);
+assert.ok(enKeys.length >= 30, `the English catalogue looks too small (${enKeys.length} keys)`);
+const localeCodes = fs
+  .readdirSync(LOCALES)
+  .filter((code) => fs.existsSync(path.join(LOCALES, code, "messages.json")));
+assert.ok(localeCodes.length >= 30, `expected dozens of locales, got ${localeCodes.length}`);
+for (const code of localeCodes) {
+  const catalogue = JSON.parse(fs.readFileSync(path.join(LOCALES, code, "messages.json"), "utf8"));
+  assert.deepEqual(Object.keys(catalogue), enKeys, `${code}: keys/order must match locales/en`);
+  for (const key of enKeys) {
+    const value = catalogue[key] && catalogue[key].message;
+    assert.ok(typeof value === "string" && value.trim().length > 0, `${code}: "${key}" is missing or empty`);
+  }
+  // Japanese legitimately uses kanji; Chinese is the source language. Every other
+  // catalogue must be free of Chinese once the uTools panel label is removed.
+  if (!code.startsWith("zh") && !code.startsWith("ja")) {
+    const withoutLabel = JSON.stringify(catalogue).replace(/「翻译」/g, "");
+    assert.ok(!/[\u4e00-\u9fff]/.test(withoutLabel), `${code}: contains untranslated Chinese`);
+  }
+}
+const i18nBundlePath = path.join(ROOT, "dist", "i18n.js");
+assert.ok(fs.existsSync(i18nBundlePath), "missing dist/i18n.js — run npm run build");
+const i18nBundle = fs.readFileSync(i18nBundlePath, "utf8");
+for (const code of localeCodes) assert.ok(i18nBundle.includes(`"${code}":`), `dist/i18n.js is missing ${code}`);
+
 // referenced files exist
 for (const rel of [plugin.logo, plugin.main, plugin.preload, "dist/renderer.js", "dist/style.css", "dualtran-core/index.mjs"]) {
   assert.ok(fs.existsSync(path.join(ROOT, rel)), `missing ${rel} — run build / sync-core first`);

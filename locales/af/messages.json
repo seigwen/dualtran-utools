@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Vertaal"
+  },
+  "btncopy": {
+    "message": "Kopieer"
+  },
+  "lblAiProvider": {
+    "message": "KI-verskaffer"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Redenasiediepte"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Teikentaal"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Laagste (standaard)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Verstek (verskaffer)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Geen"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimaal"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Laag"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Medium"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Hoog"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "XMaks"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maks"
+  },
+  "utSourceLanguage": {
+    "message": "Brontaal"
+  },
+  "utAutoDetect": {
+    "message": "Outo-opsporing"
+  },
+  "utEngine": {
+    "message": "Enjin"
+  },
+  "utEngineAi": {
+    "message": "KI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "KI-instellings (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Koppelvlaktaal"
+  },
+  "utLanguageAuto": {
+    "message": "Volg stelsel"
+  },
+  "utPlaceholder": {
+    "message": "Tik of plak teks — of selekteer teks enige plek en kies 「翻译」 in die uTools-paneel."
+  },
+  "utApiKey": {
+    "message": "API-sleutel"
+  },
+  "utEndpoint": {
+    "message": "Eindpunt"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Modelnaam"
+  },
+  "utModelPlaceholder": {
+    "message": "bv. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Verfris"
+  },
+  "utCatalogIdle": {
+    "message": "Modelkatalogus: nie gelaai nie"
+  },
+  "utCatalogLoading": {
+    "message": "Modelkatalogus: laai…"
+  },
+  "utCatalogLoaded": {
+    "message": "Modelkatalogus: $COUNT$ verskaffers"
+  },
+  "utCatalogOffline": {
+    "message": "Modelkatalogus: vanlyn ($COUNT$ gekas)"
+  },
+  "utCatalogError": {
+    "message": "Modelkatalogus: laai het misluk — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Pasgemaak…"
+  },
+  "utProviderDivider": {
+    "message": "── meer ──"
+  },
+  "utEndpointHint": {
+    "message": "Eindpunt en model kan albei oorskryf word."
+  },
+  "utStatusTranslating": {
+    "message": "Vertaal tans…"
+  },
+  "utStatusDone": {
+    "message": "Klaar."
+  },
+  "utStatusEmpty": {
+    "message": "Leë vertaling."
+  },
+  "utStatusNothing": {
+    "message": "Niks om te vertaal nie."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI-modus benodig eindpunt, model en sleutel (maak AI-instellings oop)."
+  },
+  "utNoTextHint": {
+    "message": "Geen teks ontvang nie — kies teks en kies 「翻译」 in die uTools-paneel, of plak die teks hier."
+  }
+}

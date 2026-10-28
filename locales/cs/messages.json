@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Přeložit"
+  },
+  "btncopy": {
+    "message": "Kopírovat"
+  },
+  "lblAiProvider": {
+    "message": "Poskytovatel AI"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Hloubka uvažování"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Cílový jazyk"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Nejnižší (výchozí)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Výchozí (poskytovatel)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Žádné"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimální"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Nízká"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Střední"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Vysoká"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Velmi vysoká"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maximální"
+  },
+  "utSourceLanguage": {
+    "message": "Zdrojový jazyk"
+  },
+  "utAutoDetect": {
+    "message": "Automatická detekce"
+  },
+  "utEngine": {
+    "message": "Modul"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "Nastavení AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Jazyk rozhraní"
+  },
+  "utLanguageAuto": {
+    "message": "Podle systému"
+  },
+  "utPlaceholder": {
+    "message": "Zadejte nebo vložte text — nebo vyberte text kdekoli a v panelu uTools zvolte 「翻译」."
+  },
+  "utApiKey": {
+    "message": "Klíč API"
+  },
+  "utEndpoint": {
+    "message": "Koncový bod"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Název modelu"
+  },
+  "utModelPlaceholder": {
+    "message": "např. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Obnovit"
+  },
+  "utCatalogIdle": {
+    "message": "Katalog modelů: nenačteno"
+  },
+  "utCatalogLoading": {
+    "message": "Katalog modelů: načítání…"
+  },
+  "utCatalogLoaded": {
+    "message": "Katalog modelů: $COUNT$ poskytovatelů"
+  },
+  "utCatalogOffline": {
+    "message": "Katalog modelů: offline ($COUNT$ v mezipaměti)"
+  },
+  "utCatalogError": {
+    "message": "Katalog modelů: načtení selhalo — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Vlastní…"
+  },
+  "utProviderDivider": {
+    "message": "── další ──"
+  },
+  "utEndpointHint": {
+    "message": "Endpoint i model lze obojí přepsat."
+  },
+  "utStatusTranslating": {
+    "message": "Překládání…"
+  },
+  "utStatusDone": {
+    "message": "Hotovo."
+  },
+  "utStatusEmpty": {
+    "message": "Prázdný překlad."
+  },
+  "utStatusNothing": {
+    "message": "Není co překládat."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "Režim AI vyžaduje endpoint, model a klíč (otevřete nastavení AI)."
+  },
+  "utNoTextHint": {
+    "message": "Nepřišel žádný text – vyberte text a v panelu uTools zvolte 「翻译」, nebo sem text vložte."
+  }
+}

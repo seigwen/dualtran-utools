@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "تەرجىمە"
+  },
+  "btncopy": {
+    "message": "كۆچۈرۈڭ"
+  },
+  "lblAiProvider": {
+    "message": "AI تەمىنلىگۈچىسى"
+  },
+  "lblAiReasoningDepth": {
+    "message": "پىكىر يۈرگۈزۈش چوڭقۇرلۇقى"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "نىشان تىل"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "ئەڭ تۆۋەن (سۈكۈتتىكى)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "سۈكۈتتىكى (تەمىنلىگۈچى)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "يوق"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "ئەڭ ئاز"
+  },
+  "msgReasoningDepthLow": {
+    "message": "تۆۋەن"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "ئوتتۇرا"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "يۇقىرى"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "ئىنتايىن يۇقىرى"
+  },
+  "msgReasoningDepthMax": {
+    "message": "ئەڭ يۇقىرى"
+  },
+  "utSourceLanguage": {
+    "message": "مەنبە تىل"
+  },
+  "utAutoDetect": {
+    "message": "ئاپتوماتىك ئېنىقلاش"
+  },
+  "utEngine": {
+    "message": "قوزغاتقۇچ"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI تەڭشەكلىرى (BYOK)"
+  },
+  "utLanguage": {
+    "message": "كۆرۈنمە يۈزى تىلى"
+  },
+  "utLanguageAuto": {
+    "message": "سىستېمىغا ئەگىشىش"
+  },
+  "utPlaceholder": {
+    "message": "تېكىست كىرگۈزۈڭ ياكى چاپلاڭ — ياكى ھەر قايسى جايدىن تېكىست تاللاپ، uTools تاختىسىدىن 「翻译」 نى تاللاڭ."
+  },
+  "utApiKey": {
+    "message": "API ئاچقۇچى"
+  },
+  "utEndpoint": {
+    "message": "ئۇلىنىش نۇقتىسى"
+  },
+  "utModel": {
+    "message": "Model"
+  },
+  "utModelName": {
+    "message": "Model name"
+  },
+  "utModelPlaceholder": {
+    "message": "e.g. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Refresh"
+  },
+  "utCatalogIdle": {
+    "message": "Model catalogue: not loaded"
+  },
+  "utCatalogLoading": {
+    "message": "Model catalogue: loading…"
+  },
+  "utCatalogLoaded": {
+    "message": "Model catalogue: $COUNT$ providers"
+  },
+  "utCatalogOffline": {
+    "message": "Model catalogue: offline ($COUNT$ cached)"
+  },
+  "utCatalogError": {
+    "message": "Model catalogue: load failed — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Custom…"
+  },
+  "utProviderDivider": {
+    "message": "── تېخىمۇ كۆپ ──"
+  },
+  "utEndpointHint": {
+    "message": "ئاخىرلاشقان نۇقتا ۋە مودېلنىڭ ھەر ئىككىسىنى قايتا بېكىتكىلى بولىدۇ."
+  },
+  "utStatusTranslating": {
+    "message": "تەرجىمە قىلىنىۋاتىدۇ…"
+  },
+  "utStatusDone": {
+    "message": "تامام."
+  },
+  "utStatusEmpty": {
+    "message": "تەرجىمە بوش."
+  },
+  "utStatusNothing": {
+    "message": "تەرجىمە قىلىدىغان نەرسە يوق."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "AI ھالىتىگە ئاخىرلاشقان نۇقتا، مودېل ۋە ئاچقۇچ كېرەك (AI تەڭشەكلىرىنى ئېچىڭ)."
+  },
+  "utNoTextHint": {
+    "message": "تېكىست كىرمىدى — تېكىستنى تاللاپ uTools تاختىسىدىن 「翻译」 نى تاللاڭ ياكى تېكىستنى بۇ يەرگە چاپلاڭ."
+  }
+}

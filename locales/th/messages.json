@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "แปลภาษา"
+  },
+  "btncopy": {
+    "message": "สำเนา"
+  },
+  "lblAiProvider": {
+    "message": "ผู้ให้บริการ AI"
+  },
+  "lblAiReasoningDepth": {
+    "message": "ความลึกของการวิเคราะห์"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "ภาษาปลายทาง"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "ต่ำสุด (ค่าเริ่มต้น)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "ค่าเริ่มต้น (ผู้ให้บริการ)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "ไม่มี"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "น้อยที่สุด"
+  },
+  "msgReasoningDepthLow": {
+    "message": "ต่ำ"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "ปานกลาง"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "สูง"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "สูงมาก"
+  },
+  "msgReasoningDepthMax": {
+    "message": "สูงสุด"
+  },
+  "utSourceLanguage": {
+    "message": "ภาษาต้นทาง"
+  },
+  "utAutoDetect": {
+    "message": "ตรวจจับอัตโนมัติ"
+  },
+  "utEngine": {
+    "message": "เอนจิน"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "การตั้งค่า AI (BYOK)"
+  },
+  "utLanguage": {
+    "message": "ภาษาของอินเทอร์เฟซ"
+  },
+  "utLanguageAuto": {
+    "message": "ตามระบบ"
+  },
+  "utPlaceholder": {
+    "message": "พิมพ์หรือวางข้อความ หรือเลือกข้อความที่ใดก็ได้แล้วเลือก 「翻译」 ในแผง uTools"
+  },
+  "utApiKey": {
+    "message": "คีย์ API"
+  },
+  "utEndpoint": {
+    "message": "ปลายทาง"
+  },
+  "utModel": {
+    "message": "โมเดล"
+  },
+  "utModelName": {
+    "message": "ชื่อโมเดล"
+  },
+  "utModelPlaceholder": {
+    "message": "เช่น gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "รีเฟรช"
+  },
+  "utCatalogIdle": {
+    "message": "แคตตาล็อกโมเดล: ยังไม่ได้โหลด"
+  },
+  "utCatalogLoading": {
+    "message": "แคตตาล็อกโมเดล: กำลังโหลด…"
+  },
+  "utCatalogLoaded": {
+    "message": "แคตตาล็อกโมเดล: $COUNT$ ผู้ให้บริการ"
+  },
+  "utCatalogOffline": {
+    "message": "แคตตาล็อกโมเดล: ออฟไลน์ ($COUNT$ แคช)"
+  },
+  "utCatalogError": {
+    "message": "แคตตาล็อกโมเดล: โหลดไม่สำเร็จ — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "กำหนดเอง…"
+  },
+  "utProviderDivider": {
+    "message": "── เพิ่มเติม ──"
+  },
+  "utEndpointHint": {
+    "message": "สามารถแทนที่ Endpoint และโมเดลได้ทั้งคู่"
+  },
+  "utStatusTranslating": {
+    "message": "กำลังแปล…"
+  },
+  "utStatusDone": {
+    "message": "เสร็จสิ้น"
+  },
+  "utStatusEmpty": {
+    "message": "คำแปลว่างเปล่า"
+  },
+  "utStatusNothing": {
+    "message": "ไม่มีข้อความให้แปล"
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "โหมด AI ต้องมี Endpoint โมเดล และคีย์ (เปิดการตั้งค่า AI)"
+  },
+  "utNoTextHint": {
+    "message": "ไม่มีข้อความเข้ามา — เลือกข้อความแล้วเลือก 「翻译」 ในแผง uTools หรือวางข้อความที่นี่"
+  }
+}

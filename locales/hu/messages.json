@@ -1,0 +1,134 @@
+{
+  "btnTranslate": {
+    "message": "Lefordítás"
+  },
+  "btncopy": {
+    "message": "Másolás"
+  },
+  "lblAiProvider": {
+    "message": "MI-szolgáltató"
+  },
+  "lblAiReasoningDepth": {
+    "message": "Gondolkodás mélysége"
+  },
+  "lblTargetLanguageGroup": {
+    "message": "Célnyelv"
+  },
+  "msgReasoningDepthLowest": {
+    "message": "Legalacsonyabb (alapértelmezett)"
+  },
+  "msgReasoningDepthProviderDefault": {
+    "message": "Alapértelmezett (szolgáltató)"
+  },
+  "msgReasoningDepthNone": {
+    "message": "Nincs"
+  },
+  "msgReasoningDepthMinimal": {
+    "message": "Minimális"
+  },
+  "msgReasoningDepthLow": {
+    "message": "Alacsony"
+  },
+  "msgReasoningDepthMedium": {
+    "message": "Közepes"
+  },
+  "msgReasoningDepthHigh": {
+    "message": "Magas"
+  },
+  "msgReasoningDepthXHigh": {
+    "message": "Extra magas"
+  },
+  "msgReasoningDepthMax": {
+    "message": "Maximum"
+  },
+  "utSourceLanguage": {
+    "message": "Forrásnyelv"
+  },
+  "utAutoDetect": {
+    "message": "Automatikus felismerés"
+  },
+  "utEngine": {
+    "message": "Motor"
+  },
+  "utEngineAi": {
+    "message": "AI (BYOK)"
+  },
+  "utAiSettings": {
+    "message": "AI-beállítások (BYOK)"
+  },
+  "utLanguage": {
+    "message": "Felület nyelve"
+  },
+  "utLanguageAuto": {
+    "message": "Rendszer követése"
+  },
+  "utPlaceholder": {
+    "message": "Írjon be vagy illesszen be szöveget — vagy jelöljön ki szöveget bárhol, és válassza a 「翻译」 lehetőséget az uTools panelen."
+  },
+  "utApiKey": {
+    "message": "API-kulcs"
+  },
+  "utEndpoint": {
+    "message": "Végpont"
+  },
+  "utModel": {
+    "message": "Modell"
+  },
+  "utModelName": {
+    "message": "Modell neve"
+  },
+  "utModelPlaceholder": {
+    "message": "pl. gpt-4o-mini"
+  },
+  "utRefresh": {
+    "message": "Frissítés"
+  },
+  "utCatalogIdle": {
+    "message": "Modellkatalógus: nincs betöltve"
+  },
+  "utCatalogLoading": {
+    "message": "Modellkatalógus: betöltés…"
+  },
+  "utCatalogLoaded": {
+    "message": "Modellkatalógus: $COUNT$ szolgáltató"
+  },
+  "utCatalogOffline": {
+    "message": "Modellkatalógus: offline ($COUNT$ gyorsítótárazott)"
+  },
+  "utCatalogError": {
+    "message": "Modellkatalógus: a betöltés sikertelen — $ERROR$"
+  },
+  "utCustomOption": {
+    "message": "Egyéni…"
+  },
+  "utProviderDivider": {
+    "message": "── további ──"
+  },
+  "utEndpointHint": {
+    "message": "A végpont és a modell is felülírható."
+  },
+  "utStatusTranslating": {
+    "message": "Fordítás…"
+  },
+  "utStatusDone": {
+    "message": "Kész."
+  },
+  "utStatusEmpty": {
+    "message": "Üres fordítás."
+  },
+  "utStatusNothing": {
+    "message": "Nincs mit lefordítani."
+  },
+  "utErrorGoogleHttp": {
+    "message": "Google HTTP $STATUS$"
+  },
+  "utErrorAiHttp": {
+    "message": "AI HTTP $STATUS$"
+  },
+  "utErrorAiConfig": {
+    "message": "Az AI módhoz végpont, modell és kulcs szükséges (nyisd meg az AI beállításokat)."
+  },
+  "utNoTextHint": {
+    "message": "Nem érkezett szöveg — jelölj ki szöveget, és válaszd a 「翻译」 elemet az uTools panelen, vagy illeszd be ide a szöveget."
+  }
+}
