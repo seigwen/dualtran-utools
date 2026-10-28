@@ -8,7 +8,7 @@
     "build": "node scripts/build-renderer.mjs && node scripts/build-i18n.mjs",
     "test": "vitest run",
     "test:dist": "node tests/dist/guards.mjs",
-    "verify": "npm run test && npm run build && npm run test:dist",
+    "verify": "npm run test && npm run build && npm run test:dist && npm run e2e",
     "package": "node scripts/package.mjs",
     "e2e": "node e2e/run.mjs",
     "i18n:build": "node scripts/build-i18n.mjs",
