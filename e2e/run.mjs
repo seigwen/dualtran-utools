@@ -20,6 +20,39 @@ const ROOT = path.join(HERE, "..");
 const ARTIFACTS = path.join(ROOT, "e2e-artifacts");
 const FIXTURE = JSON.parse(fs.readFileSync(path.join(HERE, "fixtures", "modelsdev.json"), "utf8"));
 
+/**
+ * Playwright's bundled Chromium first; on a machine without it (offline sandbox, CI image
+ * with only a system browser) fall back to a Chrome already on the box.
+ */
+const CHROME_CANDIDATES = [
+  process.env.DT_CHROME,
+  "/root/.hermes/tools/chromium-1208/chrome-linux64/chrome",
+  "/usr/bin/google-chrome",
+  "/usr/bin/google-chrome-stable",
+  "/usr/bin/chromium",
+  "/usr/bin/chromium-browser",
+].filter(Boolean);
+
+async function launchBrowser() {
+  let firstError = null;
+  try {
+    return await chromium.launch({ headless: true });
+  } catch (error) {
+    firstError = error;
+  }
+  for (const executablePath of CHROME_CANDIDATES) {
+    if (!fs.existsSync(executablePath)) continue;
+    try {
+      const browser = await chromium.launch({ headless: true, executablePath });
+      console.log(`(using ${executablePath})`);
+      return browser;
+    } catch {
+      /* try the next candidate */
+    }
+  }
+  throw firstError;
+}
+
 const UTools_STUB = `
   window.__copied = [];
   window.__dtOutbox = [];
@@ -113,8 +146,10 @@ async function openPage(browser, origin, options = {}) {
 
   await page.goto(`${origin}/index.app.html`);
   await page.waitForFunction(() => document.querySelectorAll("#aiProvider option").length > 0);
+  // The catalogue lands asynchronously: wait until the merged list carries a catalogue
+  // provider (the e2e fixture always yields some), not on the old divider option.
   await page.waitForFunction(() =>
-    Array.from(document.querySelectorAll("#aiProvider option")).some((option) => option.disabled)
+    Array.from(document.querySelectorAll("#aiProvider option")).some((option) => option.value.startsWith("c:"))
   );
   // Open the settings drawer so the inputs are actionable.
   await page.evaluate(() => {
@@ -148,19 +183,65 @@ scenario("settings-shape", async ({ browser, server }) => {
   const shape = await page.evaluate(() => {
     const provider = document.getElementById("aiProvider");
     const options = Array.from(provider.options);
-    const divider = options.findIndex((option) => option.disabled);
     const reasoning = document.getElementById("aiReasoning");
+    const target = Array.from(document.getElementById("target").options);
     return {
-      count: options.length,
-      first: options[0] && options[0].value,
-      dividerText: divider >= 0 ? options[divider].textContent.trim() : null,
-      afterDivider: divider >= 0 ? options.slice(divider + 1).map((option) => option.value) : [],
+      // One merged list: built-ins and catalogue providers, nothing else.
+      options: options.map((option) => ({
+        value: option.value,
+        label: option.textContent.trim(),
+        disabled: option.disabled,
+      })),
       reasoning: Array.from(reasoning.options).map((option) => option.value),
+      target: target.map((option) => ({ value: option.value, label: option.textContent.trim() })),
     };
   });
-  assert(shape.first && shape.first.startsWith("b:"), `built-ins must lead, got ${shape.first}`);
-  assert(shape.dividerText === "── more ──", `divider must read "── more ──", got ${shape.dividerText}`);
-  assert(shape.afterDivider.some((value) => value.startsWith("c:")), "catalogue providers must follow the divider");
+
+  const compare = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
+  const values = shape.options.map((option) => option.value);
+  const labels = shape.options.map((option) => option.label);
+
+  // R2: no divider, no disabled entry — one continuous list.
+  assert(
+    shape.options.every((option) => !option.disabled),
+    `provider list must not contain disabled entries, got ${JSON.stringify(
+      shape.options.filter((option) => option.disabled).map((option) => option.label)
+    )}`
+  );
+  assert(
+    !labels.some((label) => /^[─—]{2,}|^\s*more\s*$/i.test(label)),
+    `provider list must not contain a divider, got ${labels.filter((label) => /─/.test(label)).join(", ")}`
+  );
+
+  // R2: built-ins and catalogue entries are interleaved by label, not grouped.
+  assert(
+    values.some((value) => value.startsWith("b:")) && values.some((value) => value.startsWith("c:")),
+    `provider list must merge built-ins and the catalogue, got ${values.join(" ")}`
+  );
+  const nonCustom = shape.options.filter((option) => !/custom/i.test(option.value) && option.value !== "b:custom");
+  for (let i = 1; i < nonCustom.length; i += 1) {
+    assert(
+      compare.compare(nonCustom[i - 1].label, nonCustom[i].label) <= 0,
+      `provider list must be alphabetical: "${nonCustom[i - 1].label}" before "${nonCustom[i].label}"`
+    );
+  }
+  // R2: the free-text provider closes the list.
+  assert(
+    values[values.length - 1] === "b:custom",
+    `custom provider must be last, got ${values[values.length - 1]}`
+  );
+
+  // R1: the target picker is a readable list of Name (code) labels, no "auto".
+  assert(shape.target.length >= 40, `target language picker must offer >= 40 languages, got ${shape.target.length}`);
+  assert(
+    shape.target.every((option) => option.value !== "auto"),
+    "target language picker must not offer auto"
+  );
+  assert(
+    shape.target.every((option) => option.label.endsWith(`(${option.value})`)),
+    `target labels must read "Name (code)", got ${JSON.stringify(shape.target.slice(0, 3))}`
+  );
+
   assert(shape.reasoning[0] === "__lowest__", `reasoning must default to lowest, got ${shape.reasoning[0]}`);
   assert(shape.reasoning[1] === "", `second reasoning option must be provider default`);
   await page.screenshot({ path: path.join(ARTIFACTS, "settings-shape", "screenshot.png"), fullPage: true });
@@ -434,7 +515,7 @@ async function main() {
   for (const entry of scenarios) fs.mkdirSync(path.join(ARTIFACTS, entry.name), { recursive: true });
 
   const server = await startServer();
-  const browser = await chromium.launch({ headless: true });
+  const browser = await launchBrowser();
   const failures = [];
 
   for (const entry of scenarios) {
