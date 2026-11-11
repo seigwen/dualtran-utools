@@ -67,12 +67,20 @@
     var CATALOG_TTL = 24 * 60 * 60 * 1000;
     var CATALOG_URL = "https://models.dev/api.json";
 
+    // Target/source languages: [code, label]. Covers every code in
+    // facts/language-names.json; labels stay endonyms where one is in common use.
     var LANGUAGES = [
       ["zh-CN", "简体中文"], ["zh-TW", "繁體中文"], ["en", "English"], ["ja", "日本語"],
       ["ko", "한국어"], ["fr", "Français"], ["de", "Deutsch"], ["es", "Español"],
       ["ru", "Русский"], ["pt", "Português"], ["it", "Italiano"], ["ar", "العربية"],
       ["hi", "हिन्दी"], ["th", "ไทย"], ["vi", "Tiếng Việt"], ["id", "Bahasa Indonesia"],
-      ["tr", "Türkçe"], ["nl", "Nederlands"], ["pl", "Polski"], ["uk", "Українська"]
+      ["tr", "Türkçe"], ["nl", "Nederlands"], ["pl", "Polski"], ["uk", "Українська"],
+      ["af", "Afrikaans"], ["bn", "Bengali"], ["bg", "Bulgarian"], ["ca", "Catalan"],
+      ["hr", "Croatian"], ["cs", "Czech"], ["da", "Danish"], ["et", "Estonian"],
+      ["fi", "Finnish"], ["el", "Greek"], ["he", "Hebrew"], ["hu", "Hungarian"],
+      ["lv", "Latvian"], ["lt", "Lithuanian"], ["ms", "Malay"], ["no", "Norwegian"],
+      ["fa", "Persian"], ["pt-BR", "Portuguese (Brazil)"], ["ro", "Romanian"], ["sr", "Serbian"],
+      ["sk", "Slovak"], ["sl", "Slovenian"], ["sv", "Swedish"], ["ur", "Urdu"]
     ];
 
     // Offline fallback; the live list comes from models.dev.
@@ -222,8 +230,10 @@
       return "";
     }
 
-    var catalog = null;            // { [devId]: { name, api, models: [[id, name], ...], reasoning } }
+    var catalog = null;            // { [devId]: { name, api, pkg, models: [[id, name], ...], reasoning } }
     var catalogTs = 0;
+    // The last value applyProviderDefaults() wrote into #aiBaseUrl. Anything else in
+    // the field is the user's own text and must survive provider switches (R3).
     var lastDefaults = { base: "", model: "" };
 
     // ── languages ──────────────────────────────────────────────
@@ -246,13 +256,18 @@
       });
     }
 
+    function languageLabel(l) {
+      return l[1] + " (" + l[0] + ")";
+    }
+
     function fillLanguages() {
+      // `auto` is a source-language concept only: the target must be a concrete code.
       el.source.innerHTML = '<option value="auto">' + t("utAutoDetect") + "</option>" +
         LANGUAGES.map(function (l) {
-          return '<option value="' + l[0] + '">' + l[1] + " " + l[0] + "</option>";
+          return '<option value="' + l[0] + '">' + languageLabel(l) + "</option>";
         }).join("");
       el.target.innerHTML = LANGUAGES.map(function (l) {
-        return '<option value="' + l[0] + '">' + l[1] + " " + l[0] + "</option>";
+        return '<option value="' + l[0] + '">' + languageLabel(l) + "</option>";
       }).join("");
     }
 
@@ -293,7 +308,13 @@
           }
         });
         if (!models.length) return;
-        out[id] = { name: p.name || id, api: p.api || "", models: models, reasoning: reasoning };
+        out[id] = {
+          name: p.name || id,
+          api: p.api || "",
+          pkg: p.npm || "",
+          models: models,
+          reasoning: reasoning
+        };
       });
       return out;
     }
@@ -345,6 +366,47 @@
     }
 
     // ── provider / model selects ───────────────────────────────
+    /** models.dev npm package → the API base its SDK targets. */
+    var PACKAGE_BASE = {
+      "@ai-sdk/openai": "https://api.openai.com/v1",
+      "@ai-sdk/anthropic": "https://api.anthropic.com/v1",
+      "@ai-sdk/google": "https://generativelanguage.googleapis.com/v1beta",
+      "@ai-sdk/xai": "https://api.x.ai/v1",
+      "@ai-sdk/groq": "https://api.groq.com/openai/v1",
+      "@ai-sdk/mistral": "https://api.mistral.ai/v1",
+      "@ai-sdk/cohere": "https://api.cohere.ai/compatibility/v1",
+      "@ai-sdk/cerebras": "https://api.cerebras.ai/v1",
+      "@ai-sdk/deepinfra": "https://api.deepinfra.com/v1/openai",
+      "@ai-sdk/deepseek": "https://api.deepseek.com",
+      "@ai-sdk/perplexity": "https://api.perplexity.ai/v1",
+      "@ai-sdk/togetherai": "https://api.together.xyz/v1",
+      "@ai-sdk/azure": "https://{resource}.openai.azure.com/openai/v1"
+    };
+
+    /** Well-known providers whose models.dev entry omits both `api` and `npm`. */
+    var KNOWN_BASE = {
+      openai: "https://api.openai.com/v1",
+      anthropic: "https://api.anthropic.com/v1",
+      google: "https://generativelanguage.googleapis.com/v1beta",
+      "google-vertex": "",
+      "amazon-bedrock": "",
+      azure: "https://{resource}.openai.azure.com/openai/v1",
+      xai: "https://api.x.ai/v1",
+      groq: "https://api.groq.com/openai/v1",
+      mistral: "https://api.mistral.ai/v1",
+      cohere: "https://api.cohere.ai/compatibility/v1",
+      cerebras: "https://api.cerebras.ai/v1",
+      deepinfra: "https://api.deepinfra.com/v1/openai",
+      perplexity: "https://api.perplexity.ai/v1"
+    };
+
+    /** The base URL a catalogue provider is called on; "" when it cannot be inferred. */
+    function catalogBase(id, entry) {
+      if (entry.api) return normalizeBase(entry.api);
+      if (PACKAGE_BASE[entry.pkg]) return normalizeBase(PACKAGE_BASE[entry.pkg]);
+      return KNOWN_BASE[id] || "";
+    }
+
     function providerValueOf(id) {
       return id.indexOf("c:") === 0 || id.indexOf("b:") === 0 ? id : "b:" + id;
     }
@@ -354,25 +416,38 @@
       return BUILTIN[BUILTIN.length - 1];
     }
 
-    function renderProviders() {
-      var current = el.aiProvider.value || "b:openai";
-      var opts = BUILTIN.map(function (p) {
-        return '<option value="b:' + p.id + '">' + p.name + "</option>";
+    var PROVIDER_COLLATOR = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
+
+    /**
+     * Built-ins and models.dev providers are one list, sorted by the label the user
+     * sees. A catalogue entry that a built-in already aliases (`dev`) contributes no
+     * twin; only providers with a usable endpoint join the list; `custom` stays last
+     * because it is the escape hatch, not a provider.
+     */
+    function providerCandidates() {
+      var out = BUILTIN.filter(function (b) { return b.id !== "custom"; }).map(function (b) {
+        return { value: "b:" + b.id, label: b.name, source: b };
       });
       if (catalog) {
-        var ids = Object.keys(catalog).sort(function (a, b) {
-          return (catalog[a].name || a).localeCompare(catalog[b].name || b);
+        Object.keys(catalog).forEach(function (id) {
+          var entry = catalog[id];
+          if (!entry.models || !entry.models.length) return;
+          if (BUILTIN.some(function (b) { return b.dev === id; })) return; // alias twin of a built-in
+          out.push({ value: "c:" + id, label: entry.name || id, source: entry });
         });
-        if (ids.length) {
-          opts.push('<option disabled>' + t("utProviderDivider") + "</option>");
-          ids.forEach(function (id) {
-            if (!catalog[id].api) return; // no endpoint to call; only useful as a built-in alias
-            if (BUILTIN.some(function (b) { return b.dev === id; })) return; // already listed above
-            opts.push('<option value="c:' + id + '">' + (catalog[id].name || id) + "</option>");
-          });
-        }
       }
-      el.aiProvider.innerHTML = opts.join("");
+      out.sort(function (a, b) { return PROVIDER_COLLATOR.compare(a.label, b.label); });
+      var custom = BUILTIN.filter(function (b) { return b.id === "custom"; })[0];
+      if (custom) out.push({ value: "b:" + custom.id, label: custom.name, source: custom });
+      return out;
+    }
+
+    function renderProviders() {
+      var current = el.aiProvider.value || "b:openai";
+      var html = providerCandidates().map(function (entry) {
+        return '<option value="' + entry.value + '">' + entry.label + "</option>";
+      });
+      el.aiProvider.innerHTML = html.join("");
       // keep the previous selection if it still exists
       var still = Array.prototype.some.call(el.aiProvider.options, function (o) { return o.value === current; });
       el.aiProvider.value = still ? current : "b:openai";
@@ -397,11 +472,14 @@
     }
 
     function setModelValue(value) {
-      var models = modelsForCurrentProvider();
+      var models = modelsForCurrentProvider().slice().sort(function (a, b) {
+        return PROVIDER_COLLATOR.compare(a[1], b[1]);
+      });
       var known = models.some(function (m) { return m[0] === value; });
       var opts = models.map(function (m) {
         return '<option value="' + m[0] + '">' + m[1] + "</option>";
       });
+      // `__custom__` is the escape hatch, so it always closes the list.
       opts.push('<option value="__custom__">' + t("utCustomOption") + "</option>");
       el.aiModelSelect.innerHTML = opts.join("");
       if (value && known) {
@@ -426,6 +504,11 @@
       setModelValue(el.aiModel.value.trim());
     }
 
+    /**
+     * Switching provider offers that provider's endpoint. A value the user typed
+     * themselves survives every later switch: we only overwrite an empty field or a
+     * value this function filled in last time (tracked in `lastDefaults.base`).
+     */
     function applyProviderDefaults(value) {
       var v = providerValueOf(value);
       var base = "";
@@ -433,7 +516,7 @@
       if (v.indexOf("c:") === 0) {
         var entry = catalog && catalog[v.slice(2)];
         if (entry) {
-          base = normalizeBase(entry.api);
+          base = catalogBase(v.slice(2), entry);
           model = entry.models.length ? entry.models[0][0] : "";
         }
       } else {
@@ -441,7 +524,9 @@
         base = b.base;
         model = b.model;
       }
-      el.aiBaseUrl.value = base;
+      var typed = el.aiBaseUrl.value.trim();
+      var autoFilled = !typed || typed === lastDefaults.base;
+      if (autoFilled) el.aiBaseUrl.value = base;
       // Switching provider is an explicit choice: follow its default model. The user
       // can still pick 自定义 afterwards and type anything.
       setModelValue(model);
@@ -483,6 +568,7 @@
       if (saved.sourceLanguage) el.source.value = saved.sourceLanguage;
       if (saved.targetLanguage) el.target.value = saved.targetLanguage;
       if (saved.aiProvider) el.aiProvider.value = providerValueOf(saved.aiProvider);
+      // A saved endpoint is the user's own value: keep it out of the autofill tracker.
       if (saved.aiBaseUrl) el.aiBaseUrl.value = saved.aiBaseUrl;
       if (saved.aiModel) { el.aiModel.value = saved.aiModel; setModelValue(saved.aiModel); }
       // Rebuild the levels for the restored model before selecting the saved one,
@@ -618,6 +704,11 @@
     el.input.addEventListener("keydown", function (e) {
       if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) run();
     });
+    // Typing in the endpoint is an explicit override: stop treating the previous
+    // autofill as ours so a provider switch cannot revert it.
+    el.aiBaseUrl.addEventListener("input", function () {
+      if (el.aiBaseUrl.value.trim() !== lastDefaults.base) lastDefaults.base = "";
+    });
     [el.engine, el.source, el.target, el.aiBaseUrl, el.aiApiKey].forEach(function (node) {
       node.addEventListener("change", remember);
     });
@@ -650,6 +741,16 @@
 
     loadCatalog(false);
     try { utools.setExpendHeight(620); } catch (e) {}
+
+    // Read-only handle for the conformance harness (tests/conformance): it must observe
+    // the page's own reasoning resolution instead of re-implementing it. Nothing in the
+    // UI reads this.
+    window.__dtConformance = {
+      resolveReasoning: resolveReasoning,
+      reasoningValuesFor: reasoningValuesFor,
+      catalogBase: catalogBase,
+      providerCandidates: providerCandidates
+    };
   })();
   </script>
 </body>

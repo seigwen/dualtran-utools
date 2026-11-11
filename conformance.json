@@ -1,0 +1,20 @@
+{
+  "spec": "2.0.0",
+  "host": "dualtran-utools",
+  "payload": "tests/conformance/settings.test.mjs",
+  "static": {
+    "files": ["index.app.html"],
+    "patterns": [
+      "utProviderDivider",
+      "providerSeparator",
+      "__separator__",
+      "__more__",
+      "More (models.dev)",
+      {
+        "token": "disabled-option",
+        "regex": "<option[^>]+disabled"
+      }
+    ]
+  },
+  "platformLimits": []
+}
