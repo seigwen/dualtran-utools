@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "कोई टेक्स्ट नहीं आया — टेक्स्ट चुनें और uTools पैनल में 「翻译」 चुनें, या यहाँ टेक्स्ट पेस्ट करें।"
+  },
+  "providerPlaceholder": {
+    "message": "प्रदाता चुनें"
+  },
+  "providerRequiredForModel": {
+    "message": "पहले प्रदाता चुनें"
+  },
+  "providerRequiredError": {
+    "message": "अनुवाद करने से पहले सेटिंग्स में AI प्रदाता चुनें।"
   }
 }

@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Nem érkezett szöveg — jelölj ki szöveget, és válaszd a 「翻译」 elemet az uTools panelen, vagy illeszd be ide a szöveget."
+  },
+  "providerPlaceholder": {
+    "message": "Válasszon szolgáltatót"
+  },
+  "providerRequiredForModel": {
+    "message": "Először válasszon szolgáltatót"
+  },
+  "providerRequiredError": {
+    "message": "Fordítás előtt válasszon AI-szolgáltatót a beállításokban."
   }
 }

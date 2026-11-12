@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Ekkert texti barst — veldu texta og veldu 「翻译」 í uTools spjaldinu, eða límdu textann hér."
+  },
+  "providerPlaceholder": {
+    "message": "Veldu þjónustuveitanda"
+  },
+  "providerRequiredForModel": {
+    "message": "Veldu þjónustuveitanda fyrst"
+  },
+  "providerRequiredError": {
+    "message": "Veldu AI-þjónustuveitanda í stillingum áður en þú þýðir."
   }
 }

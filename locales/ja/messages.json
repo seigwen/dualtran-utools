@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "テキストが入力されていません — テキストを選択してuToolsパネルで「翻译」を選ぶか、ここにテキストを貼り付けてください。"
+  },
+  "providerPlaceholder": {
+    "message": "プロバイダーを選択"
+  },
+  "providerRequiredForModel": {
+    "message": "先にプロバイダーを選択してください"
+  },
+  "providerRequiredError": {
+    "message": "翻訳する前に設定で AI プロバイダーを選択してください。"
   }
 }

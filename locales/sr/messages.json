@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Nema unetog teksta — izaberite tekst i odaberite 「翻译」 u uTools panelu ili nalepite tekst ovde."
+  },
+  "providerPlaceholder": {
+    "message": "Изаберите добављача"
+  },
+  "providerRequiredForModel": {
+    "message": "Прво изаберите добављача"
+  },
+  "providerRequiredError": {
+    "message": "Пре превођења изаберите AI добављача у подешавањима."
   }
 }

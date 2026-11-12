@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Nema unesenog teksta — odaberite tekst i odaberite 「翻译」 u uTools panelu ili zalijepite tekst ovdje."
+  },
+  "providerPlaceholder": {
+    "message": "Odaberite pružatelja"
+  },
+  "providerRequiredForModel": {
+    "message": "Najprije odaberite pružatelja"
+  },
+  "providerRequiredError": {
+    "message": "Prije prevođenja odaberite AI pružatelja u postavkama."
   }
 }

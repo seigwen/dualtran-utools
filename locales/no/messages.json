@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Ingen tekst kom inn – velg tekst og velg 「翻译」 i uTools-panelet, eller lim inn teksten her."
+  },
+  "providerPlaceholder": {
+    "message": "Velg en leverandør"
+  },
+  "providerRequiredForModel": {
+    "message": "Velg en leverandør først"
+  },
+  "providerRequiredError": {
+    "message": "Velg en AI-leverandør i innstillingene før du oversetter."
   }
 }

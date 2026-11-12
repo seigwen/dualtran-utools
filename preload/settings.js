@@ -10,7 +10,7 @@ const DEFAULT_SETTINGS = Object.freeze({
   engine: "google",
   sourceLanguage: "auto",
   targetLanguage: "en",
-  aiProvider: "openai",
+  aiProvider: "",
   aiApiKey: "",
   aiModel: "",
   aiBaseUrl: "",

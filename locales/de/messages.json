@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Kein Text empfangen — Text auswählen und 「翻译」 im uTools-Panel wählen oder den Text hier einfügen."
+  },
+  "providerPlaceholder": {
+    "message": "Anbieter auswählen"
+  },
+  "providerRequiredForModel": {
+    "message": "Zuerst einen Anbieter auswählen"
+  },
+  "providerRequiredError": {
+    "message": "Wähle vor dem Übersetzen einen KI-Anbieter in den Einstellungen."
   }
 }

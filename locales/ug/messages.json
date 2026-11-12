@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "تېكىست كىرمىدى — تېكىستنى تاللاپ uTools تاختىسىدىن 「翻译」 نى تاللاڭ ياكى تېكىستنى بۇ يەرگە چاپلاڭ."
+  },
+  "providerPlaceholder": {
+    "message": "تەمىنلىگۈچى تاللاڭ"
+  },
+  "providerRequiredForModel": {
+    "message": "ئاۋۋال تەمىنلىگۈچى تاللاڭ"
+  },
+  "providerRequiredError": {
+    "message": "تەرجىمە قىلىشتىن بۇرۇن تەڭشەكتە AI تەمىنلىگۈچىسىنى تاللاڭ."
   }
 }

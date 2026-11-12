@@ -1,9 +1,11 @@
 {
-  "spec": "2.0.0",
+  "spec": "2.1.0",
   "host": "dualtran-utools",
-  "payload": "tests/conformance/settings.test.mjs",
+  "payloadCommand": "node tests/conformance/settings.test.mjs",
   "static": {
-    "files": ["index.app.html"],
+    "files": [
+      "index.app.html"
+    ],
     "patterns": [
       "utProviderDivider",
       "providerSeparator",
@@ -11,10 +13,14 @@
       "__more__",
       "More (models.dev)",
       {
+        "comment": "No disabled entry may be a NON-EMPTY option (that is what a divider or a fake provider looks like). SPEC 2.1 requires exactly one disabled option in the provider picker: the empty-valued placeholder, asserted separately in the payload.",
         "token": "disabled-option",
-        "regex": "<option[^>]+disabled"
+        "regex": "<option[^>]*value=\"[^\"]+\"[^>]*\\sdisabled"
       }
     ]
   },
-  "platformLimits": []
+  "platformLimits": [],
+  "negativeControls": {
+    "configuredProvider": "c:anthropic"
+  }
 }

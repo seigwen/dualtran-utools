@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Δεν ήρθε κείμενο — επιλέξτε κείμενο και πατήστε 「翻译」 στον πίνακα uTools ή επικολλήστε το κείμενο εδώ."
+  },
+  "providerPlaceholder": {
+    "message": "Επιλέξτε πάροχο"
+  },
+  "providerRequiredForModel": {
+    "message": "Επιλέξτε πρώτα πάροχο"
+  },
+  "providerRequiredError": {
+    "message": "Επιλέξτε πάροχο AI στις ρυθμίσεις πριν από τη μετάφραση."
   }
 }

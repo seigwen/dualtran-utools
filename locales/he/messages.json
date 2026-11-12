@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "לא התקבל טקסט — בחר טקסט ובחר 「翻译」 בפאנל uTools, או הדבק את הטקסט כאן."
+  },
+  "providerPlaceholder": {
+    "message": "בחר ספק"
+  },
+  "providerRequiredForModel": {
+    "message": "בחר ספק תחילה"
+  },
+  "providerRequiredError": {
+    "message": "בחר ספק AI בהגדרות לפני התרגום."
   }
 }

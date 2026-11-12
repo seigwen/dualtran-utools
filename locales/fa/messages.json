@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "متنی دریافت نشد — متن را انتخاب کنید و در پنل uTools گزینه 「翻译」 را بزنید، یا متن را اینجا بچسبانید."
+  },
+  "providerPlaceholder": {
+    "message": "یک ارائه‌دهنده انتخاب کنید"
+  },
+  "providerRequiredForModel": {
+    "message": "ابتدا یک ارائه‌دهنده انتخاب کنید"
+  },
+  "providerRequiredError": {
+    "message": "پیش از ترجمه، در تنظیمات یک ارائه‌دهنده هوش مصنوعی انتخاب کنید."
   }
 }

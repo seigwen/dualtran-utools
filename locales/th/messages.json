@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "ไม่มีข้อความเข้ามา — เลือกข้อความแล้วเลือก 「翻译」 ในแผง uTools หรือวางข้อความที่นี่"
+  },
+  "providerPlaceholder": {
+    "message": "เลือกผู้ให้บริการ"
+  },
+  "providerRequiredForModel": {
+    "message": "เลือกผู้ให้บริการก่อน"
+  },
+  "providerRequiredError": {
+    "message": "เลือกผู้ให้บริการ AI ในการตั้งค่าก่อนแปล"
   }
 }

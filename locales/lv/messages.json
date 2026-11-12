@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Teksts netika saņemts — atlasiet tekstu un uTools panelī izvēlieties 「翻译」, vai ielīmējiet tekstu šeit."
+  },
+  "providerPlaceholder": {
+    "message": "Atlasiet pakalpojumu sniedzēju"
+  },
+  "providerRequiredForModel": {
+    "message": "Vispirms atlasiet pakalpojumu sniedzēju"
+  },
+  "providerRequiredError": {
+    "message": "Pirms tulkošanas iestatījumos atlasiet AI pakalpojumu sniedzēju."
   }
 }
