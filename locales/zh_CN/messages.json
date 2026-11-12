@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "没有带入文本 —— 选中文字后用 uTools 面板点「翻译」，或把文字粘贴到这里。"
+  },
+  "providerPlaceholder": {
+    "message": "请选择 AI 提供商"
+  },
+  "providerRequiredForModel": {
+    "message": "请先选择提供商"
+  },
+  "providerRequiredError": {
+    "message": "翻译前请先在设置中选择 AI 提供商。"
   }
 }

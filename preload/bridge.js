@@ -32,8 +32,14 @@ function createRequestUrlFetch(requestUrl) {
   };
 }
 
-function createBridge({ core, fetchImpl, getSettings }) {
+function createBridge({ core, fetchImpl, getSettings, providerRequiredError }) {
   async function translateBlocksAi(blocks, settings) {
+    // SPEC 2.1: a fresh install has no AI provider. Without one there is nothing
+    // to route to, so refuse before building or sending any request — never
+    // substitute a default provider here.
+    if (!String(settings.aiProvider || "").trim()) {
+      throw new Error(String(providerRequiredError || "").trim() || "Choose an AI provider in settings before translating.");
+    }
     const results = [];
     for (const content of blocks) {
       const targetLanguageName =

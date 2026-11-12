@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Текст не надійшов — виділіть текст і виберіть 「翻译」 на панелі uTools або вставте текст сюди."
+  },
+  "providerPlaceholder": {
+    "message": "Виберіть постачальника"
+  },
+  "providerRequiredForModel": {
+    "message": "Спочатку виберіть постачальника"
+  },
+  "providerRequiredError": {
+    "message": "Перед перекладом виберіть постачальника AI у налаштуваннях."
   }
 }

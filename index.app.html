@@ -47,7 +47,7 @@
         <span id="catalogState" class="hint" data-i18n="utCatalogIdle">Model catalogue: not loaded</span>
         <button id="refreshCatalog" type="button" data-i18n="utRefresh">Refresh</button>
       </div>
-      <label><span data-i18n="utEndpoint">Endpoint</span> <input id="aiBaseUrl" placeholder="https://api.openai.com/v1" /></label>
+      <label><span data-i18n="utEndpoint">Endpoint</span> <input id="aiBaseUrl" placeholder="https://" /></label>
       <label><span data-i18n="utModel">Model</span> <select id="aiModelSelect"></select></label>
       <label><span data-i18n="lblAiReasoningDepth">Reasoning depth</span> <select id="aiReasoning"></select></label>
       <label id="customModelRow" hidden><span data-i18n="utModelName">Model name</span> <input id="aiModel" data-i18n-placeholder="utModelPlaceholder" /></label>
@@ -203,6 +203,16 @@
     /** Lowest first, then provider default, then the declared levels. */
     function renderReasoning() {
       var current = el.aiReasoning.value || REASONING_LOWEST;
+      if (isUnconfigured()) {
+        // Disabled, but the stored sentinel stays `lowest` — the setting is not lost,
+        // it just has no provider to resolve against yet (SPEC 2.1).
+        el.aiReasoning.innerHTML =
+          '<option value="' + REASONING_LOWEST + '">' + t("msgReasoningDepthLowest") + "</option>";
+        el.aiReasoning.value = REASONING_LOWEST;
+        el.aiReasoning.disabled = true;
+        return;
+      }
+      el.aiReasoning.disabled = false;
       var declared = reasoningValuesFor();
       var values = REASONING_ORDER.filter(function (level) { return declared.indexOf(level) >= 0; });
       var html = [
@@ -442,15 +452,30 @@
       return out;
     }
 
+    /**
+     * The empty state is a disabled, selected placeholder that is NOT part of the
+     * real list (SPEC 2.1): it never sorts, never re-selects, and once a provider is
+     * chosen the control cannot go back to it.
+     */
     function renderProviders() {
-      var current = el.aiProvider.value || "b:openai";
-      var html = providerCandidates().map(function (entry) {
-        return '<option value="' + entry.value + '">' + entry.label + "</option>";
-      });
+      var current = el.aiProvider.value || "";
+      var html = ['<option value="" disabled>' + t("providerPlaceholder") + "</option>"].concat(
+        providerCandidates().map(function (entry) {
+          return '<option value="' + entry.value + '">' + entry.label + "</option>";
+        })
+      );
       el.aiProvider.innerHTML = html.join("");
-      // keep the previous selection if it still exists
-      var still = Array.prototype.some.call(el.aiProvider.options, function (o) { return o.value === current; });
-      el.aiProvider.value = still ? current : "b:openai";
+      // Keep the previous selection if it still exists; otherwise stay unconfigured.
+      // Falling back to a provider here would be a silent choice the user never made.
+      var still = Array.prototype.some.call(el.aiProvider.options, function (o) {
+        return !o.disabled && o.value === current;
+      });
+      el.aiProvider.value = still ? current : "";
+    }
+
+    /** The empty state: no provider chosen, so nothing downstream can be used yet. */
+    function isUnconfigured() {
+      return !String(el.aiProvider.value || "").trim();
     }
 
     function modelsForCurrentProvider() {
@@ -472,6 +497,20 @@
     }
 
     function setModelValue(value) {
+      // No provider: the model list is empty and disabled behind its own label.
+      if (isUnconfigured()) {
+        el.aiModelSelect.innerHTML = '<option value="">' + t("providerRequiredForModel") + "</option>";
+        el.aiModelSelect.disabled = true;
+        el.aiModelSelect.value = "";
+        el.aiModel.value = "";
+        // The empty state names no model at all — not even an example one. The
+        // free-text row is closed, so its hint would only ever be visible by accident.
+        el.aiModel.setAttribute("placeholder", "");
+        el.customModelRow.hidden = true;
+        return;
+      }
+      el.aiModelSelect.disabled = false;
+      el.aiModel.setAttribute("placeholder", t("utModelPlaceholder"));
       var models = modelsForCurrentProvider().slice().sort(function (a, b) {
         return PROVIDER_COLLATOR.compare(a[1], b[1]);
       });
@@ -510,9 +549,17 @@
      * value this function filled in last time (tracked in `lastDefaults.base`).
      */
     function applyProviderDefaults(value) {
-      var v = providerValueOf(value);
+      var v = providerValueOf(value || "");
       var base = "";
       var model = "";
+      if (!value) {
+        // Back to the empty state (only reachable on a first load): no endpoint,
+        // no model, no autofill to remember.
+        el.aiBaseUrl.value = "";
+        lastDefaults = { base: "", model: "" };
+        setModelValue("");
+        return;
+      }
       if (v.indexOf("c:") === 0) {
         var entry = catalog && catalog[v.slice(2)];
         if (entry) {
@@ -567,7 +614,11 @@
       if (saved.engine) el.engine.value = saved.engine;
       if (saved.sourceLanguage) el.source.value = saved.sourceLanguage;
       if (saved.targetLanguage) el.target.value = saved.targetLanguage;
-      if (saved.aiProvider) el.aiProvider.value = providerValueOf(saved.aiProvider);
+      // Stored values are never rewritten: a saved provider is used as-is, and an
+      // absent/empty one leaves the install unconfigured instead of inventing a default.
+      if (typeof saved.aiProvider === "string" && saved.aiProvider.trim()) {
+        el.aiProvider.value = providerValueOf(saved.aiProvider.trim());
+      }
       // A saved endpoint is the user's own value: keep it out of the autofill tracker.
       if (saved.aiBaseUrl) el.aiBaseUrl.value = saved.aiBaseUrl;
       if (saved.aiModel) { el.aiModel.value = saved.aiModel; setModelValue(saved.aiModel); }
@@ -634,10 +685,28 @@
       });
     }
 
+    /** Primary-button state: an unconfigured AI engine cannot translate, and says why. */
+    function syncTranslateGuard() {
+      var blocked = el.engine.value === "ai" && isUnconfigured();
+      el.translate.disabled = blocked;
+      if (blocked) {
+        el.translate.title = t("providerRequiredError");
+        el.translate.setAttribute("aria-disabled", "true");
+      } else {
+        el.translate.removeAttribute("title");
+        el.translate.removeAttribute("aria-disabled");
+      }
+    }
+
     function run() {
       var text = el.input.value.trim();
       if (!text) { say(t("utStatusNothing")); return; }
       var cfg = settings();
+      // No provider is a hard stop: no network call, and the user is told why.
+      if (cfg.engine === "ai" && !String(cfg.aiProvider || "").trim()) {
+        say(t("providerRequiredError"), true);
+        return;
+      }
       remember();
       el.translate.disabled = true;
       el.copy.disabled = true;
@@ -653,7 +722,7 @@
       }).catch(function (e) {
         say(String((e && e.message) || e), true);
       }).then(function () {
-        el.translate.disabled = false;
+        syncTranslateGuard();
       });
     }
 
@@ -662,14 +731,19 @@
     el.target.value = "zh-CN";
     renderProviders();
     restore();
-    if (!el.aiBaseUrl.value.trim()) applyProviderDefaults(el.aiProvider.value);
+    // No provider means no endpoint to default to: the empty state stays empty.
+    if (isUnconfigured()) applyProviderDefaults("");
+    else if (!el.aiBaseUrl.value.trim()) applyProviderDefaults(el.aiProvider.value);
     else renderModels();
     renderReasoning();
+    syncTranslateGuard();
     fillUiLanguages();
 
     el.aiProvider.addEventListener("change", function () {
+      if (isUnconfigured()) return; // the disabled placeholder is not a choice
       applyProviderDefaults(el.aiProvider.value);
       renderReasoning();
+      syncTranslateGuard();
       remember();
     });
     el.aiModelSelect.addEventListener("change", function () {
@@ -691,9 +765,10 @@
       loadCatalog(true);
     });
     el.engine.addEventListener("change", function () {
-      if (el.engine.value === "ai" && !el.aiApiKey.value.trim()) {
+      if (el.engine.value === "ai" && (!el.aiApiKey.value.trim() || isUnconfigured())) {
         document.getElementById("settings").open = true;
       }
+      syncTranslateGuard();
       remember();
     });
     el.translate.addEventListener("click", run);
@@ -749,7 +824,8 @@
       resolveReasoning: resolveReasoning,
       reasoningValuesFor: reasoningValuesFor,
       catalogBase: catalogBase,
-      providerCandidates: providerCandidates
+      providerCandidates: providerCandidates,
+      isUnconfigured: isUnconfigured
     };
   })();
   </script>

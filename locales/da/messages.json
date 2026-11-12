@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Ingen tekst modtaget — vælg tekst og vælg 「翻译」 i uTools-panelet, eller indsæt teksten her."
+  },
+  "providerPlaceholder": {
+    "message": "Vælg en udbyder"
+  },
+  "providerRequiredForModel": {
+    "message": "Vælg en udbyder først"
+  },
+  "providerRequiredError": {
+    "message": "Vælg en AI-udbyder i indstillingerne, før du oversætter."
   }
 }

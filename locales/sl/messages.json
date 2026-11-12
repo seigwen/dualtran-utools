@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Ni vnesenega besedila – izberite besedilo in v uTools plošči izberite 「翻译」 ali prilepite besedilo tukaj."
+  },
+  "providerPlaceholder": {
+    "message": "Izberite ponudnika"
+  },
+  "providerRequiredForModel": {
+    "message": "Najprej izberite ponudnika"
+  },
+  "providerRequiredError": {
+    "message": "Pred prevajanjem v nastavitvah izberite ponudnika AI."
   }
 }

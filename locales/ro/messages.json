@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Nu a venit niciun text — selectează text și alege 「翻译」 în panoul uTools sau lipește textul aici."
+  },
+  "providerPlaceholder": {
+    "message": "Selectați un furnizor"
+  },
+  "providerRequiredForModel": {
+    "message": "Selectați mai întâi un furnizor"
+  },
+  "providerRequiredError": {
+    "message": "Alegeți un furnizor AI din setări înainte de a traduce."
   }
 }

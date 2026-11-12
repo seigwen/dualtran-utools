@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Geen teks ontvang nie — kies teks en kies 「翻译」 in die uTools-paneel, of plak die teks hier."
+  },
+  "providerPlaceholder": {
+    "message": "Kies 'n verskaffer"
+  },
+  "providerRequiredForModel": {
+    "message": "Kies eers 'n verskaffer"
+  },
+  "providerRequiredError": {
+    "message": "Kies 'n KI-verskaffer in instellings voordat jy vertaal."
   }
 }

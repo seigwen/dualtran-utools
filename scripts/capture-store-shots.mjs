@@ -44,8 +44,13 @@ await page.route("**/translate_a/single**", (route) =>
   })
 );
 await page.goto(`${origin}/index.app.html`);
+// SPEC 2.1: the provider picker always opens on a disabled placeholder, so the
+// placeholder is not a readiness signal. Wait for the merged catalogue instead
+// (the models.dev cache is seeded by the page itself; a c: entry means it landed).
 await page.waitForFunction(() =>
-  Array.from(document.querySelectorAll("#aiProvider option")).some((option) => option.disabled)
+  Array.from(document.querySelectorAll("#aiProvider option")).some((option) =>
+    option.value.startsWith("c:")
+  )
 );
 fs.mkdirSync(OUT, { recursive: true });
 

@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Metin gelmedi — metni seçip uTools panelinde 「翻译」 öğesini seçin veya metni buraya yapıştırın."
+  },
+  "providerPlaceholder": {
+    "message": "Bir sağlayıcı seçin"
+  },
+  "providerRequiredForModel": {
+    "message": "Önce bir sağlayıcı seçin"
+  },
+  "providerRequiredError": {
+    "message": "Çeviri yapmadan önce ayarlardan bir AI sağlayıcısı seçin."
   }
 }

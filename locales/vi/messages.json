@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Không có văn bản nào — hãy chọn văn bản và chọn 「翻译」 trong bảng uTools, hoặc dán văn bản vào đây."
+  },
+  "providerPlaceholder": {
+    "message": "Chọn nhà cung cấp"
+  },
+  "providerRequiredForModel": {
+    "message": "Hãy chọn nhà cung cấp trước"
+  },
+  "providerRequiredError": {
+    "message": "Chọn nhà cung cấp AI trong cài đặt trước khi dịch."
   }
 }

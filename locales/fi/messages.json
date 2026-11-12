@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Tekstiä ei tullut — valitse teksti ja valitse 「翻译」 uTools-paneelista tai liitä teksti tähän."
+  },
+  "providerPlaceholder": {
+    "message": "Valitse palveluntarjoaja"
+  },
+  "providerRequiredForModel": {
+    "message": "Valitse ensin palveluntarjoaja"
+  },
+  "providerRequiredError": {
+    "message": "Valitse AI-palveluntarjoaja asetuksista ennen kääntämistä."
   }
 }

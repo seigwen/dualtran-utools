@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "لم يصل أي نص — حدد النص واختر 「翻译」 في لوحة uTools، أو الصق النص هنا."
+  },
+  "providerPlaceholder": {
+    "message": "اختر مزوّدًا"
+  },
+  "providerRequiredForModel": {
+    "message": "اختر مزوّدًا أولًا"
+  },
+  "providerRequiredError": {
+    "message": "اختر مزوّد AI في الإعدادات قبل الترجمة."
   }
 }

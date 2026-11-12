@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "No ha arribat cap text: selecciona text i tria 「翻译」 al tauler d'uTools, o enganxa el text aquí."
+  },
+  "providerPlaceholder": {
+    "message": "Selecciona un proveïdor"
+  },
+  "providerRequiredForModel": {
+    "message": "Selecciona primer un proveïdor"
+  },
+  "providerRequiredError": {
+    "message": "Tria un proveïdor d'IA a la configuració abans de traduir."
   }
 }

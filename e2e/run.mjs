@@ -191,22 +191,29 @@ scenario("settings-shape", async ({ browser, server }) => {
         value: option.value,
         label: option.textContent.trim(),
         disabled: option.disabled,
+        selected: option.selected,
       })),
+      current: provider.value,
       reasoning: Array.from(reasoning.options).map((option) => option.value),
       target: target.map((option) => ({ value: option.value, label: option.textContent.trim() })),
     };
   });
 
   const compare = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
-  const values = shape.options.map((option) => option.value);
-  const labels = shape.options.map((option) => option.label);
-
-  // R2: no divider, no disabled entry — one continuous list.
+  // SPEC 2.1: a fresh install selects a disabled placeholder (empty value). It is not
+  // part of the real list — it never sorts and is not a choice.
+  const placeholder = shape.options.filter((option) => option.disabled);
   assert(
-    shape.options.every((option) => !option.disabled),
-    `provider list must not contain disabled entries, got ${JSON.stringify(
-      shape.options.filter((option) => option.disabled).map((option) => option.label)
-    )}`
+    placeholder.length === 1 && placeholder[0].value === "",
+    `exactly one disabled placeholder (value ""), got ${JSON.stringify(placeholder)}`
+  );
+  assert(placeholder[0].selected && shape.current === "", "a fresh install must start on the placeholder, not on a provider");
+  const options = shape.options.filter((option) => !option.disabled);
+  const values = options.map((option) => option.value);
+  const labels = options.map((option) => option.label);
+  assert(
+    options.every((option) => option.value !== ""),
+    "the placeholder must not be part of the provider options"
   );
   assert(
     !labels.some((label) => /^[─—]{2,}|^\s*more\s*$/i.test(label)),
@@ -218,7 +225,7 @@ scenario("settings-shape", async ({ browser, server }) => {
     values.some((value) => value.startsWith("b:")) && values.some((value) => value.startsWith("c:")),
     `provider list must merge built-ins and the catalogue, got ${values.join(" ")}`
   );
-  const nonCustom = shape.options.filter((option) => !/custom/i.test(option.value) && option.value !== "b:custom");
+  const nonCustom = options.filter((option) => !/custom/i.test(option.value) && option.value !== "b:custom");
   for (let i = 1; i < nonCustom.length; i += 1) {
     assert(
       compare.compare(nonCustom[i - 1].label, nonCustom[i].label) <= 0,
@@ -242,8 +249,27 @@ scenario("settings-shape", async ({ browser, server }) => {
     `target labels must read "Name (code)", got ${JSON.stringify(shape.target.slice(0, 3))}`
   );
 
+  // SPEC 2.1: with no provider the reasoning control is disabled and keeps the
+  // lowest sentinel; its full ladder (sentinel, provider default, levels) appears
+  // once a provider is chosen — checked below.
   assert(shape.reasoning[0] === "__lowest__", `reasoning must default to lowest, got ${shape.reasoning[0]}`);
-  assert(shape.reasoning[1] === "", `second reasoning option must be provider default`);
+  const picked = await page.evaluate(() => {
+    const select = document.getElementById("aiProvider");
+    select.value = "b:deepseek";
+    select.dispatchEvent(new Event("change"));
+    const reasoning = document.getElementById("aiReasoning");
+    return {
+      provider: select.value,
+      reasoning: Array.from(reasoning.options).map((option) => option.value),
+      endpoint: document.getElementById("aiBaseUrl").value,
+      model: document.getElementById("aiModelSelect").value,
+    };
+  });
+  assert(picked.provider === "b:deepseek", "a provider must be selectable from the empty state");
+  assert(picked.reasoning[0] === "__lowest__", "reasoning must still default to lowest once a provider is chosen");
+  assert(picked.reasoning[1] === "", `second reasoning option must be provider default, got ${JSON.stringify(picked.reasoning)}`);
+  assert(/^https:\/\//.test(picked.endpoint), `choosing a provider must fill the endpoint, got "${picked.endpoint}"`);
+  assert(!!picked.model, "choosing a provider must load its model list");
   await page.screenshot({ path: path.join(ARTIFACTS, "settings-shape", "screenshot.png"), fullPage: true });
   await context.close();
 });

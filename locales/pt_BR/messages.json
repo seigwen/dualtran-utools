@@ -130,5 +130,14 @@
   },
   "utNoTextHint": {
     "message": "Nenhum texto recebido — selecione o texto e escolha 「翻译」 no painel do uTools, ou cole o texto aqui."
+  },
+  "providerPlaceholder": {
+    "message": "Selecione um provedor"
+  },
+  "providerRequiredForModel": {
+    "message": "Selecione um provedor primeiro"
+  },
+  "providerRequiredError": {
+    "message": "Escolha um provedor de IA nas configurações antes de traduzir."
   }
 }
