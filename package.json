@@ -1,6 +1,6 @@
 {
   "name": "dualtran-utools",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "description": "DualTran for uTools \u2014 translate selected text with Google or your own AI model (BYOK).",
   "scripts": {

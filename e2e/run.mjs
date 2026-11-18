@@ -124,7 +124,7 @@ async function startServer() {
   };
 }
 
-async function openPage(browser, origin, options = {}) {
+async function openPage(browser, origin, options = {}, seedSettings = null) {
   const context = await browser.newContext({ viewport: { width: 960, height: 900 }, ...options });
   const page = await context.newPage();
   const logs = [];
@@ -132,6 +132,12 @@ async function openPage(browser, origin, options = {}) {
   page.on("pageerror", (error) => logs.push(`pageerror: ${error.message}`));
 
   await page.addInitScript(UTools_STUB);
+  if (seedSettings) {
+    // Seed the stored blob before the page boots, the way an upgrade from 0.1.4 would.
+    await page.addInitScript((blob) => {
+      try { localStorage.setItem("dualtran.settings", JSON.stringify(blob)); } catch (e) {}
+    }, seedSettings);
+  }
   await page.route("https://models.dev/api.json", (route) =>
     route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(FIXTURE) })
   );
@@ -398,6 +404,55 @@ scenario("persistence", async ({ browser, server }) => {
   assert(restored.target === "ja", `target not persisted: ${restored.target}`);
   await page.screenshot({ path: path.join(ARTIFACTS, "persistence", "screenshot.png") });
   await context.close();
+});
+
+scenario("legacy-settings-migration", async ({ browser, server }) => {
+  // 0.1.4 wrote OpenAI into a fresh install, so "never configured" and "kept the default"
+  // are the same bytes. Only an EXACT match of the shipped defaults may be migrated; any
+  // edit the user made must survive untouched.
+  const shippedDefaults = {
+    engine: "ai",
+    sourceLanguage: "auto",
+    targetLanguage: "zh-CN",
+    aiProvider: "b:openai",
+    aiBaseUrl: "https://api.openai.com/v1",
+    aiModel: "gpt-4o-mini",
+    aiApiKey: "",
+  };
+
+  const untouched = await openPage(browser, server.origin, {}, shippedDefaults);
+  const migrated = await untouched.page.evaluate(() => ({
+    provider: document.getElementById("aiProvider").value,
+    base: document.getElementById("aiBaseUrl").value,
+    model: document.getElementById("aiModel").value,
+    stored: JSON.parse(localStorage.getItem("dualtran.settings") || "null"),
+  }));
+  assert(migrated.provider === "", `0.1.4 defaults must land on the empty state, got "${migrated.provider}"`);
+  assert(migrated.base === "", `migrated install must not keep the old endpoint, got "${migrated.base}"`);
+  assert(migrated.model === "", `migrated install must not keep the old model, got "${migrated.model}"`);
+  assert(migrated.stored && migrated.stored.schema === 2, `migration must stamp schema 2, got ${JSON.stringify(migrated.stored)}`);
+
+  // ...and it happens once: a reload reads schema 2 and restores the empty state.
+  await untouched.page.reload();
+  await untouched.page.waitForFunction(() => document.querySelectorAll("#aiProvider option").length > 0);
+  const again = await untouched.page.evaluate(() => document.getElementById("aiProvider").value);
+  assert(again === "", `reload must stay unconfigured, got "${again}"`);
+  await untouched.page.screenshot({ path: path.join(ARTIFACTS, "legacy-settings-migration", "migrated.png") });
+  await untouched.context.close();
+
+  // A user who touched anything keeps it: a trailing slash is enough to prove a real choice.
+  const edited = { ...shippedDefaults, aiBaseUrl: "https://api.openai.com/v1/", aiModel: "gpt-4o" };
+  const kept = await openPage(browser, server.origin, {}, edited);
+  const preserved = await kept.page.evaluate(() => ({
+    provider: document.getElementById("aiProvider").value,
+    base: document.getElementById("aiBaseUrl").value,
+    model: document.getElementById("aiModel").value,
+  }));
+  assert(preserved.provider === "b:openai", `an edited provider must be kept, got "${preserved.provider}"`);
+  assert(preserved.base === "https://api.openai.com/v1/", `an edited endpoint must be kept, got "${preserved.base}"`);
+  assert(preserved.model === "gpt-4o", `an edited model must be kept, got "${preserved.model}"`);
+  await kept.page.screenshot({ path: path.join(ARTIFACTS, "legacy-settings-migration", "kept.png") });
+  await kept.context.close();
 });
 
 scenario("enter-text", async ({ browser, server }) => {
