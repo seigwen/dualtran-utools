@@ -63,6 +63,17 @@
      selected text uTools passes on entry. */
   (function () {
     var SETTINGS_KEY = "dualtran.settings";
+    // Bump when a stored blob needs a one-time shape change. 1 (implicit) is the 0.1.4
+    // layout, where the AI block was pre-filled with OpenAI; 2 records that the empty
+    // state is now the default and that a saved provider is a real user choice.
+    var SETTINGS_SCHEMA = 2;
+    // 0.1.4 wrote this exact block on first run, so "never configured" and "kept the
+    // default" are indistinguishable in storage. Only an exact match may be migrated.
+    var LEGACY_AI_DEFAULTS = {
+      aiProvider: "b:openai",
+      aiBaseUrl: "https://api.openai.com/v1",
+      aiModel: "gpt-4o-mini"
+    };
     var CATALOG_KEY = "dualtran.modelsdev.v2";
     var CATALOG_TTL = 24 * 60 * 60 * 1000;
     var CATALOG_URL = "https://models.dev/api.json";
@@ -592,6 +603,7 @@
 
     function settings() {
       return {
+        schema: SETTINGS_SCHEMA,
         engine: el.engine.value,
         sourceLanguage: el.source.value || "auto",
         targetLanguage: el.target.value || "zh-CN",
@@ -607,10 +619,38 @@
       try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings())); } catch (e) {}
     }
 
+    /**
+     * One-time migration of a 0.1.4 blob that still holds the shipped AI defaults.
+     *
+     * 0.1.4 pre-selected OpenAI and wrote the whole block on first run, so a user who
+     * never opened the settings panel and one who deliberately kept OpenAI stored the
+     * same bytes. Only an EXACT match is migrated: any deviation means the user touched
+     * it, and a stored value they typed is never rewritten.
+     *
+     * @param {object} saved blob read from localStorage (mutated in place)
+     * @returns {boolean} true when the blob was migrated and should be persisted again
+     */
+    function migrateLegacySettings(saved) {
+      if (saved.schema === SETTINGS_SCHEMA) return false;
+      var provider = String(saved.aiProvider || "");
+      var legacyProvider = provider === LEGACY_AI_DEFAULTS.aiProvider || provider === "openai";
+      if (!legacyProvider) return false;
+      if (String(saved.aiBaseUrl || "") !== LEGACY_AI_DEFAULTS.aiBaseUrl) return false;
+      if (String(saved.aiModel || "") !== LEGACY_AI_DEFAULTS.aiModel) return false;
+      if (String(saved.aiApiKey || "")) return false;
+      saved.aiProvider = "";
+      saved.aiBaseUrl = "";
+      saved.aiModel = "";
+      saved.aiApiKey = "";
+      saved.schema = SETTINGS_SCHEMA;
+      return true;
+    }
+
     function restore() {
       var saved = null;
       try { saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "null"); } catch (e) {}
       if (!saved) return;
+      var migrated = migrateLegacySettings(saved);
       if (saved.engine) el.engine.value = saved.engine;
       if (saved.sourceLanguage) el.source.value = saved.sourceLanguage;
       if (saved.targetLanguage) el.target.value = saved.targetLanguage;
@@ -627,6 +667,8 @@
       renderReasoning();
       if (saved.aiReasoning) el.aiReasoning.value = saved.aiReasoning;
       if (saved.aiApiKey) el.aiApiKey.value = saved.aiApiKey;
+      // Persist the migrated blob once so this runs a single time, not on every boot.
+      if (migrated) remember();
     }
 
     // ── engines ───────────────────────────────────────────────
